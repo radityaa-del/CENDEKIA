@@ -1,3 +1,15 @@
+async function initializeDashboard() {
+  let user;
+  try {
+    user = await window.CendekiaAuth.requireUser();
+  } catch (error) {
+    const toast = document.querySelector('.toast');
+    toast.textContent = error.message || 'Tidak dapat memeriksa sesi akun.';
+    toast.classList.add('is-visible');
+    return;
+  }
+  if (!user) return;
+
 function readProgress() {
   return JSON.parse(localStorage.getItem('cendekiaProgress') || '{}');
 }
@@ -12,8 +24,8 @@ function courseProgress(course) {
   return { completed: progress.completed || [], percent: lessons.length ? Math.round((progress.completed || []).length / lessons.length * 100) : 0, last: progress.last || lessons[0].id };
 }
 
-const profile = JSON.parse(localStorage.getItem('cendekiaProfile') || '{"name":"Pelajar"}');
-const displayName = profile.name || profile.username || 'Pelajar';
+const metadata = user.user_metadata || {};
+const displayName = metadata.display_name || metadata.username || user.email || 'Pelajar';
 document.querySelector('#student-name').textContent = displayName.split(' ')[0];
 document.querySelector('#profile-name').textContent = displayName;
 document.querySelector('#profile-avatar').textContent = displayName.charAt(0).toUpperCase();
@@ -43,10 +55,16 @@ const activities = Object.entries(progress).flatMap(([courseId, item]) => (item.
 document.querySelector('#activity-list').innerHTML = activities.length ? activities.map((item) => `<div class="activity-item"><span class="activity-dot"></span><div><strong>Menyelesaikan ${item.lesson.title}</strong><small>${item.course.title} · Baru saja</small></div></div>`).join('') : '<div class="empty-activity"><span>✦</span><p>Belum ada aktivitas. Mulai satu materi hari ini!</p></div>';
 
 document.querySelector('#logout-button').addEventListener('click', () => {
-  sessionStorage.removeItem('cendekiaSession');
-  window.location.href = 'login.html';
+  window.CendekiaAuth.signOut().catch((error) => {
+    const toast = document.querySelector('.toast');
+    toast.textContent = error.message || 'Tidak dapat keluar dari akun.';
+    toast.classList.add('is-visible');
+  });
 });
 
 document.querySelector('#student-menu').addEventListener('click', () => {
   document.querySelector('#student-sidebar').classList.toggle('is-open');
 });
+}
+
+initializeDashboard();

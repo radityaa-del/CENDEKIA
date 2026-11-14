@@ -1,12 +1,12 @@
 const authToast = document.querySelector('.toast');
 let authToastTimer;
 
-function showAuthToast(message) {
+function showAuthToast(message, duration = 3200) {
   if (!authToast) return;
   authToast.textContent = message;
   authToast.classList.add('is-visible');
   window.clearTimeout(authToastTimer);
-  authToastTimer = window.setTimeout(() => authToast.classList.remove('is-visible'), 3200);
+  authToastTimer = window.setTimeout(() => authToast.classList.remove('is-visible'), duration);
 }
 
 function setError(input, message) {
@@ -21,6 +21,21 @@ function validatePassword(input) {
   return !message;
 }
 
+function validateForm(form) {
+  let valid = true;
+  form.querySelectorAll('[required]').forEach((input) => {
+    let message = '';
+    if (!input.value.trim()) message = 'Bagian ini wajib diisi.';
+    if (input.type === 'email' && input.value && !/^\S+@\S+\.\S+$/.test(input.value)) message = 'Masukkan email yang valid.';
+    if (input.name === 'password' && input.value && input.value.length < 8) message = 'Password minimal 8 karakter.';
+    if (input.name === 'confirmPassword' && input.value !== form.elements.password.value) message = 'Password belum sama.';
+    if (input.type === 'checkbox' && !input.checked) message = 'Persetujuan diperlukan untuk melanjutkan.';
+    setError(input, message);
+    if (message) valid = false;
+  });
+  return valid;
+}
+
 document.querySelectorAll('.password-toggle').forEach((button) => {
   button.addEventListener('click', () => {
     const input = document.getElementById(button.dataset.target);
@@ -32,37 +47,55 @@ document.querySelectorAll('.password-toggle').forEach((button) => {
 });
 
 document.querySelectorAll('.auth-form').forEach((form) => {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    let valid = true;
-    form.querySelectorAll('[required]').forEach((input) => {
-      let message = '';
-      if (!input.value.trim()) message = 'Bagian ini wajib diisi.';
-      if (input.type === 'email' && input.value && !/^\S+@\S+\.\S+$/.test(input.value)) message = 'Masukkan email yang valid.';
-      if (input.name === 'password' && input.value) message = input.value.length < 8 ? 'Password minimal 8 karakter.' : '';
-      if (input.name === 'confirmPassword' && input.value !== form.elements.password.value) message = 'Password belum sama.';
-      if (input.type === 'checkbox' && !input.checked) message = 'Persetujuan diperlukan untuk melanjutkan.';
-      setError(input, message);
-      if (message) valid = false;
-    });
-    if (!valid) return;
-    if (form.dataset.mode === 'register') {
-      const profile = { name: form.elements.fullName.value.trim(), username: form.elements.username.value.trim(), email: form.elements.email.value.trim(), joinedAt: new Date().toISOString(), bio:'', avatar:'' };
-      localStorage.setItem('cendekiaProfile', JSON.stringify(profile));
-      showAuthToast('Registrasi berhasil. Silakan masuk dengan akunmu.');
-      window.setTimeout(() => { window.location.href = 'login.html'; }, 800);
+    if (!validateForm(form)) return;
+    if (!window.cendekiaSupabase) {
+      showAuthToast(window.CENDEKIA_AUTH_ERROR || 'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.');
       return;
     }
-    const savedProfile = JSON.parse(localStorage.getItem('cendekiaProfile') || 'null');
-    const identity = form.elements.identity.value.trim();
-    const profile = savedProfile || {
-      name: identity.includes('@') ? identity.split('@')[0] : identity,
-      username: identity
-    };
-    localStorage.setItem('cendekiaProfile', JSON.stringify(profile));
-    sessionStorage.setItem('cendekiaSession', 'active');
-    showAuthToast('Simulasi masuk berhasil. Selamat datang di CENDEKIA.');
-    window.setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+
+    const submitButton = form.querySelector('[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.disabled = true;
+    submitButton.textContent = 'Memproses...';
+
+    try {
+      if (form.dataset.mode === 'register') {
+        const { data, error } = await window.cendekiaSupabase.auth.signUp({
+          email: form.elements.email.value.trim(),
+          password: form.elements.password.value,
+          options: {
+            data: {
+              display_name: form.elements.fullName.value.trim(),
+              username: form.elements.username.value.trim()
+            },
+            emailRedirectTo: new URL('dashboard.html', window.location.href).href
+          }
+        });
+        if (error) throw error;
+
+        if (!data.session) {
+          showAuthToast('Pendaftaran berhasil. Periksa email untuk konfirmasi, lalu masuk.', 7000);
+          form.reset();
+          return;
+        }
+      } else {
+        const { error } = await window.cendekiaSupabase.auth.signInWithPassword({
+          email: form.elements.identity.value.trim(),
+          password: form.elements.password.value
+        });
+        if (error) throw error;
+      }
+
+      showAuthToast(form.dataset.mode === 'register' ? 'Akun berhasil dibuat. Membuka dashboard...' : 'Berhasil masuk. Selamat datang di CENDEKIA.');
+      window.setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+    } catch (error) {
+      showAuthToast(error.message || 'Autentikasi gagal. Coba lagi.');
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = originalButtonText;
+    }
   });
 });
 

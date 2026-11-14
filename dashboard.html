@@ -12,10 +12,14 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/pages.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="js/supabase-config.js" defer></script>
+    <script src="js/supabase-client.js" defer></script>
+    <script src="js/auth-session.js" defer></script>
     <script src="js/learning-data.js" defer> </script>
     <script src="js/dashboard.js" defer> </script>
   <script src="js/theme.js" defer></script></head>
-  <body class="student-app">
+  <body class="student-app" data-auth-required="true">
     <div class="student-layout">
     <aside class="student-sidebar" id="student-sidebar">
       <a class="brand" href="dashboard.html"> <span class="brand-mark">C</span> <span>CENDEKIA</span> </a>

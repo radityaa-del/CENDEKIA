@@ -1,3 +1,7 @@
+async function initializeLearningRoom() {
+const user = await window.CendekiaAuth.requireUser();
+if (!user) return;
+
 const params = new URLSearchParams(window.location.search);
 const course = getCourse(params.get('course'));
 const lessons = getLessonList(course);
@@ -45,3 +49,10 @@ document.querySelector('#previous-lesson').addEventListener('click', () => { cur
 document.querySelector('#next-lesson').addEventListener('click', () => { currentIndex += 1; render(); });
 document.querySelector('#curriculum-toggle').addEventListener('click', () => document.querySelector('#curriculum-sidebar').classList.toggle('is-open'));
 render();
+}
+
+initializeLearningRoom().catch((error) => {
+  const toast = document.querySelector('.toast');
+  toast.textContent = error.message || 'Tidak dapat membuka ruang belajar.';
+  toast.classList.add('is-visible');
+});
