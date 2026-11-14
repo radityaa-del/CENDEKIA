@@ -26,6 +26,7 @@
 .password-wrap .form-input { padding-right:52px; }
 .password-toggle { background:none; border:0; color:var(--muted); cursor:pointer; font-size:.72rem; font-weight:700; padding:7px; position:absolute; right:8px; top:7px; }
 .form-options { align-items:center; display:flex; gap:8px; margin:8px 0 22px; }
+.form-options { justify-content:space-between; }.auth-link-button { background:none; border:0; color:var(--blue); cursor:pointer; font:inherit; font-size:.75rem; font-weight:700; padding:0; }.auth-link-button:disabled { cursor:wait; opacity:.65; }
 .check-label { align-items:flex-start; color:var(--muted); display:flex; font-size:.72rem; gap:8px; line-height:1.5; }
 .check-label input { accent-color:var(--blue); margin-top:3px; }
 .form-submit { width:100%; }.auth-page~.toast { background:var(--navy); border-left:4px solid var(--orange); border-radius:8px; bottom:25px; box-shadow:var(--shadow); color:#fff; font-size:.82rem; max-width:min(440px,calc(100% - 36px)); opacity:0; padding:13px 18px; pointer-events:none; position:fixed; right:18px; transform:translateY(15px); transition:.3s; visibility:hidden; z-index:50; }.auth-page~.toast.is-visible { opacity:1; transform:translateY(0); visibility:visible; }

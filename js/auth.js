@@ -52,6 +52,38 @@ document.querySelectorAll('.password-toggle').forEach((button) => {
   });
 });
 
+document.querySelector('#forgot-password')?.addEventListener('click', async (event) => {
+  const emailInput = document.querySelector('#identity');
+  const email = emailInput.value.trim();
+  if (!/^\S+@\S+\.\S+$/.test(email)) {
+    setError(emailInput, email ? 'Masukkan email yang valid.' : 'Isi email akunmu terlebih dahulu.');
+    emailInput.focus();
+    return;
+  }
+  setError(emailInput, '');
+  if (!window.cendekiaSupabase) {
+    showAuthToast(window.CENDEKIA_AUTH_ERROR || 'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.', 7000);
+    return;
+  }
+
+  const button = event.currentTarget;
+  button.disabled = true;
+  try {
+    const redirectTo = new URL('reset-password.html', window.location.href).href;
+    const { error } = await window.cendekiaSupabase.auth.resetPasswordForEmail(email, { redirectTo });
+    if (error) throw error;
+    showAuthToast('Jika email terdaftar, tautan reset password akan dikirim. Periksa inbox dan folder spam.', 7000);
+  } catch (error) {
+    showAuthToast(error.message || 'Tidak dapat mengirim tautan reset. Coba lagi.', 7000);
+  } finally {
+    button.disabled = false;
+  }
+});
+
+if (new URLSearchParams(window.location.search).get('password') === 'updated') {
+  showAuthToast('Password berhasil diperbarui. Silakan masuk dengan password baru.', 7000);
+}
+
 document.querySelectorAll('.auth-form').forEach((form) => {
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
