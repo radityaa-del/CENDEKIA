@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard belajar siswa CENDEKIA.">
+    <title>Dashboard Siswa | CENDEKIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="js/learning-data.js" defer> </script>
+    <script src="js/dashboard.js" defer> </script>
+  <script src="js/theme.js" defer></script></head>
+  <body class="student-app">
+    <div class="student-layout">
+    <aside class="student-sidebar" id="student-sidebar">
+      <a class="brand" href="dashboard.html"> <span class="brand-mark">C</span> <span>CENDEKIA</span> </a>
+      <nav class="student-nav" aria-label="Navigasi siswa">
+        <p class="student-nav-label">Menu utama</p> <a class="student-nav-link is-active" href="dashboard.html"> <span>▦</span> Dashboard</a> <a class="student-nav-link" href="#my-courses"> <span>▣</span> Kelas Saya</a> <a class="student-nav-link" href="catalog.html"> <span>⌕</span> Jelajahi Kelas</a> <a class="student-nav-link" href="playground.html"> <span>&lt;/&gt;</span> Coding Playground</a> <a class="student-nav-link" href="quiz.html"> <span>✦</span> Latihan dan Kuis</a> <a class="student-nav-link" href="progress.html"> <span>◔</span> Progres Belajar</a>
+        <p class="student-nav-label">Akun</p> <a class="student-nav-link" href="profile.html"> <span>♙</span> Profil Saya</a> <a class="student-nav-link" href="settings.html"> <span>⚙</span> Pengaturan</a>
+      </nav> <button class="student-logout" id="logout-button" type="button"> <span>↪</span> Keluar</button>
+    </aside>
+    <main class="student-main">
+      <header class="student-header">
+        <button class="student-menu" id="student-menu" type="button" aria-label="Buka navigasi">☰</button> <div>
+        <p class="section-kicker">Kamis, 5 November 2026</p>
+        <h1>Selamat datang, <span id="student-name">Pelajar</span> 👋</h1> </div> <div class="student-profile"> <div class="profile-avatar" id="profile-avatar">P</div> <div> <strong id="profile-name">Pelajar</strong> <small>Pelajar aktif</small> </div> </div>
+      </header>
+      <section class="dashboard-welcome">
+        <div>
+        <p class="section-kicker">Terus melangkah</p>
+        <h2>Belajar sedikit setiap hari,<br> <em>hasilnya luar biasa.</em> </h2>
+        <p>Ikuti progresmu dan lanjutkan materi yang terakhir kamu buka.</p> <a class="button button-white" id="continue-button" href="learning.html?course=python-dasar">Lanjutkan pembelajaran <span>↗</span> </a> </div> <div class="welcome-art" aria-hidden="true"> <span>&lt;/&gt;</span> <b>+</b> <i>✦</i> </div>
+      </section>
+      <section class="stat-grid" aria-label="Ringkasan progres">
+        <article class="stat-card">
+          <span class="stat-icon blue">▣</span> <div> <strong id="class-count">0</strong> <span>Kelas diikuti</span> </div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon green">✓</span> <div> <strong id="completed-count">0</strong> <span>Materi selesai</span> </div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon orange">◷</span> <div> <strong id="activity-count">0</strong> <span>Total aktivitas</span> </div>
+        </article>
+        <article class="stat-card">
+          <span class="stat-icon navy">◔</span> <div> <strong id="overall-progress">0%</strong> <span>Progres belajar</span> </div>
+        </article>
+      </section> <div class="dashboard-columns">
+      <section class="dashboard-section" id="my-courses">
+        <div class="section-title-row"> <div>
+        <p class="section-kicker">Perjalananmu</p>
+        <h2>Kelas yang sedang dipelajari</h2> </div> <a class="text-link" href="catalog.html">Lihat semua <span>↗</span> </a> </div> <div class="learning-course-list" id="my-course-list"> </div>
+        <section class="dashboard-section compact" id="progress">
+          <div class="section-title-row"> <div>
+          <p class="section-kicker">Jejak belajar</p>
+          <h2>Aktivitas terbaru</h2> </div> </div> <div class="activity-list" id="activity-list"> </div>
+        </section>
+      </section>
+      <aside class="dashboard-aside">
+        <section class="recommendation-card">
+          <div class="section-title-row"> <div>
+          <p class="section-kicker">Untukmu</p>
+          <h2>Rekomendasi kelas</h2> </div> </div> <div id="recommendation-list"> </div>
+        </section>
+        <section class="quick-card">
+          <p class="section-kicker">Ruang praktik</p>
+          <h3>Siap mencoba sesuatu yang baru?</h3>
+          <p>Latih logikamu dengan membuat kode pertama di playground.</p> <a href="playground.html" class="button button-secondary">Buka playground <span>↗</span> </a>
+        </section>
+      </aside> </div>
+      <section class="dashboard-tools" aria-label="Menu tambahan">
+        <article id="playground">
+          <p class="section-kicker">Coding Playground</p>
+          <h2>Ruang praktik kode</h2>
+          <p>Gunakan ruang belajar untuk mencoba contoh kode dari setiap materi.</p> <a class="text-link" href="playground.html">Mulai mencoba <span>↗</span> </a>
+        </article>
+        <article id="practice">
+          <p class="section-kicker">Latihan dan Kuis</p>
+          <h2>Perkuat pemahamanmu</h2>
+          <p>Ulangi materi dan selesaikan latihan setelah mengikuti kelas.</p> <a class="text-link" href="quiz.html">Mulai latihan <span>↗</span> </a>
+        </article>
+        <article id="profile">
+          <p class="section-kicker">Profil Saya</p>
+          <h2 id="profile-card-name">Profil pelajar</h2>
+          <p>Data profil prototipe tersimpan hanya sebagai nama dan username.</p>
+        </article>
+        <article id="settings">
+          <p class="section-kicker">Pengaturan</p>
+          <h2>Preferensi belajar</h2>
+          <p>Pengaturan akun dan notifikasi akan tersedia pada versi berikutnya.</p>
+        </article>
+      </section>
+    </main> </div> <div class="toast" role="status" aria-live="polite"> </div>
+    <script src="js/navigation.js" defer> </script>
+  </body>
+</html>

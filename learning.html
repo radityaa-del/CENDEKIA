@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ruang belajar CENDEKIA.">
+    <title>Ruang Belajar | CENDEKIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js" defer></script></head>
+  <body class="learning-room">
+    <header class="learning-header">
+      <a class="brand" href="dashboard.html"> <span class="brand-mark">C</span> <span>CENDEKIA</span> </a> <div class="learning-course-name"> <small>RUANG BELAJAR</small> <strong id="learning-course-title">Python Dasar</strong> </div> <div class="learning-progress"> <span id="learning-progress-label">0% selesai</span> <div class="progress-track"> <span id="learning-progress-bar"> </span> </div> </div> <a class="back-dashboard" href="dashboard.html">← Dashboard</a> <button class="curriculum-toggle" id="curriculum-toggle" type="button" aria-label="Buka kurikulum">☰</button>
+    </header>
+    <main class="learning-layout">
+      <aside class="curriculum-sidebar" id="curriculum-sidebar">
+        <div class="curriculum-heading">
+        <p class="section-kicker">Kurikulum kelas</p>
+        <h2 id="curriculum-course-title">Python Dasar</h2> </div> <div id="curriculum-list"> </div>
+      </aside>
+      <section class="lesson-area">
+        <div class="lesson-breadcrumb"> <span id="lesson-chapter">Bab 1</span> <span>/</span> <span id="lesson-position">Materi 1</span> </div>
+        <article class="lesson-content">
+          <div class="lesson-title-row"> <div>
+          <p class="section-kicker">Materi pembelajaran</p>
+          <h1 id="lesson-title"> </h1> </div> <span class="lesson-status" id="lesson-status">Belum selesai</span> </div> <div class="lesson-illustration" id="lesson-illustration"> <span>{ }</span> <b>Belajar dengan praktik</b> </div> <div class="lesson-copy">
+          <p id="lesson-explanation"> </p>
+          <h2>Contoh kode</h2>
+          <pre> <code id="lesson-code"> </code> </pre> <div class="lesson-summary"> <strong>Rangkuman materi</strong>
+          <p id="lesson-summary"> </p> </div> </div>
+        </article>
+        <nav class="lesson-navigation" aria-label="Navigasi materi">
+          <button class="button button-secondary" id="previous-lesson" type="button">← Sebelumnya</button> <button class="button button-primary" id="complete-lesson" type="button">Tandai selesai <span>✓</span> </button> <button class="button button-primary" id="next-lesson" type="button">Materi berikutnya <span>→</span> </button>
+        </nav>
+      </section>
+    </main> <div class="toast" role="status" aria-live="polite"> </div>
+    <script src="js/learning-data.js"> </script>
+    <script src="js/progress-store.js"> </script>
+    <script src="js/learning.js"> </script>
+  </body>
+</html>

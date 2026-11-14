@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Latihan dan kuis interaktif CENDEKIA.">
+  <title>Latihan &amp; Kuis | CENDEKIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/quiz.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/quiz-data.js" defer></script>
+  <script src="js/progress-store.js" defer></script>
+  <script src="js/quiz.js" defer></script>
+<script src="js/theme.js" defer></script></head>
+<body class="quiz-page">
+  <header class="site-header">
+    <nav class="navbar container" aria-label="Navigasi utama">
+      <a class="brand" href="dashboard.html"><span class="brand-mark">C</span><span>CENDEKIA</span></a>
+      <div class="quiz-nav-actions"><a class="button button-ghost" href="dashboard.html">Dashboard</a><a class="button button-primary button-small" href="catalog.html">Jelajahi kelas <span>↗</span></a></div>
+    </nav>
+  </header>
+  <main class="quiz-shell container">
+    <section id="quiz-library" class="quiz-view">
+      <header class="quiz-page-heading"><div><p class="section-kicker">Latihan dan evaluasi</p><h1>Uji pemahamanmu,<br><span>tumbuh lebih jauh.</span></h1><p>Pilih topik, jawab soal dengan tenang, dan lihat rekomendasi belajar berikutnya.</p></div><div class="history-summary"><span class="summary-icon">◔</span><div><strong id="history-count">0</strong><small>percobaan tersimpan</small></div></div></header>
+      <div class="quiz-filter-bar"><div class="quiz-filter-label">Pilih kategori</div><div class="quiz-category-filters" id="category-filters"><button class="category-filter is-active" type="button" data-category="all">Semua</button></div></div>
+      <div class="quiz-card-grid" id="quiz-card-grid"></div>
+      <section class="history-section"><div class="quiz-section-heading"><div><p class="section-kicker">Riwayat belajarmu</p><h2>Nilai terakhir</h2></div><span class="history-note">Tersimpan di perangkat ini</span></div><div class="history-list" id="history-list"><p class="empty-history">Belum ada latihan yang diselesaikan.</p></div></section>
+    </section>
+
+    <section id="quiz-player" class="quiz-view is-hidden">
+      <div class="player-topbar"><button class="back-link" id="exit-quiz" type="button">← Kembali ke latihan</button><div class="player-course-title"><span id="player-category">Python</span><strong id="player-title">Latihan</strong></div><span class="question-counter" id="question-counter">1 / 10</span></div>
+      <div class="progress-line"><span id="quiz-progress-line"></span></div>
+      <div class="player-layout"><aside class="question-map-panel"><div class="map-heading"><h2>Soal latihan</h2><span id="answered-count">0/10</span></div><div class="question-map" id="question-map"></div><div class="map-legend"><span><i class="legend-current"></i> Saat ini</span><span><i class="legend-answered"></i> Terjawab</span></div></aside><article class="question-panel"><div class="question-type-row"><span class="question-type" id="question-type">Pilihan ganda</span><span class="difficulty-pill" id="question-difficulty">Mudah</span></div><h1 id="question-text">Pertanyaan</h1><p class="question-instruction" id="question-instruction">Instruksi</p><div id="answer-area" class="answer-area"></div><div class="player-actions"><button class="button button-secondary" id="previous-question" type="button">← Sebelumnya</button><button class="button button-primary" id="next-question" type="button">Berikutnya →</button><button class="button button-primary is-hidden" id="submit-quiz" type="button">Kumpulkan jawaban</button></div></article></div>
+    </section>
+
+    <section id="quiz-result" class="quiz-view is-hidden">
+      <div class="result-hero"><div class="result-badge">✦</div><p class="section-kicker">Latihan selesai</p><h1>Langkahmu hari ini<br><em>berarti.</em></h1><p id="result-message">Terus berlatih dan kenali bagian yang bisa kamu kuatkan.</p></div>
+      <div class="result-stats"><div><strong id="result-score">0</strong><span>Nilai akhir</span></div><div><strong id="result-correct">0</strong><span>Jawaban benar</span></div><div><strong id="result-wrong">0</strong><span>Jawaban salah</span></div><div><strong id="result-percent">0%</strong><span>Keberhasilan</span></div><div><strong id="result-time">-</strong><span>Waktu pengerjaan</span></div></div>
+      <div class="result-progress"><div class="result-progress-heading"><span>Ringkasan hasil</span><strong id="result-progress-label">0 dari 10 soal benar</strong></div><div class="result-track"><span id="result-progress-bar"></span></div></div>
+      <div class="result-content"><section><div class="quiz-section-heading"><div><p class="section-kicker">Review jawaban</p><h2>Pembahasan soal</h2></div></div><div class="review-list" id="review-list"></div></section><aside class="recommendation-panel"><p class="section-kicker">Rekomendasi berikutnya</p><h2 id="recommendation-title">Pelajari lagi bagian ini.</h2><p id="recommendation-text">Gunakan pembahasan untuk menentukan materi yang perlu diulang.</p><a class="button button-secondary" href="catalog.html">Kembali ke materi <span>↗</span></a></aside></div><div class="result-actions"><button class="button button-secondary" id="retry-quiz" type="button">↻ Ulangi kuis</button><button class="button button-primary" id="back-to-library" type="button">Pilih latihan lain <span>↗</span></button></div>
+    </section>
+  </main>
+  <div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
