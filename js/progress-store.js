@@ -1,7 +1,10 @@
 const CendekiaProgress = (() => {
   const read = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch { return fallback; } };
   const dayKey = (date = new Date()) => { const local = new Date(date); return `${local.getFullYear()}-${String(local.getMonth() + 1).padStart(2, '0')}-${String(local.getDate()).padStart(2, '0')}`; };
-  function readActivities() { return read('cendekiaActivityLog', []); }
+  function readActivities() {
+    const activities = read('cendekiaActivityLog', []);
+    return Array.isArray(activities) ? activities : [];
+  }
   function recordActivity(type, title, meta = {}) { const activities = readActivities(); const entry = { id: Date.now(), type, title, meta, date: dayKey() }; if (!activities.some((item) => item.type === type && item.title === title && item.date === entry.date)) { activities.unshift(entry); localStorage.setItem('cendekiaActivityLog', JSON.stringify(activities.slice(0, 120))); } }
   function snapshot() {
     const progress = read('cendekiaProgress', {}); const quizHistory = read('cendekiaQuizHistory', []); const projects = read('cendekiaPlaygroundProjects', []); const activities = readActivities();
@@ -11,3 +14,4 @@ const CendekiaProgress = (() => {
   function calculateStreak(dateSet) { const today = new Date(); let cursor = new Date(today.getFullYear(), today.getMonth(), today.getDate()); let current = 0; while (dateSet.has(dayKey(cursor))) { current += 1; cursor.setDate(cursor.getDate() - 1); } let longest = 0; let run = 0; const dates = [...dateSet].sort(); dates.forEach((date, index) => { if (index && Math.round((new Date(`${date}T00:00:00`) - new Date(`${dates[index - 1]}T00:00:00`)) / 86400000) === 1) run += 1; else run = 1; longest = Math.max(longest, run); }); return { current, longest }; }
   return { dayKey, readActivities, recordActivity, snapshot };
 })();
+window.CendekiaProgress = CendekiaProgress;

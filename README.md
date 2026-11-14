@@ -30,6 +30,6 @@ Buka folder ini di VS Code dan jalankan `index.html` dengan ekstensi Live Server
 
 ## Penyimpanan prototipe dan batasan
 
-Sesi Supabase disimpan di `sessionStorage`. Progres belajar, riwayat kuis, proyek Playground, preferensi, dan sebagian data profil masih disimpan di LocalStorage browser sehingga belum tersinkron antarperangkat. Password tidak disimpan oleh aplikasi.
+Sesi Supabase disimpan di `sessionStorage`. Nama, username, deskripsi profil, dan password dikelola melalui Supabase Auth. Progres belajar, riwayat kuis, proyek Playground, preferensi, dan log aktivitas disimpan di LocalStorage browser sehingga belum tersinkron antarperangkat. Foto profil hanya ditampilkan sementara di tab aktif dan tidak diunggah atau disimpan. Preferensi pengingat belum mengirim notifikasi.
 
 Sebelum menyimpan data pengguna di database Supabase, aktifkan Row Level Security (RLS) dan pastikan kebijakan membatasi setiap pengguna ke datanya sendiri. Jangan memasukkan informasi sensitif ke LocalStorage atau repository publik.

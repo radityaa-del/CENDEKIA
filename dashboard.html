@@ -17,6 +17,7 @@
     <script src="js/supabase-client.js" defer></script>
     <script src="js/auth-session.js" defer></script>
     <script src="js/learning-data.js" defer> </script>
+    <script src="js/progress-store.js" defer></script>
     <script src="js/dashboard.js" defer> </script>
   <script src="js/theme.js" defer></script></head>
   <body class="student-app" data-auth-required="true">
@@ -31,7 +32,7 @@
     <main class="student-main">
       <header class="student-header">
         <button class="student-menu" id="student-menu" type="button" aria-label="Buka navigasi">☰</button> <div>
-        <p class="section-kicker">Kamis, 5 November 2026</p>
+        <p class="section-kicker" id="dashboard-date"></p>
         <h1>Selamat datang, <span id="student-name">Pelajar</span> 👋</h1> </div> <div class="student-profile"> <div class="profile-avatar" id="profile-avatar">P</div> <div> <strong id="profile-name">Pelajar</strong> <small>Pelajar aktif</small> </div> </div>
       </header>
       <section class="dashboard-welcome">
@@ -90,12 +91,14 @@
         <article id="profile">
           <p class="section-kicker">Profil Saya</p>
           <h2 id="profile-card-name">Profil pelajar</h2>
-          <p>Data profil prototipe tersimpan hanya sebagai nama dan username.</p>
+          <p>Kelola nama, username, dan deskripsi profilmu.</p>
+          <a class="text-link" href="profile.html">Buka profil <span>↗</span></a>
         </article>
         <article id="settings">
           <p class="section-kicker">Pengaturan</p>
           <h2>Preferensi belajar</h2>
-          <p>Pengaturan akun dan notifikasi akan tersedia pada versi berikutnya.</p>
+          <p>Atur tampilan, preferensi, dan password akunmu.</p>
+          <a class="text-link" href="settings.html">Buka pengaturan <span>↗</span></a>
         </article>
       </section>
     </main> </div> <div class="toast" role="status" aria-live="polite"> </div>

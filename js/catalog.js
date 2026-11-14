@@ -14,15 +14,20 @@ const resultCount = document.querySelector('#result-count');
 const emptyState = document.querySelector('#empty-state');
 
 function courseCard(course) {
-  return `<article class="catalog-card reveal is-visible"><div class="course-image"><img src="${course.image}" alt="Ilustrasi ${course.title}"><span class="course-badge">GRATIS</span><span class="course-level ${course.levelClass}">${course.level}</span></div><div class="course-body"><p class="course-label">${course.label}</p><h3>${course.title}</h3><p>${course.description}</p><div class="course-meta"><span>◷ ${course.lessons}</span><span>♧ ${course.rating}</span><a class="course-detail" href="course.html?id=${course.id}">Lihat detail <span>↗</span></a></div></div></article>`;
+  const details = getCourse(course.id);
+  const lessonCount = getLessonList(details).length;
+  const levelClass = details.level === 'Pemula' ? 'level-green' : 'level-orange';
+  return `<article class="catalog-card reveal is-visible"><div class="course-image"><img src="${details.image}" alt="Ilustrasi ${details.title}"><span class="course-badge">GRATIS</span><span class="course-level ${levelClass}">${details.level}</span></div><div class="course-body"><p class="course-label">${details.category.toUpperCase()}</p><h3>${details.title}</h3><p>${details.description}</p><div class="course-meta"><span>◷ ${lessonCount} materi</span><span>♧ ${course.rating}</span><a class="course-detail" href="course.html?id=${course.id}">Lihat detail <span>↗</span></a></div></div></article>`;
 }
 
 function renderCourses() {
   const query = searchInput.value.trim().toLowerCase();
   const category = categoryFilter.value;
   const filtered = courses.filter((course) => {
-    const matchesText = `${course.title} ${course.description} ${course.category}`.toLowerCase().includes(query);
-    return matchesText && (!category || course.category === category);
+    const details = getCourse(course.id);
+    const searchableText = `${course.title} ${course.description} ${course.category} ${details.title} ${details.description} ${details.category}`.toLowerCase();
+    const matchesText = searchableText.includes(query);
+    return matchesText && (!category || details.category === category);
   });
   grid.innerHTML = filtered.map(courseCard).join('');
   resultCount.textContent = `${filtered.length} kelas ditemukan`;

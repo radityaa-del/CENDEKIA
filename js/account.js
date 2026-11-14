@@ -1,19 +1,242 @@
 const profileKey = 'cendekiaProfile';
 const preferenceKey = 'cendekiaPreferences';
-const defaultProfile = { name:'Pelajar', username:'pelajar', email:'', bio:'Belum ada deskripsi.', joinedAt:new Date().toISOString(), avatar:'' };
-const readJson = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch { return fallback; } };
-const getProfile = () => ({ ...defaultProfile, ...readJson(profileKey, {}) });
-const getPreferences = () => ({ theme:'light', fontSize:'normal', reminder:true, achievement:true, updates:true, publicProfile:false, ...readJson(preferenceKey, {}) });
-const profile = getProfile();
+const defaultProfile = {
+  name: 'Pelajar',
+  username: 'pelajar',
+  email: '',
+  bio: 'Belum ada deskripsi.',
+  joinedAt: new Date().toISOString(),
+  avatar: ''
+};
+const readJson = (key, fallback) => {
+  try {
+    return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
+  } catch {
+    return fallback;
+  }
+};
+const getPreferences = () => ({
+  theme: 'light',
+  fontSize: 'normal',
+  reminder: true,
+  achievement: true,
+  updates: true,
+  ...readJson(preferenceKey, {})
+});
+let profile = { ...defaultProfile };
 const preferences = getPreferences();
 const toast = document.querySelector('.toast');
 let toastTimer;
-function notify(message) { if (!toast) return; toast.textContent = message; toast.classList.add('is-visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 2800); }
-function savePreferences() { localStorage.setItem(preferenceKey, JSON.stringify(preferences)); }
-function applyPreferences() { document.body.classList.toggle('theme-dark', preferences.theme === 'dark'); document.body.classList.toggle('text-large', preferences.fontSize === 'large'); }
-function avatarElement(element) { if (!element) return; element.textContent = profile.name.charAt(0).toUpperCase(); if (profile.avatar) element.style.backgroundImage = `url(${profile.avatar})`; }
-function formatJoined() { return new Date(profile.joinedAt).toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' }); }
-function showProfile() { const progress = readJson('cendekiaProgress', {}); const courses = typeof learningCourses === 'undefined' ? [] : learningCourses; const completedLessons = courses.reduce((sum, course) => sum + (progress[course.id]?.completed || []).length, 0); const history = readJson('cendekiaQuizHistory', []); document.querySelector('#profile-name')?.replaceChildren(document.createTextNode(profile.name)); document.querySelector('#profile-username')?.replaceChildren(document.createTextNode(`@${profile.username}`)); document.querySelector('#profile-bio')?.replaceChildren(document.createTextNode(profile.bio || 'Belum ada deskripsi.')); document.querySelector('#profile-joined')?.replaceChildren(document.createTextNode(`Bergabung ${formatJoined()}`)); avatarElement(document.querySelector('#profile-avatar')); document.querySelector('#settings-email')?.replaceChildren(document.createTextNode(profile.email || 'Belum diisi')); document.querySelector('#settings-username')?.replaceChildren(document.createTextNode(`@${profile.username}`)); document.querySelector('#settings-joined')?.replaceChildren(document.createTextNode(formatJoined())); document.querySelector('#profile-courses')?.replaceChildren(document.createTextNode(String(Object.keys(progress).length))); document.querySelector('#profile-lessons')?.replaceChildren(document.createTextNode(String(completedLessons))); document.querySelector('#profile-quizzes')?.replaceChildren(document.createTextNode(String(history.length))); const achievements = JSON.parse(localStorage.getItem('cendekiaAchievements') || '[]'); const target = document.querySelector('#profile-achievements'); if (target) target.innerHTML = achievements.length ? achievements.slice(0,3).map((item) => `<div class="mini-achievement"><span>✦</span>${item.name}</div>`).join('') : '<p class="settings-note">Belum ada pencapaian terbuka. Mulai belajar untuk mendapatkannya.</p>'; }
-function setupProfile() { showProfile(); document.querySelector('#edit-profile')?.addEventListener('click', () => { document.querySelector('#name-input').value = profile.name; document.querySelector('#username-input').value = profile.username; document.querySelector('#bio-input').value = profile.bio || ''; document.querySelector('#profile-dialog').showModal(); }); document.querySelector('#avatar-input')?.addEventListener('change', (event) => { const file = event.target.files[0]; if (!file || file.size > 2 * 1024 * 1024) { notify('Foto maksimal berukuran 2 MB.'); return; } const reader = new FileReader(); reader.onload = () => { profile.avatar = reader.result; }; reader.readAsDataURL(file); }); document.querySelector('#profile-form')?.addEventListener('submit', (event) => { if (event.submitter?.id !== 'save-profile') return; event.preventDefault(); const name = document.querySelector('#name-input').value.trim(); const username = document.querySelector('#username-input').value.trim(); const bio = document.querySelector('#bio-input').value.trim(); let valid = true; document.querySelector('[data-error="name"]').textContent = name.length < 2 ? 'Nama minimal 2 karakter.' : ''; document.querySelector('[data-error="username"]').textContent = /^[A-Za-z0-9_]{3,20}$/.test(username) ? '' : 'Username 3-20 karakter, hanya huruf, angka, underscore.'; document.querySelector('[data-error="bio"]').textContent = bio.length > 140 ? 'Deskripsi maksimal 140 karakter.' : ''; valid = name.length >= 2 && /^[A-Za-z0-9_]{3,20}$/.test(username) && bio.length <= 140; if (!valid) return; profile.name = name; profile.username = username; profile.bio = bio; localStorage.setItem(profileKey, JSON.stringify(profile)); document.querySelector('#profile-dialog').close(); showProfile(); notify('Profil berhasil diperbarui.'); }); }
-function setupSettings() { document.querySelector('#settings-email')?.replaceChildren(document.createTextNode(profile.email || 'Belum diisi')); document.querySelector('#settings-username')?.replaceChildren(document.createTextNode(`@${profile.username}`)); document.querySelector('#settings-joined')?.replaceChildren(document.createTextNode(formatJoined())); document.querySelectorAll('[data-theme]').forEach((button) => { button.classList.toggle('is-active', button.dataset.theme === preferences.theme); button.addEventListener('click', () => { preferences.theme = button.dataset.theme; savePreferences(); applyPreferences(); document.querySelectorAll('[data-theme]').forEach((item) => item.classList.toggle('is-active', item === button)); notify('Tema tampilan disimpan.'); }); }); const fontSize = document.querySelector('#font-size-setting'); if (fontSize) { fontSize.value = preferences.fontSize; fontSize.addEventListener('change', () => { preferences.fontSize = fontSize.value; savePreferences(); applyPreferences(); }); } document.querySelectorAll('[data-preference]').forEach((input) => { input.checked = Boolean(preferences[input.dataset.preference]); input.addEventListener('change', () => { preferences[input.dataset.preference] = input.checked; savePreferences(); notify('Preferensi disimpan.'); }); }); document.querySelector('#password-form')?.addEventListener('submit', (event) => { event.preventDefault(); const password = document.querySelector('#new-password').value; const confirm = document.querySelector('#confirm-password').value; document.querySelector('[data-error="password"]').textContent = password.length < 8 ? 'Password minimal 8 karakter.' : ''; document.querySelector('[data-error="confirm"]').textContent = password !== confirm ? 'Konfirmasi password belum sama.' : ''; if (password.length < 8 || password !== confirm) return; event.currentTarget.reset(); notify('Password hanya divalidasi sebagai simulasi dan tidak disimpan.'); }); document.querySelector('#logout-button')?.addEventListener('click', () => { if (confirm('Keluar dari akun CENDEKIA?')) { sessionStorage.removeItem('cendekiaSession'); window.location.href = 'login.html'; } }); document.querySelector('#delete-account')?.addEventListener('click', () => { if (!confirm('Hapus seluruh data prototipe akun ini? Tindakan ini tidak dapat dibatalkan.')) return; ['cendekiaProfile','cendekiaPreferences','cendekiaProgress','cendekiaQuizHistory','cendekiaPlaygroundProjects','cendekiaPlaygroundProgress','cendekiaActivityLog','cendekiaAchievements'].forEach((key) => localStorage.removeItem(key)); sessionStorage.removeItem('cendekiaSession'); window.location.href = 'index.html'; }); }
-applyPreferences(); setupProfile(); setupSettings();
+let avatarUrl = '';
+
+function notify(message) {
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 3500);
+}
+
+function savePreferences() {
+  localStorage.setItem(preferenceKey, JSON.stringify(preferences));
+}
+
+function applyPreferences() {
+  document.body.classList.toggle('theme-dark', preferences.theme === 'dark');
+  document.body.classList.toggle('text-large', preferences.fontSize === 'large');
+}
+
+function avatarElement(element) {
+  if (!element) return;
+  element.textContent = profile.name.charAt(0).toUpperCase();
+  element.style.backgroundImage = avatarUrl ? `url("${avatarUrl}")` : '';
+}
+
+function formatJoined() {
+  const date = new Date(profile.joinedAt);
+  if (Number.isNaN(date.getTime())) return 'Tanggal tidak tersedia';
+  return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+function showProfile() {
+  const progress = readJson('cendekiaProgress', {});
+  const courses = typeof learningCourses === 'undefined' ? [] : learningCourses;
+  const completedLessons = courses.reduce((sum, course) => {
+    const completed = progress[course.id]?.completed;
+    return sum + (Array.isArray(completed) ? completed.length : 0);
+  }, 0);
+  const history = readJson('cendekiaQuizHistory', []);
+  document.querySelector('#profile-name')?.replaceChildren(document.createTextNode(profile.name));
+  document.querySelector('#profile-username')?.replaceChildren(document.createTextNode(`@${profile.username}`));
+  document.querySelector('#profile-bio')?.replaceChildren(document.createTextNode(profile.bio || 'Belum ada deskripsi.'));
+  document.querySelector('#profile-joined')?.replaceChildren(document.createTextNode(`Bergabung ${formatJoined()}`));
+  avatarElement(document.querySelector('#profile-avatar'));
+  document.querySelector('#settings-email')?.replaceChildren(document.createTextNode(profile.email || 'Belum diisi'));
+  document.querySelector('#settings-username')?.replaceChildren(document.createTextNode(`@${profile.username}`));
+  document.querySelector('#settings-joined')?.replaceChildren(document.createTextNode(formatJoined()));
+  document.querySelector('#profile-courses')?.replaceChildren(document.createTextNode(String(Object.keys(progress).length)));
+  document.querySelector('#profile-lessons')?.replaceChildren(document.createTextNode(String(completedLessons)));
+  document.querySelector('#profile-quizzes')?.replaceChildren(document.createTextNode(String(Array.isArray(history) ? history.length : 0)));
+  const achievements = readJson('cendekiaAchievements', []);
+  const target = document.querySelector('#profile-achievements');
+  if (target) {
+    target.innerHTML = Array.isArray(achievements) && achievements.length
+      ? achievements.slice(0, 3).map((item) => `<div class="mini-achievement"><span>✦</span>${item.name}</div>`).join('')
+      : '<p class="settings-note">Belum ada pencapaian terbuka. Mulai belajar untuk mendapatkannya.</p>';
+  }
+}
+
+function setupProfile(user) {
+  showProfile();
+  document.querySelector('#edit-profile')?.addEventListener('click', () => {
+    document.querySelector('#name-input').value = profile.name;
+    document.querySelector('#username-input').value = profile.username;
+    document.querySelector('#bio-input').value = profile.bio || '';
+    document.querySelector('#profile-dialog').showModal();
+  });
+  document.querySelector('#avatar-input')?.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 2 * 1024 * 1024) {
+      notify('Pilih PNG, JPG, atau WebP dengan ukuran maksimal 2 MB.');
+      event.target.value = '';
+      return;
+    }
+    if (avatarUrl) URL.revokeObjectURL(avatarUrl);
+    avatarUrl = URL.createObjectURL(file);
+    avatarElement(document.querySelector('#profile-avatar'));
+  });
+  document.querySelector('#profile-form')?.addEventListener('submit', async (event) => {
+    if (event.submitter?.id !== 'save-profile') return;
+    event.preventDefault();
+    const name = document.querySelector('#name-input').value.trim();
+    const username = document.querySelector('#username-input').value.trim();
+    const bio = document.querySelector('#bio-input').value.trim();
+    document.querySelector('[data-error="name"]').textContent = name.length < 2 ? 'Nama minimal 2 karakter.' : '';
+    document.querySelector('[data-error="username"]').textContent = /^[A-Za-z0-9_]{3,20}$/.test(username)
+      ? ''
+      : 'Username 3-20 karakter, hanya huruf, angka, underscore.';
+    document.querySelector('[data-error="bio"]').textContent = bio.length > 140 ? 'Deskripsi maksimal 140 karakter.' : '';
+    if (name.length < 2 || !/^[A-Za-z0-9_]{3,20}$/.test(username) || bio.length > 140) return;
+
+    const submitButton = document.querySelector('#save-profile');
+    submitButton.disabled = true;
+    try {
+      const { data, error } = await window.cendekiaSupabase.auth.updateUser({
+        data: { display_name: name, username, bio }
+      });
+      if (error) throw error;
+      user = data.user;
+      profile = {
+        ...profile,
+        name: user.user_metadata.display_name || name,
+        username: user.user_metadata.username || username,
+        bio: user.user_metadata.bio || bio,
+        email: user.email || ''
+      };
+      localStorage.removeItem(profileKey);
+      document.querySelector('#profile-dialog').close();
+      showProfile();
+      notify('Profil berhasil diperbarui.');
+    } catch (error) {
+      notify(error.message || 'Tidak dapat menyimpan perubahan profil.');
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+}
+
+function setupSettings() {
+  document.querySelectorAll('[data-theme]').forEach((button) => {
+    button.classList.toggle('is-active', button.dataset.theme === preferences.theme);
+    button.addEventListener('click', () => {
+      preferences.theme = button.dataset.theme;
+      savePreferences();
+      applyPreferences();
+      document.querySelectorAll('[data-theme]').forEach((item) => item.classList.toggle('is-active', item === button));
+      notify('Tema tampilan disimpan.');
+    });
+  });
+  const fontSize = document.querySelector('#font-size-setting');
+  if (fontSize) {
+    fontSize.value = preferences.fontSize;
+    fontSize.addEventListener('change', () => {
+      preferences.fontSize = fontSize.value;
+      savePreferences();
+      applyPreferences();
+    });
+  }
+  document.querySelectorAll('[data-preference]').forEach((input) => {
+    input.checked = Boolean(preferences[input.dataset.preference]);
+    input.addEventListener('change', () => {
+      preferences[input.dataset.preference] = input.checked;
+      savePreferences();
+      notify('Preferensi disimpan.');
+    });
+  });
+  document.querySelector('#password-form')?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const password = document.querySelector('#new-password').value;
+    const confirmPassword = document.querySelector('#confirm-password').value;
+    document.querySelector('[data-error="password"]').textContent = password.length < 8 ? 'Password minimal 8 karakter.' : '';
+    document.querySelector('[data-error="confirm"]').textContent = password !== confirmPassword ? 'Konfirmasi password belum sama.' : '';
+    if (password.length < 8 || password !== confirmPassword) return;
+
+    const submitButton = event.currentTarget.querySelector('[type="submit"]');
+    submitButton.disabled = true;
+    try {
+      const { error } = await window.cendekiaSupabase.auth.updateUser({ password });
+      if (error) throw error;
+      event.currentTarget.reset();
+      notify('Password berhasil diperbarui.');
+    } catch (error) {
+      notify(error.message || 'Tidak dapat memperbarui password.');
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+  document.querySelector('#delete-account')?.addEventListener('click', () => {
+    if (!confirm('Hapus progres dan preferensi yang tersimpan di perangkat ini? Akun Supabase tidak akan dihapus.')) return;
+    [
+      'cendekiaProfile',
+      'cendekiaPreferences',
+      'cendekiaProgress',
+      'cendekiaQuizHistory',
+      'cendekiaPlaygroundProjects',
+      'cendekiaPlaygroundProgress',
+      'cendekiaActivityLog',
+      'cendekiaAchievements'
+    ].forEach((key) => localStorage.removeItem(key));
+    window.location.href = 'dashboard.html';
+  });
+}
+
+async function initializeAccount() {
+  applyPreferences();
+  try {
+    const user = await window.CendekiaAuth.requireUser();
+    if (!user) return;
+    const metadata = user.user_metadata || {};
+    const storedProfile = readJson(profileKey, {});
+    if (storedProfile.email) {
+      delete storedProfile.email;
+      localStorage.setItem(profileKey, JSON.stringify(storedProfile));
+    }
+    profile = {
+      ...defaultProfile,
+      ...storedProfile,
+      name: metadata.display_name || metadata.username || storedProfile.name || defaultProfile.name,
+      username: metadata.username || storedProfile.username || defaultProfile.username,
+      email: user.email || '',
+      bio: metadata.bio || storedProfile.bio || defaultProfile.bio,
+      joinedAt: user.created_at || storedProfile.joinedAt || defaultProfile.joinedAt,
+      avatar: ''
+    };
+    setupProfile(user);
+    setupSettings();
+  } catch (error) {
+    notify(error.message || 'Tidak dapat memuat informasi akun.');
+  }
+}
+
+initializeAccount();
