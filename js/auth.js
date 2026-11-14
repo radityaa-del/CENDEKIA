@@ -25,14 +25,20 @@ function validateForm(form) {
   let valid = true;
   form.querySelectorAll('[required]').forEach((input) => {
     let message = '';
-    if (!input.value.trim()) message = 'Bagian ini wajib diisi.';
+    if (input.type !== 'checkbox' && !input.value.trim()) message = 'Bagian ini wajib diisi.';
     if (input.type === 'email' && input.value && !/^\S+@\S+\.\S+$/.test(input.value)) message = 'Masukkan email yang valid.';
     if (input.name === 'password' && input.value && input.value.length < 8) message = 'Password minimal 8 karakter.';
     if (input.name === 'confirmPassword' && input.value !== form.elements.password.value) message = 'Password belum sama.';
     if (input.type === 'checkbox' && !input.checked) message = 'Persetujuan diperlukan untuk melanjutkan.';
     setError(input, message);
+    if (input.type === 'checkbox' && message) {
+      showAuthToast(message);
+      input.focus();
+    }
     if (message) valid = false;
   });
+  if (!valid && !form.querySelector('[required].is-invalid[type="checkbox"]')) showAuthToast('Periksa bagian yang ditandai, lalu coba lagi.');
+  if (!valid) form.querySelector('.is-invalid')?.focus();
   return valid;
 }
 
@@ -91,7 +97,7 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       showAuthToast(form.dataset.mode === 'register' ? 'Akun berhasil dibuat. Membuka dashboard...' : 'Berhasil masuk. Selamat datang di CENDEKIA.');
       window.setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
     } catch (error) {
-      showAuthToast(error.message || 'Autentikasi gagal. Coba lagi.');
+      showAuthToast(error.message || error.toString() || 'Autentikasi gagal. Coba lagi.', 7000);
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;
