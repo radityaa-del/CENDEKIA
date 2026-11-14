@@ -1,6 +1,6 @@
 (function () {
-  const projectUrl = window.CENDEKIA_SUPABASE_URL;
-  const publishableKey = window.CENDEKIA_SUPABASE_PUBLISHABLE_KEY;
+  const projectUrl = window.CENDEKIA_SUPABASE_URL?.trim();
+  const publishableKey = window.CENDEKIA_SUPABASE_PUBLISHABLE_KEY?.trim();
   const configured = projectUrl && publishableKey &&
     !projectUrl.includes('PASTE_') && !publishableKey.includes('PASTE_');
 
@@ -13,12 +13,21 @@
     return;
   }
 
-  window.cendekiaSupabase = window.supabase.createClient(projectUrl, publishableKey, {
-    auth: {
-      storage: window.sessionStorage,
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
+  try {
+    const url = new URL(projectUrl);
+    if (url.protocol !== 'https:' || !url.hostname.endsWith('.supabase.co')) {
+      throw new Error('Gunakan Project URL HTTPS dari Supabase.');
     }
-  });
+
+    window.cendekiaSupabase = window.supabase.createClient(url.href, publishableKey, {
+      auth: {
+        storage: window.sessionStorage,
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true
+      }
+    });
+  } catch (error) {
+    window.CENDEKIA_AUTH_ERROR = error.message || 'Project URL Supabase tidak valid.';
+  }
 })();
