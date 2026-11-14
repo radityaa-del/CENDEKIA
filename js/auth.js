@@ -97,7 +97,10 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       showAuthToast(form.dataset.mode === 'register' ? 'Akun berhasil dibuat. Membuka dashboard...' : 'Berhasil masuk. Selamat datang di CENDEKIA.');
       window.setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
     } catch (error) {
-      showAuthToast(error.message || error.toString() || 'Autentikasi gagal. Coba lagi.', 7000);
+      const message = error.message || error.toString() || 'Autentikasi gagal. Coba lagi.';
+      showAuthToast(message.toLowerCase().includes('invalid login credentials')
+        ? 'Email atau password salah. Periksa kembali data loginmu.'
+        : message, 7000);
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;

@@ -28,7 +28,7 @@
 .form-options { align-items:center; display:flex; gap:8px; margin:8px 0 22px; }
 .check-label { align-items:flex-start; color:var(--muted); display:flex; font-size:.72rem; gap:8px; line-height:1.5; }
 .check-label input { accent-color:var(--blue); margin-top:3px; }
-.form-submit { width:100%; }
+.form-submit { width:100%; }.auth-page~.toast { background:var(--navy); border-left:4px solid var(--orange); border-radius:8px; bottom:25px; box-shadow:var(--shadow); color:#fff; font-size:.82rem; max-width:min(440px,calc(100% - 36px)); opacity:0; padding:13px 18px; pointer-events:none; position:fixed; right:18px; transform:translateY(15px); transition:.3s; visibility:hidden; z-index:50; }.auth-page~.toast.is-visible { opacity:1; transform:translateY(0); visibility:visible; }
 .form-footnote { color:var(--muted); font-size:.78rem; margin:21px 0 0; text-align:center; }
 .form-footnote a { color:var(--blue); font-weight:700; }
 .auth-notice { background:#FFF7E5; border-left:3px solid var(--orange); color:#8C6200; font-size:.72rem; line-height:1.5; margin-top:20px; padding:10px 12px; }
