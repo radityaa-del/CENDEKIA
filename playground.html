@@ -1,20 +1,18 @@
-<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
-<!-- Deskripsi halaman: playground.html - Antarmuka CENDEKIA untuk bagian playground. -->
-<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
+<!-- Deskripsi halaman: Coding Playground menyediakan editor kode, tantangan, pemilihan bahasa, console, pratinjau program, penyimpanan proyek, dan pengunduhan kode. -->
+
 <html lang="id">
-  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
+  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
   <head>
-    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Coding Playground CENDEKIA untuk berlatih HTML, CSS, dan JavaScript."
     />
-    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
+
     <title>Coding Playground | CENDEKIA</title>
-    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,7 +22,7 @@
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/playground.css" />
-    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
@@ -33,25 +31,23 @@
     <script src="js/playground.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
-  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
+
   <body class="playground-page" data-auth-required="true">
     <header class="playground-header">
-      <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
       <div class="playground-brand-wrap">
-        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a
           class="brand brand-light"
           href="dashboard.html"
           aria-label="Kembali ke dashboard CENDEKIA"
           ><span class="brand-mark">C</span><span>CENDEKIA</span></a
         >
-        <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
+
         <span class="header-divider"></span>
         <span class="workspace-title">Coding Playground</span>
       </div>
       <div class="playground-header-actions">
         <a class="back-dashboard" href="dashboard.html">← Dashboard</a>
-        <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
+
         <button
           class="icon-action"
           id="fullscreen-button"
@@ -64,20 +60,16 @@
       </div>
     </header>
 
-    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
     <main class="playground-layout" id="playground-workspace">
-      <!-- Aside menampung informasi pendukung yang melengkapi isi utama, seperti persyaratan kelas, ringkasan, atau rekomendasi berikutnya. -->
       <aside class="playground-sidebar">
         <div class="sidebar-intro">
-          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="section-kicker">Ruang praktik</p>
-          <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
+
           <h1>Belajar dengan <span>mencoba.</span></h1>
           <p>Tulis kode, jalankan, lalu lihat idemu menjadi nyata.</p>
         </div>
         <div class="challenge-section">
           <div class="sidebar-heading">
-            <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
             <h2>Tantangan latihan</h2>
             <span id="challenge-count">1 / 5</span>
           </div>
@@ -94,7 +86,6 @@
         </div>
       </aside>
 
-      <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
       <section class="playground-main" aria-label="Workspace coding playground">
         <section class="challenge-brief" id="challenge-brief">
           <div class="brief-icon">✦</div>
@@ -113,10 +104,8 @@
         </section>
         <section class="editor-toolbar" aria-label="Kontrol editor">
           <div class="language-picker">
-            <!-- Label menghubungkan teks dengan input tertentu agar pengguna dan pembaca layar memahami data yang diminta. -->
             <label for="language-select">Bahasa</label
             ><select id="language-select">
-              <!-- Option adalah satu nilai yang tersedia di dalam select. Teksnya menjadi pilihan yang dilihat pengguna. -->
               <option value="html">HTML</option>
               <option value="css">CSS</option>
               <option value="javascript">JavaScript</option>
@@ -144,7 +133,7 @@
             </div>
             <div class="editor-body">
               <div class="line-numbers" id="line-numbers" aria-hidden="true">1</div>
-              <!-- Textarea menyediakan area teks beberapa baris dan cocok untuk deskripsi, jawaban, atau kode yang memerlukan lebih banyak ruang. -->
+
               <textarea
                 id="code-editor"
                 spellcheck="false"
@@ -184,9 +173,7 @@
       </section>
     </main>
 
-    <!-- Dialog menampilkan panel lapisan atas yang dapat digunakan untuk mengubah data atau memberi konfirmasi tanpa meninggalkan halaman. -->
     <dialog class="save-dialog" id="save-dialog">
-      <!-- Form mengelompokkan kontrol input dan tombol submit. JavaScript membaca nilai di dalamnya untuk validasi, penyimpanan, atau permintaan ke Supabase. -->
       <form method="dialog" id="save-form">
         <button class="dialog-close" value="cancel" type="submit" aria-label="Tutup dialog">
           ×

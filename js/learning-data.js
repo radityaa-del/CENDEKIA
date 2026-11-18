@@ -1,4 +1,3 @@
-// Penjelasan variabel learningCourses : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const learningCourses = [
   {
     id: 'python-dasar',
@@ -210,9 +209,8 @@ const learningCourses = [
   },
 ];
 
-// Penjelasan fungsi getCourse : Mencari kelas berdasarkan ID atau alias dan memilih kelas bawaan jika tidak ditemukan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi getCourse: Mencari kelas berdasarkan ID atau alias dan memilih kelas bawaan jika tidak ditemukan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function getCourse(courseId) {
-  // Penjelasan variabel aliases : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const aliases = {
     'web-pertama': 'html-css',
     'logika-programming': 'python-dasar',
@@ -225,7 +223,7 @@ function getCourse(courseId) {
   );
 }
 
-// Penjelasan fungsi getLessonList : Meratakan daftar materi seluruh bab beserta metadata setiap materi. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi getLessonList: Meratakan daftar materi seluruh bab beserta metadata setiap materi. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function getLessonList(course) {
   return course.chapters.flatMap((chapter, chapterIndex) =>
     chapter.lessons.map((lesson, lessonIndex) => ({

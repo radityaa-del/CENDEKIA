@@ -1,7 +1,7 @@
-/* Deskripsi: Gaya responsif: penyesuaian tampilan desktop, tablet, dan perangkat mobile. */
-/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
+/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk responsive. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 900px) {
-  /* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
   .container {
     width: min(100% - 40px, 680px);
   }
@@ -62,6 +62,7 @@
     display: none;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 640px) {
   .container {
     width: calc(100% - 36px);
@@ -305,6 +306,7 @@
     gap: 8px;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 900px) {
   .student-layout {
     grid-template-columns: 1fr;
@@ -376,6 +378,7 @@
     display: none;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 640px) {
   .student-main {
     padding: 25px 18px 50px;
@@ -500,11 +503,13 @@
     padding-top: 25px;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 900px) {
   .dashboard-tools {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 640px) {
   .dashboard-tools {
     grid-template-columns: 1fr;

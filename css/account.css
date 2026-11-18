@@ -1,7 +1,6 @@
-/* Deskripsi: Gaya halaman akun: profil pengguna, pengaturan, avatar, dan formulir akun. */
-/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
+/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk account. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+
 body.theme-dark {
-  /* Penjelasan variabel CSS: nilai berikut didefinisikan di :root agar dapat dipakai berulang sebagai warna, bayangan, sudut, atau pengaturan desain yang harus konsisten di seluruh aplikasi. */
   --bg: #0d1c2d;
   --white: #142d4e;
   --ink: #f2f6fb;
@@ -364,7 +363,8 @@ body.text-large {
   opacity: 1;
   transform: translateY(0);
 }
-/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
+
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 750px) {
   .account-heading {
     align-items: start;
@@ -402,6 +402,7 @@ body.text-large {
     width: 100%;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 480px) {
   .account-shell {
     padding-block: 45px 70px;
@@ -420,6 +421,7 @@ body.text-large {
     font-size: 1.2rem;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 480px) {
   .account-page .navbar {
     gap: 8px;

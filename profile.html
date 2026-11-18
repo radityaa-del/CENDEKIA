@@ -1,21 +1,19 @@
-<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
-<!-- Deskripsi halaman: profile.html - Antarmuka CENDEKIA untuk bagian profile. -->
-<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
+<!-- Deskripsi halaman: Halaman profil menampilkan identitas pelajar, deskripsi, tanggal bergabung, statistik ringkas, pencapaian, dan formulir pengubahan profil. -->
+
 <html lang="id">
-  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
+  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
   <head>
-    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
+
     <title>Profil Siswa | CENDEKIA</title>
-    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
+
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/account.css" />
-    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
@@ -24,43 +22,39 @@
     <script src="js/account.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
-  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
+
   <body class="account-page" data-auth-required="true">
     <header class="site-header">
-      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container">
-        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="dashboard.html"
           ><span class="brand-mark">C</span><span>CENDEKIA</span></a
         >
-        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
+
         <div class="nav-actions">
           <a class="button button-ghost" href="dashboard.html">Dashboard</a
           ><a class="button button-primary button-small" href="settings.html">Pengaturan</a>
         </div>
       </nav>
     </header>
-    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
+
     <main class="container account-shell">
       <div class="account-heading">
         <div>
-          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="section-kicker">Profil siswa</p>
-          <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
+
           <h1>Ruang belajarmu,<br /><span>versi kamu.</span></h1>
         </div>
-        <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
+
         <button class="button button-primary" id="edit-profile" type="button">Edit profil</button>
       </div>
-      <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
+
       <section class="profile-hero">
         <div class="avatar-large" id="profile-avatar">P</div>
         <div>
-          <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
           <h2 id="profile-name">Pelajar</h2>
           <p id="profile-username">@pelajar</p>
           <p id="profile-bio">Belum ada deskripsi.</p>
-          <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
+
           <span id="profile-joined">Bergabung -</span>
           <p class="settings-note">
             Foto profil hanya ditampilkan sementara di tab ini; tidak diunggah atau disimpan ke
@@ -95,14 +89,13 @@
         </section>
       </div>
     </main>
-    <!-- Dialog menampilkan panel lapisan atas yang dapat digunakan untuk mengubah data atau memberi konfirmasi tanpa meninggalkan halaman. -->
+
     <dialog id="profile-dialog" class="account-dialog">
-      <!-- Form mengelompokkan kontrol input dan tombol submit. JavaScript membaca nilai di dalamnya untuk validasi, penyimpanan, atau permintaan ke Supabase. -->
       <form id="profile-form" method="dialog">
         <button class="dialog-close" value="cancel" type="submit">×</button>
         <p class="section-kicker">Edit profil</p>
         <h2>Perbarui informasimu.</h2>
-        <!-- Label menghubungkan teks dengan input tertentu agar pengguna dan pembaca layar memahami data yang diminta. -->
+
         <label for="avatar-input">Foto profil</label
         ><input id="avatar-input" type="file" accept="image/png,image/jpeg,image/webp" /><label
           for="name-input"

@@ -1,5 +1,5 @@
-/* Deskripsi: Gaya halaman tentang CENDEKIA: informasi organisasi, visi, dan tim. */
-/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
+/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk about. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+
 .about-hero {
   background: var(--navy);
   color: var(--white);
@@ -122,7 +122,7 @@
   margin-top: 16px;
 }
 
-/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 700px) {
   .about-hero {
     padding: 65px 0;

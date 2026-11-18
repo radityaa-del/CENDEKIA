@@ -1,17 +1,15 @@
-<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
-<!-- Deskripsi halaman: course.html - Antarmuka CENDEKIA untuk bagian course. -->
-<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
+<!-- Deskripsi halaman: Halaman detail kelas menampilkan informasi kelas, tujuan pembelajaran, kurikulum, durasi, tingkat kesulitan, dan tombol memulai pembelajaran. -->
+
 <html lang="id">
-  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
+  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
   <head>
-    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Detail kelas gratis CENDEKIA." />
-    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
+
     <title>Detail Kelas | CENDEKIA</title>
-    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,23 +20,21 @@
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/responsive.css" />
-    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
+
     <script src="js/navigation.js" defer></script>
     <script src="js/learning-data.js" defer></script>
     <script src="js/course.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
-  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
+
+  <!-- Body menjadi wadah seluruh tampilan dan interaksi pengguna yang terlihat pada halaman. -->
   <body>
     <header class="site-header">
-      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container" aria-label="Navigasi utama">
-        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="index.html">
-          <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
           <span class="brand-mark">C</span> <span>CENDEKIA</span>
         </a>
-        <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
+
         <button
           class="menu-toggle"
           type="button"
@@ -48,7 +44,7 @@
         >
           <span> </span> <span> </span> <span> </span>
         </button>
-        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
+
         <div class="nav-panel" id="main-menu">
           <div class="nav-links">
             <a class="nav-link" href="index.html">Beranda</a>
@@ -64,22 +60,19 @@
         </div>
       </nav>
     </header>
-    <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
+
     <section class="detail-hero">
       <div class="container detail-hero-inner">
         <div>
-          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="detail-label" data-course-category>WEB DEVELOPMENT</p>
-          <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
+
           <h1 data-course-title>Bangun Website Pertamamu</h1>
           <p data-course-description>Mulai perjalananmu membuat website dari nol.</p>
         </div>
         <div class="detail-visual">
-          <!-- Img menampilkan gambar dari atribut src. Atribut alt memberi penjelasan bagi pembaca layar dan pengganti jika gambar gagal dimuat. -->
           <img data-course-image src="" alt="" />
           <div class="detail-stat-card">
             <div class="detail-stat">
-              <!-- Strong memberi penekanan visual dan semantik, sehingga teks tersebut dianggap lebih penting daripada kalimat sekelilingnya. -->
               <strong data-course-level>Pemula</strong> <span>Tingkat</span>
             </div>
             <div class="detail-stat">
@@ -92,14 +85,15 @@
         </div>
       </div>
     </section>
-    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
+
     <main class="container detail-main">
       <div>
+        <!-- Bagian section mengelompokkan satu topik atau tahapan antarmuka agar hierarki dan alur baca halaman mudah dipahami. -->
         <section>
           <p class="section-kicker">Tentang kelas</p>
-          <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
+
           <h2>Yang akan kamu <span>pelajari.</span></h2>
-          <!-- Ul membuat daftar item yang urutannya tidak memiliki arti numerik; setiap isi biasanya ditandai oleh elemen li. -->
+
           <ul class="objective-list" id="objectives"></ul>
         </section>
         <section>
@@ -108,11 +102,10 @@
           <div class="curriculum" id="curriculum"></div>
         </section>
       </div>
-      <!-- Aside menampung informasi pendukung yang melengkapi isi utama, seperti persyaratan kelas, ringkasan, atau rekomendasi berikutnya. -->
+
       <aside class="detail-aside">
         <h2>Siap mulai?</h2>
         <ul class="aside-list">
-          <!-- Li adalah satu butir dalam daftar ul atau ol dan dapat berisi teks, tautan, ikon, atau tombol. -->
           <li>Level <strong data-course-level>Pemula</strong></li>
           <li>Estimasi durasi <strong data-course-duration>4 jam</strong></li>
           <li>Materi pembelajaran <strong data-course-lessons>8 materi</strong></li>

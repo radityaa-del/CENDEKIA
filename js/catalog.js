@@ -1,4 +1,3 @@
-// Penjelasan variabel courses : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const courses = [
   {
     id: 'web-pertama',
@@ -80,41 +79,38 @@ const courses = [
   },
 ];
 
-// Penjelasan variabel grid : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const grid = document.querySelector('#catalog-grid');
-// Penjelasan variabel searchInput : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const searchInput = document.querySelector('#course-search');
-// Penjelasan variabel categoryFilter : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const categoryFilter = document.querySelector('#category-filter');
-// Penjelasan variabel resultCount : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const resultCount = document.querySelector('#result-count');
-// Penjelasan variabel emptyState : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const emptyState = document.querySelector('#empty-state');
 
-// Penjelasan fungsi courseCard : Membentuk HTML kartu kelas beserta ringkasan materi dan tautannya. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi courseCard: Membentuk HTML kartu kelas beserta ringkasan materi dan tautannya. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function courseCard(course) {
-  // Penjelasan variabel details : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const details = getCourse(course.id);
-  // Penjelasan variabel lessonCount : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const lessonCount = getLessonList(details).length;
-  // Penjelasan variabel levelClass : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const levelClass = details.level === 'Pemula' ? 'level-green' : 'level-orange';
   return `<article class="catalog-card reveal is-visible"><div class="course-image"><img src="${details.image}" alt="Ilustrasi ${details.title}"><span class="course-badge">GRATIS</span><span class="course-level ${levelClass}">${details.level}</span></div><div class="course-body"><p class="course-label">${details.category.toUpperCase()}</p><h3>${details.title}</h3><p>${details.description}</p><div class="course-meta"><span>◷ ${lessonCount} materi</span><span>♧ ${course.rating}</span><a class="course-detail" href="course.html?id=${course.id}">Lihat detail <span>↗</span></a></div></div></article>`;
 }
 
-// Penjelasan fungsi renderCourses : Merender daftar kelas atau ringkasan progres setiap kelas pada halaman. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi renderCourses: Merender daftar kelas atau ringkasan progres setiap kelas pada halaman. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function renderCourses() {
-  // Penjelasan variabel query : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const query = searchInput.value.trim().toLowerCase();
-  // Penjelasan variabel category : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const category = categoryFilter.value;
-  // Penjelasan variabel filtered : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const filtered = courses.filter((course) => {
     const details = getCourse(course.id);
-    // Penjelasan variabel searchableText : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const searchableText =
       `${course.title} ${course.description} ${course.category} ${details.title} ${details.description} ${details.category}`.toLowerCase();
-    // Penjelasan variabel matchesText : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const matchesText = searchableText.includes(query);
     return matchesText && (!category || details.category === category);
   });

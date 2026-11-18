@@ -1,4 +1,3 @@
-// Penjelasan variabel quizCategories : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const quizCategories = [
   {
     id: 'python',
@@ -38,7 +37,6 @@ const quizCategories = [
   },
 ];
 
-// Penjelasan variabel quizBank : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const quizBank = [
   {
     id: 'py-01',

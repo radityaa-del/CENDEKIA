@@ -1,8 +1,7 @@
-// Penjelasan variabel profileKey : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const profileKey = 'cendekiaProfile';
-// Penjelasan variabel preferenceKey : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const preferenceKey = 'cendekiaPreferences';
-// Penjelasan variabel defaultProfile : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const defaultProfile = {
   name: 'Pelajar',
   username: 'pelajar',
@@ -11,8 +10,8 @@ const defaultProfile = {
   joinedAt: new Date().toISOString(),
   avatar: '',
 };
-// Penjelasan fungsi readJson : Membaca JSON dari localStorage dan mengembalikan nilai cadangan jika data tidak valid. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
-// Penjelasan variabel readJson : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
+// Penjelasan fungsi readJson: Membaca JSON dari localStorage dan mengembalikan nilai cadangan jika data tidak valid. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 const readJson = (key, fallback) => {
   try {
     return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
@@ -20,8 +19,8 @@ const readJson = (key, fallback) => {
     return fallback;
   }
 };
-// Penjelasan fungsi getPreferences : Mengambil preferensi tampilan pengguna dari data profil yang tersimpan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
-// Penjelasan variabel getPreferences : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
+// Penjelasan fungsi getPreferences: Mengambil preferensi tampilan pengguna dari data profil yang tersimpan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 const getPreferences = () => ({
   theme: 'light',
   fontSize: 'normal',
@@ -30,19 +29,18 @@ const getPreferences = () => ({
   updates: true,
   ...readJson(preferenceKey, {}),
 });
-// Penjelasan variabel profile : Variabel ini menyimpan keadaan yang memang dapat diperbarui selama skrip berjalan. Setiap perubahan nilainya dapat memengaruhi kondisi, tampilan, atau perhitungan pada langkah berikutnya, sehingga pembaruannya harus tetap sinkron dengan alur aplikasi.
+
 let profile = { ...defaultProfile };
 const preferences = getPreferences();
-// Penjelasan variabel toast : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
 const toast = document.querySelector('.toast');
-// Penjelasan variabel toastTimer : Variabel ini menyimpan keadaan yang memang dapat diperbarui selama skrip berjalan. Setiap perubahan nilainya dapat memengaruhi kondisi, tampilan, atau perhitungan pada langkah berikutnya, sehingga pembaruannya harus tetap sinkron dengan alur aplikasi.
+
 let toastTimer;
-// Penjelasan variabel avatarUrl : Variabel ini menyimpan keadaan yang memang dapat diperbarui selama skrip berjalan. Setiap perubahan nilainya dapat memengaruhi kondisi, tampilan, atau perhitungan pada langkah berikutnya, sehingga pembaruannya harus tetap sinkron dengan alur aplikasi.
+
 let avatarUrl = '';
 
-// Penjelasan fungsi notify : Menampilkan pesan notifikasi kepada pengguna. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi notify: Menampilkan pesan notifikasi kepada pengguna. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function notify(message) {
-  // Menjalankan langkah berikut hanya jika kondisi terpenuhi.
   if (!toast) return;
   toast.textContent = message;
   toast.classList.add('is-visible');
@@ -50,48 +48,44 @@ function notify(message) {
   toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 3500);
 }
 
-// Penjelasan fungsi savePreferences : Menyimpan preferensi tampilan dan akun ke localStorage. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi savePreferences: Menyimpan preferensi tampilan dan akun ke localStorage. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function savePreferences() {
-  // Membaca atau menyimpan data secara lokal pada browser.
   localStorage.setItem(preferenceKey, JSON.stringify(preferences));
 }
 
-// Penjelasan fungsi applyPreferences : Menerapkan tema dan ukuran teks pada elemen halaman. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi applyPreferences: Menerapkan tema dan ukuran teks pada elemen halaman. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function applyPreferences() {
   document.body.classList.toggle('theme-dark', preferences.theme === 'dark');
   document.body.classList.toggle('text-large', preferences.fontSize === 'large');
 }
 
-// Penjelasan fungsi avatarElement : Menampilkan foto profil atau inisial pengguna pada elemen avatar. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi avatarElement: Menampilkan foto profil atau inisial pengguna pada elemen avatar. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function avatarElement(element) {
   if (!element) return;
   element.textContent = profile.name.charAt(0).toUpperCase();
   element.style.backgroundImage = avatarUrl ? `url("${avatarUrl}")` : '';
 }
 
-// Penjelasan fungsi formatJoined : Memformat tanggal pengguna bergabung ke format lokal Indonesia. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi formatJoined: Memformat tanggal pengguna bergabung ke format lokal Indonesia. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function formatJoined() {
-  // Penjelasan variabel date : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const date = new Date(profile.joinedAt);
   if (Number.isNaN(date.getTime())) return 'Tanggal tidak tersedia';
   return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
-// Penjelasan fungsi showProfile : Mengisi tampilan profil dengan data pengguna, progres, dan pencapaian. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi showProfile: Mengisi tampilan profil dengan data pengguna, progres, dan pencapaian. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function showProfile() {
-  // Penjelasan variabel progress : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const progress = readJson('cendekiaProgress', {});
-  // Penjelasan variabel courses : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const courses = typeof learningCourses === 'undefined' ? [] : learningCourses;
-  // Penjelasan variabel completedLessons : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const completedLessons = courses.reduce((sum, course) => {
-    // Penjelasan variabel completed : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
     const completed = progress[course.id]?.completed;
     return sum + (Array.isArray(completed) ? completed.length : 0);
   }, 0);
-  // Penjelasan variabel history : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const history = readJson('cendekiaQuizHistory', []);
-  // Mengambil satu elemen pada dokumen berdasarkan selektor.
+
   document.querySelector('#profile-name')?.replaceChildren(document.createTextNode(profile.name));
   document
     .querySelector('#profile-username')
@@ -121,9 +115,9 @@ function showProfile() {
   document
     .querySelector('#profile-quizzes')
     ?.replaceChildren(document.createTextNode(String(Array.isArray(history) ? history.length : 0)));
-  // Penjelasan variabel achievements : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const achievements = readJson('cendekiaAchievements', []);
-  // Penjelasan variabel target : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const target = document.querySelector('#profile-achievements');
   if (target) {
     target.innerHTML =
@@ -136,7 +130,7 @@ function showProfile() {
   }
 }
 
-// Penjelasan fungsi setupProfile : Menyiapkan event formulir untuk mengubah data profil dan foto pengguna. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi setupProfile: Menyiapkan event formulir untuk mengubah data profil dan foto pengguna. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function setupProfile(user) {
   showProfile();
   document.querySelector('#edit-profile')?.addEventListener('click', () => {
@@ -146,7 +140,6 @@ function setupProfile(user) {
     document.querySelector('#profile-dialog').showModal();
   });
   document.querySelector('#avatar-input')?.addEventListener('change', (event) => {
-    // Penjelasan variabel file : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
     const file = event.target.files[0];
     if (!file) return;
     if (
@@ -164,11 +157,11 @@ function setupProfile(user) {
   document.querySelector('#profile-form')?.addEventListener('submit', async (event) => {
     if (event.submitter?.id !== 'save-profile') return;
     event.preventDefault();
-    // Penjelasan variabel name : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const name = document.querySelector('#name-input').value.trim();
-    // Penjelasan variabel username : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const username = document.querySelector('#username-input').value.trim();
-    // Penjelasan variabel bio : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const bio = document.querySelector('#bio-input').value.trim();
     document.querySelector('[data-error="name"]').textContent =
       name.length < 2 ? 'Nama minimal 2 karakter.' : '';
@@ -181,7 +174,6 @@ function setupProfile(user) {
       bio.length > 140 ? 'Deskripsi maksimal 140 karakter.' : '';
     if (name.length < 2 || !/^[A-Za-z0-9_]{3,20}$/.test(username) || bio.length > 140) return;
 
-    // Penjelasan variabel submitButton : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
     const submitButton = document.querySelector('#save-profile');
     submitButton.disabled = true;
     try {
@@ -209,9 +201,8 @@ function setupProfile(user) {
   });
 }
 
-// Penjelasan fungsi setupSettings : Menyiapkan kontrol pengaturan tampilan dan pembaruan kata sandi. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi setupSettings: Menyiapkan kontrol pengaturan tampilan dan pembaruan kata sandi. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function setupSettings() {
-  // Mengambil semua elemen yang cocok untuk diproses atau diberi event.
   document.querySelectorAll('[data-theme]').forEach((button) => {
     button.classList.toggle('is-active', button.dataset.theme === preferences.theme);
     button.addEventListener('click', () => {
@@ -224,7 +215,7 @@ function setupSettings() {
       notify('Tema tampilan disimpan.');
     });
   });
-  // Penjelasan variabel fontSize : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
   const fontSize = document.querySelector('#font-size-setting');
   if (fontSize) {
     fontSize.value = preferences.fontSize;
@@ -244,9 +235,9 @@ function setupSettings() {
   });
   document.querySelector('#password-form')?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    // Penjelasan variabel password : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const password = document.querySelector('#new-password').value;
-    // Penjelasan variabel confirmPassword : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const confirmPassword = document.querySelector('#confirm-password').value;
     document.querySelector('[data-error="password"]').textContent =
       password.length < 8 ? 'Password minimal 8 karakter.' : '';
@@ -284,21 +275,20 @@ function setupSettings() {
       'cendekiaActivityLog',
       'cendekiaAchievements',
     ].forEach((key) => localStorage.removeItem(key));
-    // Mengubah navigasi, membuka tampilan, atau menggeser halaman.
+
     window.location.href = 'dashboard.html';
   });
 }
 
-// Penjelasan fungsi initializeAccount : Memeriksa sesi pengguna lalu menginisialisasi halaman akun. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
+// Penjelasan fungsi initializeAccount: Memeriksa sesi pengguna lalu menginisialisasi halaman akun. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 async function initializeAccount() {
   applyPreferences();
   try {
-    // Penjelasan variabel user : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
     const user = await window.CendekiaAuth.requireUser();
     if (!user) return;
-    // Penjelasan variabel metadata : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const metadata = user.user_metadata || {};
-    // Penjelasan variabel storedProfile : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
+
     const storedProfile = readJson(profileKey, {});
     if (storedProfile.email) {
       delete storedProfile.email;

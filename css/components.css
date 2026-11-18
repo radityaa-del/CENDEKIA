@@ -1,5 +1,5 @@
-/* Deskripsi: Gaya komponen: header, tombol, kartu, navigasi, notifikasi, dan elemen antarmuka bersama. */
-/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
+/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk components. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+
 .site-header {
   background: rgba(244, 247, 251, 0.9);
   position: sticky;
@@ -181,7 +181,6 @@ h2 span {
   position: relative;
 }
 .hero-grid-lines {
-  /* Penjelasan properti background-image : Latar elemen diisi oleh gambar atau hasil fungsi latar. Pilihan ini dapat menempatkan foto, pola, atau hasil visual tanpa menambah elemen HTML terpisah. */
   background-image:
     linear-gradient(rgba(37, 99, 235, 0.07) 1px, transparent 1px),
     linear-gradient(90deg, rgba(37, 99, 235, 0.07) 1px, transparent 1px);

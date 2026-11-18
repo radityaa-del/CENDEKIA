@@ -1,17 +1,15 @@
-<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
-<!-- Deskripsi halaman: login.html - Antarmuka CENDEKIA untuk bagian login. -->
-<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
+<!-- Deskripsi halaman: Halaman masuk menyediakan formulir identitas dan kata sandi, validasi data, pemulihan kata sandi, serta autentikasi melalui Supabase. -->
+
 <html lang="id">
-  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
+  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
   <head>
-    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Masuk ke akun CENDEKIA." />
-    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
+
     <title>Masuk | CENDEKIA</title>
-    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,7 +20,7 @@
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/responsive.css" />
-    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
+
     <script src="js/navigation.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
@@ -30,17 +28,15 @@
     <script src="js/auth.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
-  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
+
+  <!-- Body menjadi wadah seluruh tampilan dan interaksi pengguna yang terlihat pada halaman. -->
   <body>
     <header class="site-header">
-      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container" aria-label="Navigasi utama">
-        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="index.html">
-          <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
           <span class="brand-mark">C</span> <span>CENDEKIA</span>
         </a>
-        <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
+
         <button
           class="menu-toggle"
           type="button"
@@ -50,7 +46,7 @@
         >
           <span> </span> <span> </span> <span> </span>
         </button>
-        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
+
         <div class="nav-panel" id="main-menu">
           <div class="nav-links">
             <a class="nav-link" href="index.html">Beranda</a>
@@ -66,13 +62,11 @@
         </div>
       </nav>
     </header>
-    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
+
     <main class="container auth-page">
-      <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
       <section class="auth-intro">
-        <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
         <p class="section-kicker">Selamat datang kembali</p>
-        <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
+
         <h1>Ruang belajarmu <em>menunggumu.</em></h1>
         <p>
           Lanjutkan langkahmu bersama komunitas pembelajar CENDEKIA. Semua materi tetap gratis,
@@ -85,15 +79,13 @@
         </div>
       </section>
       <section class="auth-form-card" aria-labelledby="login-title">
-        <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
         <h2 id="login-title">Masuk ke CENDEKIA</h2>
         <p class="form-subtitle">Gunakan email dan password akunmu untuk melanjutkan.</p>
-        <!-- Form mengelompokkan kontrol input dan tombol submit. JavaScript membaca nilai di dalamnya untuk validasi, penyimpanan, atau permintaan ke Supabase. -->
+
         <form class="auth-form" novalidate>
           <div class="form-group">
-            <!-- Label menghubungkan teks dengan input tertentu agar pengguna dan pembaca layar memahami data yang diminta. -->
             <label class="form-label" for="identity">Email</label>
-            <!-- Input menyediakan kontrol masukan sesuai jenisnya, misalnya teks, email, kata sandi, atau berkas. Nilainya dibaca atau divalidasi oleh skrip. -->
+
             <input
               class="form-input"
               id="identity"

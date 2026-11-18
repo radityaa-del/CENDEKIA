@@ -1,5 +1,5 @@
-/* Deskripsi: Gaya halaman utama: dashboard, katalog, ruang belajar, akun, dan tampilan konten. */
-/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
+/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk pages. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+
 .page-shell {
   min-height: calc(100vh - 78px);
   padding: 72px 0 110px;
@@ -113,7 +113,7 @@
   font-size: 0.86rem;
   outline: none;
   padding: 13px 14px;
-  /* Penjelasan properti transition : Perubahan gaya dibuat bertahap selama durasi tertentu. Pilihan ini membuat interaksi seperti hover terasa halus alih-alih langsung berubah. */
+
   transition:
     border 0.2s,
     box-shadow 0.2s;
@@ -1266,7 +1266,8 @@
   margin: 16px 0 0;
   text-align: center;
 }
-/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
+
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 900px) {
   .auth-page,
   .detail-hero-inner,
@@ -1291,6 +1292,7 @@
     padding-block: 70px;
   }
 }
+/* Aturan responsif mengubah tata letak pada rentang layar tertentu agar komponen tetap terbaca dan mudah digunakan di desktop maupun perangkat seluler. */
 @media (max-width: 640px) {
   .page-shell {
     padding: 50px 0 75px;
