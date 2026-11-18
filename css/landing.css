@@ -1,4 +1,5 @@
 /* Deskripsi: Gaya halaman landing: bagian hero, unggulan, statistik, kelas, dan panggilan aksi. */
+/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
 .section-heading {
   align-items: end;
   display: flex;
@@ -24,6 +25,7 @@
   overflow: hidden;
   padding: 23px;
   position: relative;
+  /* Penjelasan properti transition : Perubahan gaya dibuat bertahap selama durasi tertentu. Pilihan ini membuat interaksi seperti hover terasa halus alih-alih langsung berubah. */
   transition:
     transform 0.25s,
     box-shadow 0.25s;
@@ -433,6 +435,7 @@
 .reveal-delay {
   transition-delay: 0.15s;
 }
+/* Penjelasan keyframes: blok ini menetapkan keadaan visual pada tahap awal, tengah, dan akhir animasi. CSS akan membaca persentase atau nama tahapan ini untuk mengubah sifat elemen secara bertahap. */
 @keyframes blink {
   0%,
   45% {

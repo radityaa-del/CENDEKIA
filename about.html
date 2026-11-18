@@ -1,24 +1,36 @@
+<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
 <!-- Deskripsi halaman: about.html - Antarmuka CENDEKIA untuk bagian about. -->
+<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
 <html lang="id">
+  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
   <head>
+    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Tentang CENDEKIA, platform belajar informatika gratis." />
+    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
     <title>Tentang Kami | CENDEKIA</title>
+    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/about.css" />
+    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
     <script src="js/theme.js" defer></script>
   </head>
+  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
   <body>
     <header class="site-header">
+      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container">
+        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="index.html">
+          <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
           <span class="brand-mark">C</span>
           <span>CENDEKIA</span>
         </a>
+        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
         <div class="nav-actions">
           <a class="button button-ghost" href="catalog.html">Kelas</a>
           <a class="button button-primary button-small" href="register.html">
@@ -28,10 +40,14 @@
       </nav>
     </header>
 
+    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
     <main>
+      <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
       <section class="about-hero">
         <div class="container">
+          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="section-kicker">Tentang CENDEKIA</p>
+          <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
           <h1>Belajar. Berpikir.<br /><em>Menciptakan.</em></h1>
           <p>
             CENDEKIA adalah platform pembelajaran digital Informatika yang dapat diakses secara
@@ -44,6 +60,7 @@
       <section class="container about-section about-intro">
         <div>
           <p class="section-kicker">Mengapa kami ada</p>
+          <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
           <h2>Teknologi seharusnya terasa <span>lebih dekat.</span></h2>
         </div>
         <div>
@@ -66,8 +83,10 @@
             <h2>Fondasi yang kami <span>jaga.</span></h2>
           </div>
           <div class="values-grid">
+            <!-- Article memuat satu unit konten yang dapat berdiri sendiri dan memiliki makna meskipun dipisahkan dari bagian lainnya. -->
             <article>
               <span>01</span>
+              <!-- H3 memberi nama subbagian atau item di bawah h2, misalnya judul materi, kartu, atau panel. -->
               <h3>Visi</h3>
               <p>
                 Menjadi ruang belajar Informatika yang terbuka, relevan, dan mendorong lebih banyak
@@ -100,6 +119,7 @@
         </div>
         <div class="advantage-grid">
           <div>
+            <!-- Strong memberi penekanan visual dan semantik, sehingga teks tersebut dianggap lebih penting daripada kalimat sekelilingnya. -->
             <strong>Materi terstruktur</strong>
             <p>Konsep disusun dari dasar sampai praktik.</p>
           </div>
@@ -130,6 +150,7 @@
       </section>
     </main>
 
+    <!-- Footer menyajikan bagian penutup, informasi hak cipta, atau tautan pendukung yang ditempatkan setelah konten utama. -->
     <footer class="site-footer">
       <div class="container footer-bottom">
         <span>© 2024 CENDEKIA</span>

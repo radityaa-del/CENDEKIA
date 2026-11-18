@@ -1,5 +1,7 @@
 /* Deskripsi: Gaya responsif: penyesuaian tampilan desktop, tablet, dan perangkat mobile. */
+/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
 @media (max-width: 900px) {
+  /* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
   .container {
     width: min(100% - 40px, 680px);
   }

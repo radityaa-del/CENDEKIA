@@ -1,11 +1,17 @@
+<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
 <!-- Deskripsi halaman: dashboard.html - Antarmuka CENDEKIA untuk bagian dashboard. -->
+<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
 <html lang="id">
+  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
   <head>
+    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Dashboard belajar siswa CENDEKIA." />
+    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
     <title>Dashboard Siswa | CENDEKIA</title>
+    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,6 +22,7 @@
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
@@ -25,13 +32,20 @@
     <script src="js/dashboard.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
+  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
   <body class="student-app" data-auth-required="true">
+    <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
     <div class="student-layout">
+      <!-- Aside menampung informasi pendukung yang melengkapi isi utama, seperti persyaratan kelas, ringkasan, atau rekomendasi berikutnya. -->
       <aside class="student-sidebar" id="student-sidebar">
+        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="dashboard.html">
+          <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
           <span class="brand-mark">C</span> <span>CENDEKIA</span>
         </a>
+        <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
         <nav class="student-nav" aria-label="Navigasi siswa">
+          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="student-nav-label">Menu utama</p>
           <a class="student-nav-link is-active" href="dashboard.html"> <span>▦</span> Dashboard</a>
           <a class="student-nav-link" href="#my-courses"> <span>▣</span> Kelas Saya</a>
@@ -45,10 +59,12 @@
           <a class="student-nav-link" href="profile.html"> <span>♙</span> Profil Saya</a>
           <a class="student-nav-link" href="settings.html"> <span>⚙</span> Pengaturan</a>
         </nav>
+        <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
         <button class="student-logout" id="logout-button" type="button">
           <span>↪</span> Keluar
         </button>
       </aside>
+      <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
       <main class="student-main">
         <header class="student-header">
           <button class="student-menu" id="student-menu" type="button" aria-label="Buka navigasi">
@@ -56,6 +72,7 @@
           </button>
           <div>
             <p class="section-kicker" id="dashboard-date"></p>
+            <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
             <h1>Selamat datang, <span id="student-name">Pelajar</span> 👋</h1>
           </div>
           <div class="student-profile">
@@ -63,11 +80,14 @@
             <div><strong id="profile-name">Pelajar</strong> <small>Pelajar aktif</small></div>
           </div>
         </header>
+        <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
         <section class="dashboard-welcome">
           <div>
             <p class="section-kicker">Terus melangkah</p>
+            <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
             <h2>
               Belajar sedikit setiap hari,<br />
+              <!-- Memberikan penekanan pada teks. -->
               <em>hasilnya luar biasa.</em>
             </h2>
             <p>Ikuti progresmu dan lanjutkan materi yang terakhir kamu buka.</p>
@@ -81,6 +101,7 @@
           <div class="welcome-art" aria-hidden="true"><span>&lt;/&gt;</span> <b>+</b> <i>✦</i></div>
         </section>
         <section class="stat-grid" aria-label="Ringkasan progres">
+          <!-- Article memuat satu unit konten yang dapat berdiri sendiri dan memiliki makna meskipun dipisahkan dari bagian lainnya. -->
           <article class="stat-card">
             <span class="stat-icon blue">▣</span>
             <div><strong id="class-count">0</strong> <span>Kelas diikuti</span></div>
@@ -130,6 +151,7 @@
             </section>
             <section class="quick-card">
               <p class="section-kicker">Ruang praktik</p>
+              <!-- H3 memberi nama subbagian atau item di bawah h2, misalnya judul materi, kartu, atau panel. -->
               <h3>Siap mencoba sesuatu yang baru?</h3>
               <p>Latih logikamu dengan membuat kode pertama di playground.</p>
               <a href="playground.html" class="button button-secondary"

@@ -1,6 +1,10 @@
-/* Deskripsi: Gaya global: variabel warna, reset elemen, tipografi, tema, dan tata letak dasar. */
+/* Deskripsi berkas: berkas ini menjadi dasar visual seluruh aplikasi.
+   Isi utamanya mencakup palet warna, jarak bawaan, tipografi, aturan reset,
+   komponen tombol, tautan, kontainer halaman, dan tema gelap global. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root {
+  /* Palet dan nilai desain utama disimpan sebagai variabel CSS agar warna,
+     bayangan, sudut, dan gaya visual dapat digunakan ulang secara konsisten. */
   --navy: #142d4e;
   --blue: #2563eb;
   --bg: #f4f7fb;
@@ -14,12 +18,17 @@
   --radius: 18px;
 }
 * {
+  /* border-box memastikan padding dan border sudah termasuk dalam ukuran
+     lebar serta tinggi elemen, sehingga tata letak lebih mudah diprediksi. */
   box-sizing: border-box;
 }
 html {
+  /* Perpindahan anchor atau scroll internal menjadi lebih halus. */
   scroll-behavior: smooth;
 }
 body {
+  /* Mengatur jarak tepi, warna teks, warna latar, huruf, dan pemotongan
+     aliran horizontal agar seluruh aplikasi memiliki tampilan dasar yang seragam. */
   margin: 0;
   color: var(--ink);
   background: var(--bg);
@@ -29,27 +38,36 @@ body {
   overflow-x: hidden;
 }
 body.menu-open {
+  /* Membekukan scroll halaman saat panel menu navigasi terbuka. */
   overflow: hidden;
 }
 a {
+  /* Tautan mewarisi warna induknya dan tidak menampilkan garis bawah bawaan
+     karena gaya tautannya ditentukan oleh komponen CENDEKIA. */
   color: inherit;
   text-decoration: none;
 }
 button {
+  /* Tombol menggunakan font yang sama dengan halaman agar tampilan konsisten. */
   font: inherit;
 }
 img {
+  /* Gambar menjadi elemen block dan tidak pernah melewati lebar wadahnya. */
   display: block;
   max-width: 100%;
 }
 .container {
+  /* Kontainer membatasi lebar konten agar tetap nyaman dibaca, namun tetap
+     memiliki batas kiri-kanan 32 px pada layar yang lebih kecil. */
   width: min(1160px, calc(100% - 64px));
   margin-inline: auto;
 }
 .section {
+  /* Memberi ruang vertikal besar pada bagian utama halaman. */
   padding-block: 110px;
 }
 .section-kicker {
+  /* Keterangan kecil bergaya kapital untuk memperkenalkan judul suatu bagian. */
   color: var(--blue);
   font-size: 0.75rem;
   font-weight: 700;
@@ -61,20 +79,25 @@ h1,
 h2,
 h3,
 p {
+  /* Menghapus margin atas bawaan browser agar jarak dapat diatur tepat oleh
+     setiap komponen secara terkontrol. */
   margin-top: 0;
 }
 h1,
 h2,
 h3 {
+  /* Judul memakai font display dan jarak baris rapat agar hierarki visual jelas. */
   font-family: 'Space Grotesk', sans-serif;
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
 h2 {
+  /* Ukuran judul bagian membesar dan mengecil responsif sesuai lebar layar. */
   font-size: clamp(2rem, 4vw, 3.2rem);
   margin-bottom: 0;
 }
 .brand {
+  /* Menata logo CENDEKIA secara horizontal dan konsisten di seluruh navigasi. */
   align-items: center;
   display: inline-flex;
   gap: 10px;
@@ -84,6 +107,7 @@ h2 {
   letter-spacing: 0.06em;
 }
 .brand-mark {
+  /* Membentuk kotak biru bertuliskan huruf C sebagai ikon merek singkat. */
   align-items: center;
   background: var(--blue);
   border-radius: 9px;
@@ -95,6 +119,8 @@ h2 {
   width: 32px;
 }
 .button {
+  /* Aturan dasar semua tombol: sejajar, berjajar, berjarak, dan memiliki sudut
+     serta transisi yang konsisten ketika pengguna berinteraksi dengannya. */
   align-items: center;
   border: 1px solid transparent;
   border-radius: 10px;
@@ -104,6 +130,8 @@ h2 {
   gap: 10px;
   justify-content: center;
   padding: 14px 20px;
+  /* Perubahan posisi, bayangan, dan latar tombol berlangsung perlahan
+     sehingga interaksi terasa halus dan tidak tiba-tiba. */
   transition:
     transform 0.2s,
     box-shadow 0.2s,
@@ -113,6 +141,7 @@ h2 {
   transform: translateY(-2px);
 }
 .button-primary {
+  /* Tampilan utama berwarna biru untuk aksi yang paling penting. */
   background: var(--blue);
   box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
   color: var(--white);
@@ -121,6 +150,7 @@ h2 {
   box-shadow: 0 14px 28px rgba(37, 99, 235, 0.32);
 }
 .button-secondary {
+  /* Tampilan sekunder memakai latar putih dan garis agar tidak mengalahkan aksi utama. */
   background: var(--white);
   border-color: var(--line);
   color: var(--navy);
@@ -153,6 +183,7 @@ h2 {
   font-size: 1.1rem;
 }
 .visually-hidden {
+  /* Teks tetap tersedia bagi pembaca layar, tetapi tidak terlihat di layout visual. */
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -165,6 +196,7 @@ h2 {
   width: 1px;
 }
 body.theme-dark .site-header {
+  /* Header dalam mode gelap memakai warna navy transparan agar menyatu dengan halaman. */
   background: rgba(13, 28, 45, 0.92);
 }
 body.theme-dark .site-footer {

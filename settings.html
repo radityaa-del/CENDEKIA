@@ -1,14 +1,21 @@
+<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
 <!-- Deskripsi halaman: settings.html - Antarmuka CENDEKIA untuk bagian settings. -->
+<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
 <html lang="id">
+  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
   <head>
+    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
     <title>Pengaturan Akun | CENDEKIA</title>
+    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/account.css" />
+    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
@@ -16,22 +23,29 @@
     <script src="js/account.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
+  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
   <body class="account-page" data-auth-required="true">
     <header class="site-header">
+      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container">
+        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="dashboard.html"
           ><span class="brand-mark">C</span><span>CENDEKIA</span></a
         >
+        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
         <div class="nav-actions">
           <a class="button button-ghost" href="profile.html">Profil</a
           ><a class="button button-primary button-small" href="dashboard.html">Dashboard</a>
         </div>
       </nav>
     </header>
+    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
     <main class="container account-shell">
       <div class="account-heading">
         <div>
+          <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
           <p class="section-kicker">Preferensi akun</p>
+          <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
           <h1>Atur ruang belajar<br /><span>sesuai kebutuhanmu.</span></h1>
         </div>
       </div>
@@ -42,8 +56,10 @@
           ><a href="#privacy">Privasi</a>
         </nav>
         <div class="settings-content">
+          <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
           <section class="settings-card" id="account-info">
             <p class="section-kicker">Informasi akun</p>
+            <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
             <h2>Data akunmu</h2>
             <div class="read-only-grid">
               <div><span>Email akun</span><strong id="settings-email">Belum diisi</strong></div>
@@ -57,7 +73,9 @@
           <section class="settings-card" id="security">
             <p class="section-kicker">Keamanan</p>
             <h2>Ubah password</h2>
+            <!-- Form mengelompokkan kontrol input dan tombol submit. JavaScript membaca nilai di dalamnya untuk validasi, penyimpanan, atau permintaan ke Supabase. -->
             <form id="password-form" class="settings-form">
+              <!-- Label menghubungkan teks dengan input tertentu agar pengguna dan pembaca layar memahami data yang diminta. -->
               <label
                 >Password baru<input
                   id="new-password"
@@ -81,15 +99,19 @@
             <div class="preference-row">
               <div><strong>Tema tampilan</strong><small>Pilih mode terang atau gelap.</small></div>
               <div class="segmented">
+                <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
                 <button type="button" data-theme="light">Terang</button
                 ><button type="button" data-theme="dark">Gelap</button>
               </div>
             </div>
             <div class="preference-row">
               <div>
+                <!-- Strong memberi penekanan visual dan semantik, sehingga teks tersebut dianggap lebih penting daripada kalimat sekelilingnya. -->
                 <strong>Ukuran teks</strong><small>Atur ukuran teks seluruh halaman.</small>
               </div>
+              <!-- Select membentuk menu pilihan; JavaScript dapat membaca nilai terpilih untuk menyaring kelas, kategori, bahasa, atau pengaturan. -->
               <select id="font-size-setting">
+                <!-- Option adalah satu nilai yang tersedia di dalam select. Teksnya menjadi pilihan yang dilihat pengguna. -->
                 <option value="normal">Normal</option>
                 <option value="large">Besar</option>
               </select>

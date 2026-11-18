@@ -1,3 +1,4 @@
+// Penjelasan variabel templates : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const templates = {
   html: {
     title: 'Membuat halaman HTML sederhana',
@@ -27,6 +28,7 @@ const templates = {
   },
 };
 
+// Penjelasan variabel challenges : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const challenges = [
   { id: 'html', title: 'Membuat halaman HTML sederhana', category: 'HTML', difficulty: 'Pemula' },
   { id: 'css', title: 'Mengubah warna dan ukuran teks', category: 'CSS', difficulty: 'Pemula' },
@@ -52,49 +54,63 @@ const challenges = [
   },
 ];
 
+// Penjelasan variabel editor : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const editor = document.querySelector('#code-editor');
+// Penjelasan variabel lineNumbers : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const lineNumbers = document.querySelector('#line-numbers');
+// Penjelasan variabel languageSelect : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const languageSelect = document.querySelector('#language-select');
+// Penjelasan variabel preview : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const preview = document.querySelector('#live-preview');
+// Penjelasan variabel consoleOutput : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const consoleOutput = document.querySelector('#console-output');
+// Penjelasan variabel consoleStatus : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const consoleStatus = document.querySelector('#console-status');
+// Penjelasan variabel challengeList : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const challengeList = document.querySelector('#challenge-list');
+// Penjelasan variabel toast : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
 const toast = document.querySelector('.toast');
+// Penjelasan variabel activeChallenge : Variabel ini menyimpan keadaan yang memang dapat diperbarui selama skrip berjalan. Setiap perubahan nilainya dapat memengaruhi kondisi, tampilan, atau perhitungan pada langkah berikutnya, sehingga pembaruannya harus tetap sinkron dengan alur aplikasi.
 let activeChallenge = 0;
+// Penjelasan variabel toastTimer : Variabel ini menyimpan keadaan yang memang dapat diperbarui selama skrip berjalan. Setiap perubahan nilainya dapat memengaruhi kondisi, tampilan, atau perhitungan pada langkah berikutnya, sehingga pembaruannya harus tetap sinkron dengan alur aplikasi.
 let toastTimer;
 
-// Deskripsi showToast: Menampilkan pesan sementara pada notifikasi halaman.
+// Penjelasan fungsi showToast : Menampilkan pesan sementara pada notifikasi halaman. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function showToast(message) {
   toast.textContent = message;
   toast.classList.add('is-visible');
   window.clearTimeout(toastTimer);
   toastTimer = window.setTimeout(() => toast.classList.remove('is-visible'), 2800);
 }
-// Deskripsi currentTemplate: Mengambil template instruksi dan kode sesuai tantangan yang sedang aktif.
+// Penjelasan fungsi currentTemplate : Mengambil template instruksi dan kode sesuai tantangan yang sedang aktif. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function currentTemplate() {
+  // Penjelasan variabel challenge : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const challenge = challenges[activeChallenge];
   return { ...templates[challenge.id], code: challenge.code || templates[challenge.id].code };
 }
-// Deskripsi updateLineNumbers: Menyelaraskan nomor baris editor dengan isi kode dan posisi gulir.
+// Penjelasan fungsi updateLineNumbers : Menyelaraskan nomor baris editor dengan isi kode dan posisi gulir. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function updateLineNumbers() {
+  // Penjelasan variabel count : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const count = editor.value.split('\n').length;
   lineNumbers.textContent = Array.from({ length: count }, (_, index) => index + 1).join('\n');
   lineNumbers.scrollTop = editor.scrollTop;
 }
-// Deskripsi setConsole: Mengatur teks output, status sukses atau error, dan warna console.
+// Penjelasan fungsi setConsole : Mengatur teks output, status sukses atau error, dan warna console. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function setConsole(message, isError = false) {
   consoleOutput.textContent = message || '// Tidak ada output console';
   consoleOutput.classList.toggle('is-error', isError);
   consoleStatus.textContent = isError ? 'Ada error' : 'Selesai dijalankan';
   consoleStatus.style.color = isError ? '#C64D4D' : 'var(--green)';
 }
-// Deskripsi baseDocument: Membentuk dokumen HTML dasar untuk isi pratinjau.
+// Penjelasan fungsi baseDocument : Membentuk dokumen HTML dasar untuk isi pratinjau. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function baseDocument(body = '<h1>Halo dari CENDEKIA!</h1><p>Mulai berkreasi dengan kode.</p>') {
   return `<!doctype html><html lang="id"><head><meta charset="UTF-8"><style>body{font-family:Arial,sans-serif;padding:32px;color:#142D4E}button{background:#2563EB;border:0;border-radius:6px;color:white;padding:10px 14px}</style></head><body>${body}</body></html>`;
 }
-// Deskripsi buildPreview: Menyusun dokumen pratinjau sesuai bahasa dan kode yang dipilih.
+// Penjelasan fungsi buildPreview : Menyusun dokumen pratinjau sesuai bahasa dan kode yang dipilih. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function buildPreview(language, code) {
+  // Penjelasan variabel bridge : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const bridge = `<script>const send=(type,value)=>parent.postMessage({source:'cendekia-playground',type,value},'*');const oldLog=console.log;console.log=(...args)=>{oldLog(...args);send('log',args.map(String).join(' '))};window.onerror=(message,source,line,column,error)=>send('error',message+' (baris '+line+')');window.addEventListener('unhandledrejection',event=>send('error',event.reason?.message||String(event.reason)));<\/script>`;
+  // Menjalankan langkah berikut hanya jika kondisi terpenuhi.
   if (language === 'html') return code.replace('</head>', `${bridge}</head>`);
   if (language === 'css')
     return baseDocument(
@@ -106,10 +122,13 @@ function buildPreview(language, code) {
     .replace('</head>', `${bridge}</head>`)
     .replace('</body>', `<script>${code}<\/script></body>`);
 }
-// Deskripsi runCode: Menyimpan waktu eksekusi, menjalankan pratinjau, dan memperbarui output.
+// Penjelasan fungsi runCode : Menyimpan waktu eksekusi, menjalankan pratinjau, dan memperbarui output. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function runCode() {
+  // Penjelasan variabel language : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const language = languageSelect.value;
+  // Penjelasan variabel progress : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const progress = JSON.parse(localStorage.getItem('cendekiaPlaygroundProgress') || '{}');
+  // Membaca atau menyimpan data secara lokal pada browser.
   localStorage.setItem(
     'cendekiaPlaygroundProgress',
     JSON.stringify({
@@ -124,7 +143,7 @@ function runCode() {
       setConsole('// Tidak ada output console. Preview berhasil diperbarui.', false);
   }, 700);
 }
-// Deskripsi renderChallenges: Menampilkan daftar tantangan dan posisi tantangan aktif.
+// Penjelasan fungsi renderChallenges : Menampilkan daftar tantangan dan posisi tantangan aktif. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function renderChallenges() {
   challengeList.innerHTML = challenges
     .map(
@@ -132,13 +151,15 @@ function renderChallenges() {
         `<button class="challenge-item ${index === activeChallenge ? 'is-active' : ''}" type="button" data-challenge-index="${index}"><strong>${index + 1}. ${challenge.title}</strong><span>${challenge.category} · <i class="${challenge.difficulty === 'Pemula' ? 'difficulty-green' : 'difficulty-orange'}">${challenge.difficulty}</i></span></button>`,
     )
     .join('');
+  // Mengambil satu elemen pada dokumen berdasarkan selektor.
   document.querySelector('#challenge-count').textContent =
     `${activeChallenge + 1} / ${challenges.length}`;
 }
-// Deskripsi loadChallenge: Memuat tantangan, kode awal, level, instruksi, dan hasil yang diharapkan.
+// Penjelasan fungsi loadChallenge : Memuat tantangan, kode awal, level, instruksi, dan hasil yang diharapkan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function loadChallenge(index) {
   activeChallenge = index;
   const challenge = challenges[index];
+  // Penjelasan variabel template : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const template = currentTemplate();
   languageSelect.value = challenge.id;
   editor.value = template.code;
@@ -151,9 +172,11 @@ function loadChallenge(index) {
   setConsole('// Pilih Jalankan kode untuk melihat hasil.');
   runCode();
 }
-// Deskripsi saveProject: Menyimpan kode proyek ke localStorage dan mencatat aktivitas proyek.
+// Penjelasan fungsi saveProject : Menyimpan kode proyek ke localStorage dan mencatat aktivitas proyek. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function saveProject(name) {
+  // Penjelasan variabel projects : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const projects = JSON.parse(localStorage.getItem('cendekiaPlaygroundProjects') || '[]');
+  // Penjelasan variabel project : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const project = {
     id: Date.now(),
     name,
@@ -167,10 +190,11 @@ function saveProject(name) {
   renderSavedProjects();
   showToast('Proyek berhasil disimpan di perangkat ini.');
 }
-// Deskripsi renderSavedProjects: Menampilkan jumlah dan daftar proyek yang tersimpan.
+// Penjelasan fungsi renderSavedProjects : Menampilkan jumlah dan daftar proyek yang tersimpan. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function renderSavedProjects() {
   const projects = JSON.parse(localStorage.getItem('cendekiaPlaygroundProjects') || '[]');
   document.querySelector('#saved-count').textContent = projects.length;
+  // Penjelasan variabel target : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const target = document.querySelector('#saved-project-list');
   target.innerHTML = projects.length
     ? projects
@@ -181,10 +205,12 @@ function renderSavedProjects() {
         .join('')
     : '<p class="muted-small">Belum ada proyek tersimpan.</p>';
 }
-// Deskripsi downloadCode: Mengunduh kode editor dengan ekstensi file sesuai bahasa.
+// Penjelasan fungsi downloadCode : Mengunduh kode editor dengan ekstensi file sesuai bahasa. Fungsi ini memproses input atau keadaan halaman yang diterima, mengembalikan atau memperbarui hasil yang dibutuhkan langkah berikutnya, dan dapat dipengaruhi oleh keadaan penyimpanan atau interaksi pengguna.
 function downloadCode() {
   const template = currentTemplate();
+  // Penjelasan variabel blob : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const blob = new Blob([editor.value], { type: 'text/plain' });
+  // Penjelasan variabel link : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = `cendekia-${languageSelect.value}.${template.extension}`;
@@ -200,6 +226,7 @@ editor.addEventListener('scroll', () => {
 editor.addEventListener('keydown', (event) => {
   if (event.key === 'Tab') {
     event.preventDefault();
+    // Penjelasan variabel start : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
     const start = editor.selectionStart;
     editor.value = `${editor.value.slice(0, start)}  ${editor.value.slice(editor.selectionEnd)}`;
     editor.selectionStart = editor.selectionEnd = start + 2;
@@ -211,7 +238,9 @@ editor.addEventListener('keydown', (event) => {
   }
 });
 languageSelect.addEventListener('change', () => {
+  // Penjelasan variabel selected : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const selected = languageSelect.value;
+  // Penjelasan variabel index : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const index = challenges.findIndex((challenge) => challenge.id === selected);
   activeChallenge = index >= 0 ? index : 0;
   loadChallenge(activeChallenge);
@@ -238,11 +267,14 @@ document.querySelector('#save-form').addEventListener('submit', (event) => {
   document.querySelector('#save-dialog').close();
 });
 challengeList.addEventListener('click', (event) => {
+  // Penjelasan variabel button : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const button = event.target.closest('[data-challenge-index]');
   if (button) loadChallenge(Number(button.dataset.challengeIndex));
 });
 document.querySelector('#saved-project-list').addEventListener('click', (event) => {
+  // Penjelasan variabel projectId : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const projectId = event.target.closest('[data-project-id]')?.dataset.projectId;
+  // Penjelasan variabel deleteId : Variabel ini menyimpan data, hasil, atau referensi elemen yang dipakai oleh alur berikutnya. Walaupun bentuk atau isinya dapat digunakan lebih dari sekali, identitas variabel tersebut membuat kode lebih mudah dibaca dan ditelusuri.
   const deleteId = event.target.closest('[data-delete-id]')?.dataset.deleteId;
   const projects = JSON.parse(localStorage.getItem('cendekiaPlaygroundProjects') || '[]');
   if (projectId) {
@@ -266,9 +298,11 @@ document.querySelector('#saved-project-list').addEventListener('click', (event) 
 });
 document.querySelector('#fullscreen-button').addEventListener('click', async () => {
   if (!document.fullscreenElement)
+    // Menunggu hasil operasi asinkron sebelum melanjutkan.
     await document.querySelector('#playground-workspace').requestFullscreen();
   else await document.exitFullscreen();
 });
+// Memasang penanganan event pada objek window.
 window.addEventListener('message', (event) => {
   if (event.source !== preview.contentWindow || event.data?.source !== 'cendekia-playground')
     return;

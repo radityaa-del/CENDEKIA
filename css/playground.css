@@ -1,4 +1,5 @@
 /* Deskripsi: Gaya Coding Playground: editor, tantangan, console, preview, dan proyek tersimpan. */
+/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
 body.playground-page {
   background: #eaf0f7;
   color: var(--navy);
@@ -366,6 +367,7 @@ body.playground-page {
 .line-numbers {
   border-right: 1px solid rgba(255, 255, 255, 0.08);
   color: #5f748d;
+  /* Penjelasan properti font : Properti ini menentukan gabungan keluarga huruf, ketebalan, ukuran, atau gaya bawaan untuk teks pada elemen yang dipilih. */
   font:
     12px/1.65 'SFMono-Regular',
     Consolas,
@@ -531,6 +533,7 @@ body.playground-page {
   opacity: 1;
   transform: translateY(0);
 }
+/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
 @media (max-width: 980px) {
   .playground-layout {
     grid-template-columns: 235px 1fr;

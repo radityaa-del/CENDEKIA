@@ -1,11 +1,17 @@
+<!-- Menentukan dokumen sebagai HTML5. -->
 <!doctype html>
 <!-- Deskripsi halaman: quiz.html - Antarmuka CENDEKIA untuk bagian quiz. -->
+<!-- Tag html membungkus seluruh dokumen. Atribut lang="id" memberi informasi bahwa isi utama ditulis dalam Bahasa Indonesia bagi browser dan teknologi aksesibilitas. -->
 <html lang="id">
+  <!-- Bagian head menyimpan informasi yang tidak ditampilkan langsung sebagai konten utama, tetapi dibutuhkan browser untuk judul, pengkodean karakter, tampilan layar, stylesheet, dan skrip. -->
   <head>
+    <!-- Meta memberikan petunjuk teknis kepada browser dan mesin pencari, seperti encoding karakter, ukuran tampilan pada perangkat seluler, atau ringkasan isi halaman. -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Latihan dan kuis interaktif CENDEKIA." />
+    <!-- Title menentukan nama tab dan sering dipakai sebagai identitas halaman pada riwayat browser, bookmark, atau hasil pencarian. -->
     <title>Latihan &amp; Kuis | CENDEKIA</title>
+    <!-- Link menghubungkan halaman dengan berkas CSS atau layanan font. Perubahan atau kegagalan sumber daya ini dapat memengaruhi tampilan visual halaman. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,6 +23,7 @@
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/quiz.css" />
     <link rel="stylesheet" href="css/responsive.css" />
+    <!-- Script memuat logika interaksi, autentikasi, data, dan tema. Atribut defer memungkinkan skrip dijalankan setelah struktur HTML siap digunakan. -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
@@ -26,12 +33,16 @@
     <script src="js/quiz.js" defer></script>
     <script src="js/theme.js" defer></script>
   </head>
+  <!-- Body adalah wadah seluruh elemen yang dapat dilihat atau digunakan pengguna, termasuk navigasi, konten, dialog, dan pemberitahuan. -->
   <body class="quiz-page" data-auth-required="true">
     <header class="site-header">
+      <!-- Nav mengelompokkan tautan yang berfungsi mengarahkan pengguna ke halaman lain atau lokasi tertentu. Struktur ini juga membantu navigasi keyboard dan pembaca layar. -->
       <nav class="navbar container" aria-label="Navigasi utama">
+        <!-- Anchor mengubah elemen di dalamnya menjadi tautan. Nilai href menentukan halaman atau bagian situs yang dibuka saat diklik. -->
         <a class="brand" href="dashboard.html"
           ><span class="brand-mark">C</span><span>CENDEKIA</span></a
         >
+        <!-- Div adalah wadah generik yang mengelompokkan elemen agar jarak, posisi, dan gaya dapat diatur bersama oleh CSS. -->
         <div class="quiz-nav-actions">
           <a class="button button-ghost" href="dashboard.html">Dashboard</a
           ><a class="button button-primary button-small" href="catalog.html"
@@ -40,15 +51,20 @@
         </div>
       </nav>
     </header>
+    <!-- Main menandai bagian isi yang paling penting bagi tujuan halaman. Konten di sini biasanya tidak dipakai ulang sebagai elemen dekorasi atau navigasi. -->
     <main class="quiz-shell container">
+      <!-- Section mengelompokkan isi yang memiliki tema atau tujuan sama, misalnya intro, daftar kelas, formulir, atau ringkasan hasil. -->
       <section id="quiz-library" class="quiz-view">
         <header class="quiz-page-heading">
           <div>
+            <!-- Elemen p menyajikan teks sebagai paragraf yang terpisah sehingga alur baca, jarak baris, dan warna dapat diatur konsisten. -->
             <p class="section-kicker">Latihan dan evaluasi</p>
+            <!-- H1 adalah heading paling utama. Teks di dalamnya menjelaskan topik atau tujuan utama halaman bagi pengguna dan mesin pencari. -->
             <h1>Uji pemahamanmu,<br /><span>tumbuh lebih jauh.</span></h1>
             <p>Pilih topik, jawab soal dengan tenang, dan lihat rekomendasi belajar berikutnya.</p>
           </div>
           <div class="history-summary">
+            <!-- Span membungkus bagian teks atau ikon kecil dalam satu baris. Kelas pada span biasanya digunakan untuk pewarnaan, status, atau bentuk khusus. -->
             <span class="summary-icon">◔</span>
             <div><strong id="history-count">0</strong><small>percobaan tersimpan</small></div>
           </div>
@@ -56,6 +72,7 @@
         <div class="quiz-filter-bar">
           <div class="quiz-filter-label">Pilih kategori</div>
           <div class="quiz-category-filters" id="category-filters">
+            <!-- Button digunakan untuk aksi seperti membuka menu, menyimpan, berpindah materi, atau mengirim formulir. Perilakunya ditangani oleh JavaScript. -->
             <button class="category-filter is-active" type="button" data-category="all">
               Semua
             </button>
@@ -66,6 +83,7 @@
           <div class="quiz-section-heading">
             <div>
               <p class="section-kicker">Riwayat belajarmu</p>
+              <!-- H2 membagi isi menjadi bagian yang lebih spesifik dan membentuk hierarki judul setelah h1. -->
               <h2>Nilai terakhir</h2>
             </div>
             <span class="history-note">Tersimpan di perangkat ini</span>
@@ -86,6 +104,7 @@
         </div>
         <div class="progress-line"><span id="quiz-progress-line"></span></div>
         <div class="player-layout">
+          <!-- Aside menampung informasi pendukung yang melengkapi isi utama, seperti persyaratan kelas, ringkasan, atau rekomendasi berikutnya. -->
           <aside class="question-map-panel">
             <div class="map-heading">
               <h2>Soal latihan</h2>
@@ -97,6 +116,7 @@
               ><span><i class="legend-answered"></i> Terjawab</span>
             </div>
           </aside>
+          <!-- Article memuat satu unit konten yang dapat berdiri sendiri dan memiliki makna meskipun dipisahkan dari bagian lainnya. -->
           <article class="question-panel">
             <div class="question-type-row">
               <span class="question-type" id="question-type">Pilihan ganda</span

@@ -1,4 +1,5 @@
 /* Deskripsi: Gaya halaman kuis: perpustakaan, pemutar soal, pilihan jawaban, hasil, dan riwayat. */
+/* Penjelasan selector: aturan berikut memilih kelompok elemen tertentu dan menerapkan warna, ukuran, jarak, posisi, atau animasi agar tampilannya konsisten pada komponen yang memakai class atau elemen tersebut. */
 .quiz-page {
   background: var(--bg);
 }
@@ -110,6 +111,7 @@
   flex-direction: column;
   min-height: 270px;
   padding: 22px;
+  /* Penjelasan properti transition : Perubahan gaya dibuat bertahap selama durasi tertentu. Pilihan ini membuat interaksi seperti hover terasa halus alih-alih langsung berubah. */
   transition:
     box-shadow 0.2s,
     transform 0.2s;
@@ -618,6 +620,7 @@
   justify-content: center;
   margin-top: 40px;
 }
+/* Penjelasan media query: aturan di dalam blok ini hanya dijalankan pada rentang layar yang ditentukan. Tujuannya adalah mengubah tata letak, jarak, atau ukuran agar antarmuka tetap nyaman dipakai di desktop, tablet, dan perangkat seluler. */
 @media (max-width: 900px) {
   .quiz-card-grid {
     grid-template-columns: repeat(2, 1fr);
