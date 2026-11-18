@@ -10,10 +10,18 @@ document.querySelector('[data-course-title]').textContent = course.title;
 document.querySelector('[data-course-description]').textContent = course.description;
 document.querySelector('[data-course-image]').src = course.image;
 document.querySelector('[data-course-image]').alt = `Ilustrasi ${course.title}`;
-document.querySelectorAll('[data-course-level]').forEach((element) => { element.textContent = course.level; });
-document.querySelectorAll('[data-course-duration]').forEach((element) => { element.textContent = `±${totalDuration} jam`; });
-document.querySelectorAll('[data-course-lessons]').forEach((element) => { element.textContent = `${lessons.length} materi`; });
-document.querySelectorAll('[data-course-prerequisites]').forEach((element) => { element.textContent = 'Tidak ada'; });
+document.querySelectorAll('[data-course-level]').forEach((element) => {
+  element.textContent = course.level;
+});
+document.querySelectorAll('[data-course-duration]').forEach((element) => {
+  element.textContent = `±${totalDuration} jam`;
+});
+document.querySelectorAll('[data-course-lessons]').forEach((element) => {
+  element.textContent = `${lessons.length} materi`;
+});
+document.querySelectorAll('[data-course-prerequisites]').forEach((element) => {
+  element.textContent = 'Tidak ada';
+});
 
 document.querySelector('#objectives').innerHTML = course.chapters
   .map((chapter) => `<li>${chapter.title}</li>`)

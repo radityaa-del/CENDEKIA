@@ -2,6 +2,7 @@ const menuToggle = document.querySelector('.menu-toggle');
 const navPanel = document.querySelector('.nav-panel');
 const navLinks = document.querySelectorAll('.nav-link, .nav-actions a');
 
+// Deskripsi setMenuState: Membuka atau menutup menu navigasi dan memperbarui atribut aksesibilitasnya.
 function setMenuState(isOpen) {
   menuToggle.classList.toggle('is-open', isOpen);
   navPanel.classList.toggle('is-open', isOpen);
@@ -23,13 +24,16 @@ window.addEventListener('resize', () => {
 });
 
 const sections = document.querySelectorAll('main section[id]');
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (!entry.isIntersecting) return;
-    document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('is-active'));
-    const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
-    activeLink?.classList.add('is-active');
-  });
-}, { rootMargin: '-35% 0px -55% 0px' });
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      document.querySelectorAll('.nav-link').forEach((link) => link.classList.remove('is-active'));
+      const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+      activeLink?.classList.add('is-active');
+    });
+  },
+  { rootMargin: '-35% 0px -55% 0px' },
+);
 
 sections.forEach((section) => sectionObserver.observe(section));

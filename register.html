@@ -1,43 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Deskripsi halaman: register.html - Antarmuka CENDEKIA untuk bagian register. -->
 <html lang="id">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Daftar akun belajar gratis di CENDEKIA.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Daftar akun belajar gratis di CENDEKIA." />
     <title>Daftar | CENDEKIA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <script src="js/navigation.js" defer> </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/navigation.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
     <script src="js/supabase-config.js" defer></script>
     <script src="js/supabase-client.js" defer></script>
     <script src="js/auth.js" defer></script>
-  <script src="js/theme.js" defer></script></head>
+    <script src="js/theme.js" defer></script>
+  </head>
   <body>
     <header class="site-header">
       <nav class="navbar container" aria-label="Navigasi utama">
-        <a class="brand" href="index.html"> <span class="brand-mark">C</span> <span>CENDEKIA</span> </a> <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Buka menu navigasi"> <span> </span> <span> </span> <span> </span> </button> <div class="nav-panel" id="main-menu"> <div class="nav-links"> <a class="nav-link" href="index.html">Beranda</a> <a class="nav-link" href="catalog.html">Kelas</a> <a class="nav-link" href="index.html#tentang">Tentang Kami</a> </div> <div class="nav-actions"> <a class="button button-ghost" href="login.html">Masuk</a> <a class="button button-primary button-small" href="register.html">Daftar gratis <span>↗</span> </a> </div> </div>
+        <a class="brand" href="index.html">
+          <span class="brand-mark">C</span> <span>CENDEKIA</span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-menu"
+          aria-label="Buka menu navigasi"
+        >
+          <span> </span> <span> </span> <span> </span>
+        </button>
+        <div class="nav-panel" id="main-menu">
+          <div class="nav-links">
+            <a class="nav-link" href="index.html">Beranda</a>
+            <a class="nav-link" href="catalog.html">Kelas</a>
+            <a class="nav-link" href="index.html#tentang">Tentang Kami</a>
+          </div>
+          <div class="nav-actions">
+            <a class="button button-ghost" href="login.html">Masuk</a>
+            <a class="button button-primary button-small" href="register.html"
+              >Daftar gratis <span>↗</span>
+            </a>
+          </div>
+        </div>
       </nav>
     </header>
     <main class="container auth-page">
       <section class="auth-intro">
         <p class="section-kicker">Mulai perjalananmu</p>
-        <h1>Lebih banyak tahu, <em>lebih berani berkarya.</em> </h1>
-        <p>Buat akun gratis dan temukan ruang belajar yang membantumu mengubah rasa ingin tahu menjadi karya digital.</p> <div class="auth-points"> <div class="auth-point"> <span>01</span> Pilih kelas sesuai minatmu</div> <div class="auth-point"> <span>02</span> Belajar dengan ritmemu sendiri</div> <div class="auth-point"> <span>03</span> Praktikkan idemu jadi karya</div> </div>
+        <h1>Lebih banyak tahu, <em>lebih berani berkarya.</em></h1>
+        <p>
+          Buat akun gratis dan temukan ruang belajar yang membantumu mengubah rasa ingin tahu
+          menjadi karya digital.
+        </p>
+        <div class="auth-points">
+          <div class="auth-point"><span>01</span> Pilih kelas sesuai minatmu</div>
+          <div class="auth-point"><span>02</span> Belajar dengan ritmemu sendiri</div>
+          <div class="auth-point"><span>03</span> Praktikkan idemu jadi karya</div>
+        </div>
       </section>
       <section class="auth-form-card" aria-labelledby="register-title">
         <h2 id="register-title">Buat akun gratis</h2>
         <p class="form-subtitle">Hanya butuh satu menit untuk mulai belajar.</p>
         <form class="auth-form" data-mode="register" novalidate>
-          <div class="form-group"> <label class="form-label" for="full-name">Nama lengkap</label> <input class="form-input" id="full-name" name="fullName" type="text" placeholder="Nama lengkapmu" required> <span class="field-error" data-error-for="fullName"> </span> </div> <div class="form-group"> <label class="form-label" for="username">Username</label> <input class="form-input" id="username" name="username" type="text" placeholder="contoh: andi_belajar" required> <span class="field-error" data-error-for="username"> </span> </div> <div class="form-group"> <label class="form-label" for="email">Email</label> <input class="form-input" id="email" name="email" type="email" placeholder="contoh@email.com" required> <span class="field-error" data-error-for="email"> </span> </div> <div class="form-group"> <label class="form-label" for="password">Password</label> <div class="password-wrap"> <input class="form-input" id="password" name="password" type="password" placeholder="Minimal 8 karakter" required> <button class="password-toggle" type="button" data-target="password" aria-label="Tampilkan password">Tampilkan</button> </div> <span class="field-error" data-error-for="password"> </span> </div> <div class="form-group"> <label class="form-label" for="confirm-password">Konfirmasi password</label> <div class="password-wrap"> <input class="form-input" id="confirm-password" name="confirmPassword" type="password" placeholder="Ulangi password" required> <button class="password-toggle" type="button" data-target="confirm-password" aria-label="Tampilkan password">Tampilkan</button> </div> <span class="field-error" data-error-for="confirmPassword"> </span> </div> <div class="form-options"> <label class="check-label"> <input type="checkbox" name="terms" required> Saya menyetujui syarat penggunaan CENDEKIA.</label> </div> <button class="button button-primary form-submit" type="submit">Buat akun <span>↗</span> </button>
+          <div class="form-group">
+            <label class="form-label" for="full-name">Nama lengkap</label>
+            <input
+              class="form-input"
+              id="full-name"
+              name="fullName"
+              type="text"
+              placeholder="Nama lengkapmu"
+              required
+            />
+            <span class="field-error" data-error-for="fullName"> </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="username">Username</label>
+            <input
+              class="form-input"
+              id="username"
+              name="username"
+              type="text"
+              placeholder="contoh: andi_belajar"
+              required
+            />
+            <span class="field-error" data-error-for="username"> </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input
+              class="form-input"
+              id="email"
+              name="email"
+              type="email"
+              placeholder="contoh@email.com"
+              required
+            />
+            <span class="field-error" data-error-for="email"> </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="password-wrap">
+              <input
+                class="form-input"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Minimal 8 karakter"
+                required
+              />
+              <button
+                class="password-toggle"
+                type="button"
+                data-target="password"
+                aria-label="Tampilkan password"
+              >
+                Tampilkan
+              </button>
+            </div>
+            <span class="field-error" data-error-for="password"> </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="confirm-password">Konfirmasi password</label>
+            <div class="password-wrap">
+              <input
+                class="form-input"
+                id="confirm-password"
+                name="confirmPassword"
+                type="password"
+                placeholder="Ulangi password"
+                required
+              />
+              <button
+                class="password-toggle"
+                type="button"
+                data-target="confirm-password"
+                aria-label="Tampilkan password"
+              >
+                Tampilkan
+              </button>
+            </div>
+            <span class="field-error" data-error-for="confirmPassword"> </span>
+          </div>
+          <div class="form-options">
+            <label class="check-label">
+              <input type="checkbox" name="terms" required /> Saya menyetujui syarat penggunaan
+              CENDEKIA.</label
+            >
+          </div>
+          <button class="button button-primary form-submit" type="submit">
+            Buat akun <span>↗</span>
+          </button>
         </form>
-        <p class="form-footnote">Sudah punya akun? <a href="login.html">Masuk di sini</a> </p>
+        <p class="form-footnote">Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
       </section>
-    </main> <div class="toast" role="status" aria-live="polite"> </div>
+    </main>
+    <div class="toast" role="status" aria-live="polite"></div>
   </body>
 </html>

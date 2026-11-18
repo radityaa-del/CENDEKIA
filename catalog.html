@@ -1,46 +1,99 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Deskripsi halaman: catalog.html - Antarmuka CENDEKIA untuk bagian catalog. -->
 <html lang="id">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Katalog kelas belajar teknologi gratis CENDEKIA.">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Katalog kelas belajar teknologi gratis CENDEKIA." />
     <title>Katalog Kelas | CENDEKIA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/global.css">
-    <link rel="stylesheet" href="css/components.css">
-    <link rel="stylesheet" href="css/pages.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <script src="js/navigation.js" defer> </script>
-    <script src="js/learning-data.js" defer> </script>
-    <script src="js/catalog.js" defer> </script>
-  <script src="js/theme.js" defer></script></head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <script src="js/navigation.js" defer></script>
+    <script src="js/learning-data.js" defer></script>
+    <script src="js/catalog.js" defer></script>
+    <script src="js/theme.js" defer></script>
+  </head>
   <body>
     <header class="site-header">
       <nav class="navbar container" aria-label="Navigasi utama">
-        <a class="brand" href="index.html"> <span class="brand-mark">C</span> <span>CENDEKIA</span> </a> <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Buka menu navigasi"> <span> </span> <span> </span> <span> </span> </button> <div class="nav-panel" id="main-menu"> <div class="nav-links"> <a class="nav-link" href="index.html">Beranda</a> <a class="nav-link is-active" href="catalog.html">Kelas</a> <a class="nav-link" href="index.html#tentang">Tentang Kami</a> </div> <div class="nav-actions"> <a class="button button-ghost" href="login.html">Masuk</a> <a class="button button-primary button-small" href="register.html">Daftar gratis <span>↗</span> </a> </div> </div>
+        <a class="brand" href="index.html">
+          <span class="brand-mark">C</span> <span>CENDEKIA</span>
+        </a>
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="main-menu"
+          aria-label="Buka menu navigasi"
+        >
+          <span> </span> <span> </span> <span> </span>
+        </button>
+        <div class="nav-panel" id="main-menu">
+          <div class="nav-links">
+            <a class="nav-link" href="index.html">Beranda</a>
+            <a class="nav-link is-active" href="catalog.html">Kelas</a>
+            <a class="nav-link" href="index.html#tentang">Tentang Kami</a>
+          </div>
+          <div class="nav-actions">
+            <a class="button button-ghost" href="login.html">Masuk</a>
+            <a class="button button-primary button-small" href="register.html"
+              >Daftar gratis <span>↗</span>
+            </a>
+          </div>
+        </div>
       </nav>
     </header>
     <main class="page-shell container">
       <header class="page-header-row">
         <div>
-        <p class="section-kicker">Koleksi CENDEKIA</p>
-        <h1>Temukan kelas yang<br> <span>menggerakkanmu.</span> </h1>
-        <p>Semua kelas gratis, dibuat singkat, praktis, dan mudah diikuti dari mana saja.</p> </div> <a class="button button-secondary" href="index.html">Kembali ke beranda <span>↗</span> </a>
+          <p class="section-kicker">Koleksi CENDEKIA</p>
+          <h1>
+            Temukan kelas yang<br />
+            <span>menggerakkanmu.</span>
+          </h1>
+          <p>Semua kelas gratis, dibuat singkat, praktis, dan mudah diikuti dari mana saja.</p>
+        </div>
+        <a class="button button-secondary" href="index.html">Kembali ke beranda <span>↗</span> </a>
       </header>
       <section class="catalog-toolbar" aria-label="Pencarian dan filter kelas">
-        <div class="search-wrap"> <label class="visually-hidden" for="course-search">Cari kelas</label> <input class="search-input" id="course-search" type="search" placeholder="Cari kelas atau topik..."> </div> <label class="visually-hidden" for="category-filter">Filter kategori</label> <select class="filter-select" id="category-filter"> <option value="">Semua kategori</option> <option>Programming</option> <option>Web Development</option> <option>Computer Science</option> <option>Database</option> <option>Informatika Dasar</option> </select> <span class="result-count" id="result-count">0 kelas ditemukan</span>
+        <div class="search-wrap">
+          <label class="visually-hidden" for="course-search">Cari kelas</label>
+          <input
+            class="search-input"
+            id="course-search"
+            type="search"
+            placeholder="Cari kelas atau topik..."
+          />
+        </div>
+        <label class="visually-hidden" for="category-filter">Filter kategori</label>
+        <select class="filter-select" id="category-filter">
+          <option value="">Semua kategori</option>
+          <option>Programming</option>
+          <option>Web Development</option>
+          <option>Computer Science</option>
+          <option>Database</option>
+          <option>Informatika Dasar</option>
+        </select>
+        <span class="result-count" id="result-count">0 kelas ditemukan</span>
       </section>
-      <section id="catalog-grid" class="catalog-grid" aria-live="polite">
-      </section>
+      <section id="catalog-grid" class="catalog-grid" aria-live="polite"></section>
       <section class="empty-state hidden" id="empty-state">
         <h2>Kelas belum ditemukan</h2>
         <p>Coba gunakan kata kunci lain atau pilih semua kategori.</p>
       </section>
     </main>
     <footer class="site-footer">
-      <div class="container footer-bottom"> <span>© 2024 CENDEKIA</span> <span>Belajar teknologi, mulai dari sini.</span> </div>
+      <div class="container footer-bottom">
+        <span>© 2024 CENDEKIA</span> <span>Belajar teknologi, mulai dari sini.</span>
+      </div>
     </footer>
   </body>
 </html>

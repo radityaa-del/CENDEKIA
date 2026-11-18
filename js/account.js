@@ -6,8 +6,9 @@ const defaultProfile = {
   email: '',
   bio: 'Belum ada deskripsi.',
   joinedAt: new Date().toISOString(),
-  avatar: ''
+  avatar: '',
 };
+// Deskripsi readJson: Membaca JSON dari localStorage dan mengembalikan nilai cadangan jika data tidak valid.
 const readJson = (key, fallback) => {
   try {
     return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback));
@@ -15,13 +16,14 @@ const readJson = (key, fallback) => {
     return fallback;
   }
 };
+// Deskripsi getPreferences: Mengambil preferensi tampilan pengguna dari data profil yang tersimpan.
 const getPreferences = () => ({
   theme: 'light',
   fontSize: 'normal',
   reminder: true,
   achievement: true,
   updates: true,
-  ...readJson(preferenceKey, {})
+  ...readJson(preferenceKey, {}),
 });
 let profile = { ...defaultProfile };
 const preferences = getPreferences();
@@ -29,6 +31,7 @@ const toast = document.querySelector('.toast');
 let toastTimer;
 let avatarUrl = '';
 
+// Deskripsi notify: Menampilkan pesan notifikasi kepada pengguna.
 function notify(message) {
   if (!toast) return;
   toast.textContent = message;
@@ -37,27 +40,32 @@ function notify(message) {
   toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 3500);
 }
 
+// Deskripsi savePreferences: Menyimpan preferensi tampilan dan akun ke localStorage.
 function savePreferences() {
   localStorage.setItem(preferenceKey, JSON.stringify(preferences));
 }
 
+// Deskripsi applyPreferences: Menerapkan tema dan ukuran teks pada elemen halaman.
 function applyPreferences() {
   document.body.classList.toggle('theme-dark', preferences.theme === 'dark');
   document.body.classList.toggle('text-large', preferences.fontSize === 'large');
 }
 
+// Deskripsi avatarElement: Menampilkan foto profil atau inisial pengguna pada elemen avatar.
 function avatarElement(element) {
   if (!element) return;
   element.textContent = profile.name.charAt(0).toUpperCase();
   element.style.backgroundImage = avatarUrl ? `url("${avatarUrl}")` : '';
 }
 
+// Deskripsi formatJoined: Memformat tanggal pengguna bergabung ke format lokal Indonesia.
 function formatJoined() {
   const date = new Date(profile.joinedAt);
   if (Number.isNaN(date.getTime())) return 'Tanggal tidak tersedia';
   return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+// Deskripsi showProfile: Mengisi tampilan profil dengan data pengguna, progres, dan pencapaian.
 function showProfile() {
   const progress = readJson('cendekiaProgress', {});
   const courses = typeof learningCourses === 'undefined' ? [] : learningCourses;
@@ -67,25 +75,48 @@ function showProfile() {
   }, 0);
   const history = readJson('cendekiaQuizHistory', []);
   document.querySelector('#profile-name')?.replaceChildren(document.createTextNode(profile.name));
-  document.querySelector('#profile-username')?.replaceChildren(document.createTextNode(`@${profile.username}`));
-  document.querySelector('#profile-bio')?.replaceChildren(document.createTextNode(profile.bio || 'Belum ada deskripsi.'));
-  document.querySelector('#profile-joined')?.replaceChildren(document.createTextNode(`Bergabung ${formatJoined()}`));
+  document
+    .querySelector('#profile-username')
+    ?.replaceChildren(document.createTextNode(`@${profile.username}`));
+  document
+    .querySelector('#profile-bio')
+    ?.replaceChildren(document.createTextNode(profile.bio || 'Belum ada deskripsi.'));
+  document
+    .querySelector('#profile-joined')
+    ?.replaceChildren(document.createTextNode(`Bergabung ${formatJoined()}`));
   avatarElement(document.querySelector('#profile-avatar'));
-  document.querySelector('#settings-email')?.replaceChildren(document.createTextNode(profile.email || 'Belum diisi'));
-  document.querySelector('#settings-username')?.replaceChildren(document.createTextNode(`@${profile.username}`));
-  document.querySelector('#settings-joined')?.replaceChildren(document.createTextNode(formatJoined()));
-  document.querySelector('#profile-courses')?.replaceChildren(document.createTextNode(String(Object.keys(progress).length)));
-  document.querySelector('#profile-lessons')?.replaceChildren(document.createTextNode(String(completedLessons)));
-  document.querySelector('#profile-quizzes')?.replaceChildren(document.createTextNode(String(Array.isArray(history) ? history.length : 0)));
+  document
+    .querySelector('#settings-email')
+    ?.replaceChildren(document.createTextNode(profile.email || 'Belum diisi'));
+  document
+    .querySelector('#settings-username')
+    ?.replaceChildren(document.createTextNode(`@${profile.username}`));
+  document
+    .querySelector('#settings-joined')
+    ?.replaceChildren(document.createTextNode(formatJoined()));
+  document
+    .querySelector('#profile-courses')
+    ?.replaceChildren(document.createTextNode(String(Object.keys(progress).length)));
+  document
+    .querySelector('#profile-lessons')
+    ?.replaceChildren(document.createTextNode(String(completedLessons)));
+  document
+    .querySelector('#profile-quizzes')
+    ?.replaceChildren(document.createTextNode(String(Array.isArray(history) ? history.length : 0)));
   const achievements = readJson('cendekiaAchievements', []);
   const target = document.querySelector('#profile-achievements');
   if (target) {
-    target.innerHTML = Array.isArray(achievements) && achievements.length
-      ? achievements.slice(0, 3).map((item) => `<div class="mini-achievement"><span>✦</span>${item.name}</div>`).join('')
-      : '<p class="settings-note">Belum ada pencapaian terbuka. Mulai belajar untuk mendapatkannya.</p>';
+    target.innerHTML =
+      Array.isArray(achievements) && achievements.length
+        ? achievements
+            .slice(0, 3)
+            .map((item) => `<div class="mini-achievement"><span>✦</span>${item.name}</div>`)
+            .join('')
+        : '<p class="settings-note">Belum ada pencapaian terbuka. Mulai belajar untuk mendapatkannya.</p>';
   }
 }
 
+// Deskripsi setupProfile: Menyiapkan event formulir untuk mengubah data profil dan foto pengguna.
 function setupProfile(user) {
   showProfile();
   document.querySelector('#edit-profile')?.addEventListener('click', () => {
@@ -97,7 +128,10 @@ function setupProfile(user) {
   document.querySelector('#avatar-input')?.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (!file) return;
-    if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 2 * 1024 * 1024) {
+    if (
+      !['image/png', 'image/jpeg', 'image/webp'].includes(file.type) ||
+      file.size > 2 * 1024 * 1024
+    ) {
       notify('Pilih PNG, JPG, atau WebP dengan ukuran maksimal 2 MB.');
       event.target.value = '';
       return;
@@ -112,18 +146,22 @@ function setupProfile(user) {
     const name = document.querySelector('#name-input').value.trim();
     const username = document.querySelector('#username-input').value.trim();
     const bio = document.querySelector('#bio-input').value.trim();
-    document.querySelector('[data-error="name"]').textContent = name.length < 2 ? 'Nama minimal 2 karakter.' : '';
-    document.querySelector('[data-error="username"]').textContent = /^[A-Za-z0-9_]{3,20}$/.test(username)
+    document.querySelector('[data-error="name"]').textContent =
+      name.length < 2 ? 'Nama minimal 2 karakter.' : '';
+    document.querySelector('[data-error="username"]').textContent = /^[A-Za-z0-9_]{3,20}$/.test(
+      username,
+    )
       ? ''
       : 'Username 3-20 karakter, hanya huruf, angka, underscore.';
-    document.querySelector('[data-error="bio"]').textContent = bio.length > 140 ? 'Deskripsi maksimal 140 karakter.' : '';
+    document.querySelector('[data-error="bio"]').textContent =
+      bio.length > 140 ? 'Deskripsi maksimal 140 karakter.' : '';
     if (name.length < 2 || !/^[A-Za-z0-9_]{3,20}$/.test(username) || bio.length > 140) return;
 
     const submitButton = document.querySelector('#save-profile');
     submitButton.disabled = true;
     try {
       const { data, error } = await window.cendekiaSupabase.auth.updateUser({
-        data: { display_name: name, username, bio }
+        data: { display_name: name, username, bio },
       });
       if (error) throw error;
       user = data.user;
@@ -132,7 +170,7 @@ function setupProfile(user) {
         name: user.user_metadata.display_name || name,
         username: user.user_metadata.username || username,
         bio: user.user_metadata.bio || bio,
-        email: user.email || ''
+        email: user.email || '',
       };
       localStorage.removeItem(profileKey);
       document.querySelector('#profile-dialog').close();
@@ -146,6 +184,7 @@ function setupProfile(user) {
   });
 }
 
+// Deskripsi setupSettings: Menyiapkan kontrol pengaturan tampilan dan pembaruan kata sandi.
 function setupSettings() {
   document.querySelectorAll('[data-theme]').forEach((button) => {
     button.classList.toggle('is-active', button.dataset.theme === preferences.theme);
@@ -153,7 +192,9 @@ function setupSettings() {
       preferences.theme = button.dataset.theme;
       savePreferences();
       applyPreferences();
-      document.querySelectorAll('[data-theme]').forEach((item) => item.classList.toggle('is-active', item === button));
+      document
+        .querySelectorAll('[data-theme]')
+        .forEach((item) => item.classList.toggle('is-active', item === button));
       notify('Tema tampilan disimpan.');
     });
   });
@@ -178,8 +219,10 @@ function setupSettings() {
     event.preventDefault();
     const password = document.querySelector('#new-password').value;
     const confirmPassword = document.querySelector('#confirm-password').value;
-    document.querySelector('[data-error="password"]').textContent = password.length < 8 ? 'Password minimal 8 karakter.' : '';
-    document.querySelector('[data-error="confirm"]').textContent = password !== confirmPassword ? 'Konfirmasi password belum sama.' : '';
+    document.querySelector('[data-error="password"]').textContent =
+      password.length < 8 ? 'Password minimal 8 karakter.' : '';
+    document.querySelector('[data-error="confirm"]').textContent =
+      password !== confirmPassword ? 'Konfirmasi password belum sama.' : '';
     if (password.length < 8 || password !== confirmPassword) return;
 
     const submitButton = event.currentTarget.querySelector('[type="submit"]');
@@ -196,7 +239,12 @@ function setupSettings() {
     }
   });
   document.querySelector('#delete-account')?.addEventListener('click', () => {
-    if (!confirm('Hapus progres dan preferensi yang tersimpan di perangkat ini? Akun Supabase tidak akan dihapus.')) return;
+    if (
+      !confirm(
+        'Hapus progres dan preferensi yang tersimpan di perangkat ini? Akun Supabase tidak akan dihapus.',
+      )
+    )
+      return;
     [
       'cendekiaProfile',
       'cendekiaPreferences',
@@ -205,12 +253,13 @@ function setupSettings() {
       'cendekiaPlaygroundProjects',
       'cendekiaPlaygroundProgress',
       'cendekiaActivityLog',
-      'cendekiaAchievements'
+      'cendekiaAchievements',
     ].forEach((key) => localStorage.removeItem(key));
     window.location.href = 'dashboard.html';
   });
 }
 
+// Deskripsi initializeAccount: Memeriksa sesi pengguna lalu menginisialisasi halaman akun.
 async function initializeAccount() {
   applyPreferences();
   try {
@@ -230,7 +279,7 @@ async function initializeAccount() {
       email: user.email || '',
       bio: metadata.bio || storedProfile.bio || defaultProfile.bio,
       joinedAt: user.created_at || storedProfile.joinedAt || defaultProfile.joinedAt,
-      avatar: ''
+      avatar: '',
     };
     setupProfile(user);
     setupSettings();

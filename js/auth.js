@@ -1,6 +1,7 @@
 const authToast = document.querySelector('.toast');
 let authToastTimer;
 
+// Deskripsi showAuthToast: Menampilkan pesan status autentikasi selama durasi yang ditentukan.
 function showAuthToast(message, duration = 3200) {
   if (!authToast) return;
   authToast.textContent = message;
@@ -9,27 +10,34 @@ function showAuthToast(message, duration = 3200) {
   authToastTimer = window.setTimeout(() => authToast.classList.remove('is-visible'), duration);
 }
 
+// Deskripsi setError: Menampilkan atau menghapus pesan validasi untuk input tertentu.
 function setError(input, message) {
   const error = document.querySelector(`[data-error-for="${input.name}"]`);
   input.classList.toggle('is-invalid', Boolean(message));
   if (error) error.textContent = message;
 }
 
+// Deskripsi validatePassword: Memeriksa apakah kata sandi memenuhi panjang minimum.
 function validatePassword(input) {
   const message = input.value.length < 8 ? 'Password minimal 8 karakter.' : '';
   setError(input, message);
   return !message;
 }
 
+// Deskripsi validateForm: Memvalidasi input pada formulir dan menampilkan pesan kesalahan.
 function validateForm(form) {
   let valid = true;
   form.querySelectorAll('[required]').forEach((input) => {
     let message = '';
     if (input.type !== 'checkbox' && !input.value.trim()) message = 'Bagian ini wajib diisi.';
-    if (input.type === 'email' && input.value && !/^\S+@\S+\.\S+$/.test(input.value)) message = 'Masukkan email yang valid.';
-    if (input.name === 'password' && input.value && input.value.length < 8) message = 'Password minimal 8 karakter.';
-    if (input.name === 'confirmPassword' && input.value !== form.elements.password.value) message = 'Password belum sama.';
-    if (input.type === 'checkbox' && !input.checked) message = 'Persetujuan diperlukan untuk melanjutkan.';
+    if (input.type === 'email' && input.value && !/^\S+@\S+\.\S+$/.test(input.value))
+      message = 'Masukkan email yang valid.';
+    if (input.name === 'password' && input.value && input.value.length < 8)
+      message = 'Password minimal 8 karakter.';
+    if (input.name === 'confirmPassword' && input.value !== form.elements.password.value)
+      message = 'Password belum sama.';
+    if (input.type === 'checkbox' && !input.checked)
+      message = 'Persetujuan diperlukan untuk melanjutkan.';
     setError(input, message);
     if (input.type === 'checkbox' && message) {
       showAuthToast(message);
@@ -37,7 +45,8 @@ function validateForm(form) {
     }
     if (message) valid = false;
   });
-  if (!valid && !form.querySelector('[required].is-invalid[type="checkbox"]')) showAuthToast('Periksa bagian yang ditandai, lalu coba lagi.');
+  if (!valid && !form.querySelector('[required].is-invalid[type="checkbox"]'))
+    showAuthToast('Periksa bagian yang ditandai, lalu coba lagi.');
   if (!valid) form.querySelector('.is-invalid')?.focus();
   return valid;
 }
@@ -56,13 +65,20 @@ document.querySelector('#forgot-password')?.addEventListener('click', async (eve
   const emailInput = document.querySelector('#identity');
   const email = emailInput.value.trim();
   if (!/^\S+@\S+\.\S+$/.test(email)) {
-    setError(emailInput, email ? 'Masukkan email yang valid.' : 'Isi email akunmu terlebih dahulu.');
+    setError(
+      emailInput,
+      email ? 'Masukkan email yang valid.' : 'Isi email akunmu terlebih dahulu.',
+    );
     emailInput.focus();
     return;
   }
   setError(emailInput, '');
   if (!window.cendekiaSupabase) {
-    showAuthToast(window.CENDEKIA_AUTH_ERROR || 'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.', 7000);
+    showAuthToast(
+      window.CENDEKIA_AUTH_ERROR ||
+        'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.',
+      7000,
+    );
     return;
   }
 
@@ -70,9 +86,14 @@ document.querySelector('#forgot-password')?.addEventListener('click', async (eve
   button.disabled = true;
   try {
     const redirectTo = new URL('reset-password.html', window.location.href).href;
-    const { error } = await window.cendekiaSupabase.auth.resetPasswordForEmail(email, { redirectTo });
+    const { error } = await window.cendekiaSupabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
+    });
     if (error) throw error;
-    showAuthToast('Jika email terdaftar, tautan reset password akan dikirim. Periksa inbox dan folder spam.', 7000);
+    showAuthToast(
+      'Jika email terdaftar, tautan reset password akan dikirim. Periksa inbox dan folder spam.',
+      7000,
+    );
   } catch (error) {
     showAuthToast(error.message || 'Tidak dapat mengirim tautan reset. Coba lagi.', 7000);
   } finally {
@@ -89,7 +110,10 @@ document.querySelectorAll('.auth-form').forEach((form) => {
     event.preventDefault();
     if (!validateForm(form)) return;
     if (!window.cendekiaSupabase) {
-      showAuthToast(window.CENDEKIA_AUTH_ERROR || 'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.');
+      showAuthToast(
+        window.CENDEKIA_AUTH_ERROR ||
+          'Supabase belum siap. Muat ulang halaman atau periksa konfigurasi.',
+      );
       return;
     }
 
@@ -106,10 +130,10 @@ document.querySelectorAll('.auth-form').forEach((form) => {
           options: {
             data: {
               display_name: form.elements.fullName.value.trim(),
-              username: form.elements.username.value.trim()
+              username: form.elements.username.value.trim(),
             },
-            emailRedirectTo: new URL('dashboard.html', window.location.href).href
-          }
+            emailRedirectTo: new URL('dashboard.html', window.location.href).href,
+          },
         });
         if (error) throw error;
 
@@ -121,18 +145,27 @@ document.querySelectorAll('.auth-form').forEach((form) => {
       } else {
         const { error } = await window.cendekiaSupabase.auth.signInWithPassword({
           email: form.elements.identity.value.trim(),
-          password: form.elements.password.value
+          password: form.elements.password.value,
         });
         if (error) throw error;
       }
 
-      showAuthToast(form.dataset.mode === 'register' ? 'Akun berhasil dibuat. Membuka dashboard...' : 'Berhasil masuk. Selamat datang di CENDEKIA.');
-      window.setTimeout(() => { window.location.href = 'dashboard.html'; }, 800);
+      showAuthToast(
+        form.dataset.mode === 'register'
+          ? 'Akun berhasil dibuat. Membuka dashboard...'
+          : 'Berhasil masuk. Selamat datang di CENDEKIA.',
+      );
+      window.setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 800);
     } catch (error) {
       const message = error.message || error.toString() || 'Autentikasi gagal. Coba lagi.';
-      showAuthToast(message.toLowerCase().includes('invalid login credentials')
-        ? 'Email atau password salah. Periksa kembali data loginmu.'
-        : message, 7000);
+      showAuthToast(
+        message.toLowerCase().includes('invalid login credentials')
+          ? 'Email atau password salah. Periksa kembali data loginmu.'
+          : message,
+        7000,
+      );
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = originalButtonText;

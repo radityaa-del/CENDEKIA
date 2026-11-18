@@ -1,55 +1,191 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- Deskripsi halaman: playground.html - Antarmuka CENDEKIA untuk bagian playground. -->
 <html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Coding Playground CENDEKIA untuk berlatih HTML, CSS, dan JavaScript.">
-  <title>Coding Playground | CENDEKIA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/playground.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
-  <script src="js/supabase-config.js" defer></script>
-  <script src="js/supabase-client.js" defer></script>
-  <script src="js/auth-session.js" defer></script>
-  <script src="js/progress-store.js" defer></script>
-  <script src="js/playground.js" defer></script>
-<script src="js/theme.js" defer></script></head>
-<body class="playground-page" data-auth-required="true">
-  <header class="playground-header">
-    <div class="playground-brand-wrap">
-      <a class="brand brand-light" href="dashboard.html" aria-label="Kembali ke dashboard CENDEKIA"><span class="brand-mark">C</span><span>CENDEKIA</span></a>
-      <span class="header-divider"></span>
-      <span class="workspace-title">Coding Playground</span>
-    </div>
-    <div class="playground-header-actions">
-      <a class="back-dashboard" href="dashboard.html">← Dashboard</a>
-      <button class="icon-action" id="fullscreen-button" type="button" title="Buka fullscreen" aria-label="Buka fullscreen">⛶</button>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Coding Playground CENDEKIA untuk berlatih HTML, CSS, dan JavaScript."
+    />
+    <title>Coding Playground | CENDEKIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/playground.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+    <script src="js/supabase-config.js" defer></script>
+    <script src="js/supabase-client.js" defer></script>
+    <script src="js/auth-session.js" defer></script>
+    <script src="js/progress-store.js" defer></script>
+    <script src="js/playground.js" defer></script>
+    <script src="js/theme.js" defer></script>
+  </head>
+  <body class="playground-page" data-auth-required="true">
+    <header class="playground-header">
+      <div class="playground-brand-wrap">
+        <a
+          class="brand brand-light"
+          href="dashboard.html"
+          aria-label="Kembali ke dashboard CENDEKIA"
+          ><span class="brand-mark">C</span><span>CENDEKIA</span></a
+        >
+        <span class="header-divider"></span>
+        <span class="workspace-title">Coding Playground</span>
+      </div>
+      <div class="playground-header-actions">
+        <a class="back-dashboard" href="dashboard.html">← Dashboard</a>
+        <button
+          class="icon-action"
+          id="fullscreen-button"
+          type="button"
+          title="Buka fullscreen"
+          aria-label="Buka fullscreen"
+        >
+          ⛶
+        </button>
+      </div>
+    </header>
 
-  <main class="playground-layout" id="playground-workspace">
-    <aside class="playground-sidebar">
-      <div class="sidebar-intro"><p class="section-kicker">Ruang praktik</p><h1>Belajar dengan <span>mencoba.</span></h1><p>Tulis kode, jalankan, lalu lihat idemu menjadi nyata.</p></div>
-      <div class="challenge-section"><div class="sidebar-heading"><h2>Tantangan latihan</h2><span id="challenge-count">1 / 5</span></div><div class="challenge-list" id="challenge-list"></div></div>
-      <div class="saved-projects"><div class="sidebar-heading"><h2>Proyek tersimpan</h2><span id="saved-count">0</span></div><div id="saved-project-list" class="saved-project-list"><p class="muted-small">Belum ada proyek tersimpan.</p></div></div>
-    </aside>
+    <main class="playground-layout" id="playground-workspace">
+      <aside class="playground-sidebar">
+        <div class="sidebar-intro">
+          <p class="section-kicker">Ruang praktik</p>
+          <h1>Belajar dengan <span>mencoba.</span></h1>
+          <p>Tulis kode, jalankan, lalu lihat idemu menjadi nyata.</p>
+        </div>
+        <div class="challenge-section">
+          <div class="sidebar-heading">
+            <h2>Tantangan latihan</h2>
+            <span id="challenge-count">1 / 5</span>
+          </div>
+          <div class="challenge-list" id="challenge-list"></div>
+        </div>
+        <div class="saved-projects">
+          <div class="sidebar-heading">
+            <h2>Proyek tersimpan</h2>
+            <span id="saved-count">0</span>
+          </div>
+          <div id="saved-project-list" class="saved-project-list">
+            <p class="muted-small">Belum ada proyek tersimpan.</p>
+          </div>
+        </div>
+      </aside>
 
-    <section class="playground-main" aria-label="Workspace coding playground">
-      <section class="challenge-brief" id="challenge-brief"><div class="brief-icon">✦</div><div><div class="brief-meta"><span id="challenge-level">Pemula</span><span>HTML</span></div><h2 id="challenge-title">Membuat halaman HTML sederhana</h2><p id="challenge-instruction">Buat sebuah heading dan paragraf sapaan di dalam halaman. Gunakan struktur HTML yang semantik.</p></div><div class="expected-result"><span>Hasil yang diharapkan</span><strong id="expected-result-text">Judul dan sapaan tampil di halaman.</strong></div></section>
-      <section class="editor-toolbar" aria-label="Kontrol editor"><div class="language-picker"><label for="language-select">Bahasa</label><select id="language-select"><option value="html">HTML</option><option value="css">CSS</option><option value="javascript">JavaScript</option></select></div><div class="toolbar-actions"><button class="tool-button" id="reset-button" type="button">↺ <span>Reset</span></button><button class="tool-button" id="save-button" type="button">▣ <span>Simpan</span></button><button class="tool-button" id="download-button" type="button">↓ <span>Download</span></button><button class="button button-primary run-button" id="run-button" type="button">▶ Jalankan kode</button></div></section>
-      <section class="coding-grid" id="coding-grid">
-        <div class="editor-panel panel-surface"><div class="panel-header"><div><span class="panel-dot dot-blue"></span><h2>Editor kode</h2></div><span class="shortcut-hint">Ctrl / ⌘ + Enter untuk menjalankan</span></div><div class="editor-body"><div class="line-numbers" id="line-numbers" aria-hidden="true">1</div><textarea id="code-editor" spellcheck="false" aria-label="Editor kode" autocapitalize="off" autocomplete="off"></textarea></div></div>
-        <div class="output-panel panel-surface"><div class="panel-header"><div><span class="panel-dot dot-green"></span><h2>Hasil eksekusi</h2></div><button class="clear-output" id="clear-output" type="button">Bersihkan console</button></div><div class="preview-wrap"><iframe id="live-preview" title="Live preview kode" sandbox="allow-scripts"></iframe></div><div class="console-panel"><div class="console-label"><span>Console</span><span id="console-status">Siap menjalankan kode</span></div><pre id="console-output" aria-live="polite">// Output console akan muncul di sini</pre></div></div>
+      <section class="playground-main" aria-label="Workspace coding playground">
+        <section class="challenge-brief" id="challenge-brief">
+          <div class="brief-icon">✦</div>
+          <div>
+            <div class="brief-meta"><span id="challenge-level">Pemula</span><span>HTML</span></div>
+            <h2 id="challenge-title">Membuat halaman HTML sederhana</h2>
+            <p id="challenge-instruction">
+              Buat sebuah heading dan paragraf sapaan di dalam halaman. Gunakan struktur HTML yang
+              semantik.
+            </p>
+          </div>
+          <div class="expected-result">
+            <span>Hasil yang diharapkan</span
+            ><strong id="expected-result-text">Judul dan sapaan tampil di halaman.</strong>
+          </div>
+        </section>
+        <section class="editor-toolbar" aria-label="Kontrol editor">
+          <div class="language-picker">
+            <label for="language-select">Bahasa</label
+            ><select id="language-select">
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="javascript">JavaScript</option>
+            </select>
+          </div>
+          <div class="toolbar-actions">
+            <button class="tool-button" id="reset-button" type="button">↺ <span>Reset</span></button
+            ><button class="tool-button" id="save-button" type="button">
+              ▣ <span>Simpan</span></button
+            ><button class="tool-button" id="download-button" type="button">
+              ↓ <span>Download</span></button
+            ><button class="button button-primary run-button" id="run-button" type="button">
+              ▶ Jalankan kode
+            </button>
+          </div>
+        </section>
+        <section class="coding-grid" id="coding-grid">
+          <div class="editor-panel panel-surface">
+            <div class="panel-header">
+              <div>
+                <span class="panel-dot dot-blue"></span>
+                <h2>Editor kode</h2>
+              </div>
+              <span class="shortcut-hint">Ctrl / ⌘ + Enter untuk menjalankan</span>
+            </div>
+            <div class="editor-body">
+              <div class="line-numbers" id="line-numbers" aria-hidden="true">1</div>
+              <textarea
+                id="code-editor"
+                spellcheck="false"
+                aria-label="Editor kode"
+                autocapitalize="off"
+                autocomplete="off"
+              ></textarea>
+            </div>
+          </div>
+          <div class="output-panel panel-surface">
+            <div class="panel-header">
+              <div>
+                <span class="panel-dot dot-green"></span>
+                <h2>Hasil eksekusi</h2>
+              </div>
+              <button class="clear-output" id="clear-output" type="button">
+                Bersihkan console
+              </button>
+            </div>
+            <div class="preview-wrap">
+              <iframe id="live-preview" title="Live preview kode" sandbox="allow-scripts"></iframe>
+            </div>
+            <div class="console-panel">
+              <div class="console-label">
+                <span>Console</span><span id="console-status">Siap menjalankan kode</span>
+              </div>
+              <pre id="console-output" aria-live="polite">
+// Output console akan muncul di sini</pre
+              >
+            </div>
+          </div>
+        </section>
+        <div class="playground-footer-note">
+          <span>⚿</span> Kode berjalan di dalam iframe sandbox terpisah. Data proyek disimpan lokal
+          di perangkat ini.
+        </div>
       </section>
-      <div class="playground-footer-note"><span>⚿</span> Kode berjalan di dalam iframe sandbox terpisah. Data proyek disimpan lokal di perangkat ini.</div>
-    </section>
-  </main>
+    </main>
 
-  <dialog class="save-dialog" id="save-dialog"><form method="dialog" id="save-form"><button class="dialog-close" value="cancel" type="submit" aria-label="Tutup dialog">×</button><p class="section-kicker">Simpan progres</p><h2>Namai proyekmu.</h2><p>Proyek disimpan secara lokal dan tidak mengandung password atau data sensitif.</p><label for="project-name">Nama proyek</label><input id="project-name" type="text" placeholder="Contoh: Kartu profil pertamaku" required><div class="dialog-actions"><button class="button button-secondary" value="cancel" type="submit">Batal</button><button class="button button-primary" id="confirm-save" value="default" type="submit">Simpan proyek</button></div></form></dialog>
-  <div class="toast" role="status" aria-live="polite"></div>
-</body>
+    <dialog class="save-dialog" id="save-dialog">
+      <form method="dialog" id="save-form">
+        <button class="dialog-close" value="cancel" type="submit" aria-label="Tutup dialog">
+          ×
+        </button>
+        <p class="section-kicker">Simpan progres</p>
+        <h2>Namai proyekmu.</h2>
+        <p>Proyek disimpan secara lokal dan tidak mengandung password atau data sensitif.</p>
+        <label for="project-name">Nama proyek</label
+        ><input
+          id="project-name"
+          type="text"
+          placeholder="Contoh: Kartu profil pertamaku"
+          required
+        />
+        <div class="dialog-actions">
+          <button class="button button-secondary" value="cancel" type="submit">Batal</button
+          ><button class="button button-primary" id="confirm-save" value="default" type="submit">
+            Simpan proyek
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" role="status" aria-live="polite"></div>
+  </body>
 </html>
