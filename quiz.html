@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman kuis berisi perpustakaan kategori, pemutar soal, peta nomor soal, pilihan jawaban, riwayat nilai, hasil akhir, pembahasan, dan rekomendasi. -->
+<!-- Deskripsi halaman: Halaman kuis memiliki tiga keadaan utama: memilih latihan,
+     menjawab soal satu per satu, lalu meninjau hasil dan rekomendasi belajar. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan tampilan kuis dan memuat dependensi sesuai urutan pemakaian:
+       koneksi akun, data soal, penyimpanan progres, lalu pengendali alur kuis. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +34,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Nilai kuis dan riwayat adalah data personal, sehingga halaman memerlukan sesi
+       pengguna yang terautentikasi. -->
   <body class="quiz-page" data-auth-required="true">
     <header class="site-header">
       <nav class="navbar container" aria-label="Navigasi utama">
@@ -49,6 +53,8 @@
     </header>
 
     <main class="quiz-shell container">
+      <!-- Perpustakaan menjadi tampilan awal: pengguna memilih kategori dan kartu latihan,
+           serta dapat melihat percobaan terdahulu sebelum memulai kuis baru. -->
       <section id="quiz-library" class="quiz-view">
         <header class="quiz-page-heading">
           <div>
@@ -86,6 +92,8 @@
         </section>
       </section>
 
+      <!-- Pemutar kuis menampilkan satu soal aktif, peta nomor untuk melompat antarsoal,
+           dan kendali untuk menyimpan jawaban atau mengumpulkan seluruh jawaban. -->
       <section id="quiz-player" class="quiz-view is-hidden">
         <div class="player-topbar">
           <button class="back-link" id="exit-quiz" type="button">← Kembali ke latihan</button>
@@ -96,6 +104,8 @@
         </div>
         <div class="progress-line"><span id="quiz-progress-line"></span></div>
         <div class="player-layout">
+          <!-- Peta soal memperlihatkan posisi saat ini dan soal yang telah dijawab;
+               jumlah dan status diperbarui ketika jawaban pengguna berubah. -->
           <aside class="question-map-panel">
             <div class="map-heading">
               <h2>Soal latihan</h2>
@@ -129,6 +139,8 @@
         </div>
       </section>
 
+      <!-- Tampilan hasil merangkum nilai dan durasi, menampilkan ulasan jawaban benar/salah,
+           lalu menawarkan rekomendasi untuk mengulang atau memilih latihan lain. -->
       <section id="quiz-result" class="quiz-view is-hidden">
         <div class="result-hero">
           <div class="result-badge">✦</div>
@@ -152,6 +164,8 @@
         </div>
         <div class="result-content">
           <!-- Bagian section mengelompokkan satu topik atau tahapan antarmuka agar hierarki dan alur baca halaman mudah dipahami. -->
+          <!-- Daftar review diisi quiz.js setelah penilaian, sehingga pengguna dapat
+               memahami jawaban dan pembahasan setiap pertanyaan. -->
           <section>
             <div class="quiz-section-heading">
               <div>

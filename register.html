@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman pendaftaran menyediakan data akun baru, persetujuan penggunaan, validasi kata sandi, proses registrasi, dan pesan status. -->
+<!-- Deskripsi halaman: Halaman pendaftaran mengumpulkan identitas dan kredensial akun,
+     memeriksa persetujuan serta validasi, lalu mengirim data registrasi ke Supabase. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan gaya, pustaka Supabase, konfigurasi klien, dan auth.js untuk
+       menangani pendaftaran serta umpan balik formulir. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,6 +65,8 @@
       </nav>
     </header>
 
+    <!-- Bagian pengantar menjelaskan manfaat membuat akun; formulir di sebelahnya
+         mengumpulkan data yang diperlukan untuk membuat akun belajar. -->
     <main class="container auth-page">
       <section class="auth-intro">
         <p class="section-kicker">Mulai perjalananmu</p>
@@ -78,10 +82,14 @@
           <div class="auth-point"><span>03</span> Praktikkan idemu jadi karya</div>
         </div>
       </section>
+      <!-- aria-labelledby menghubungkan kartu dengan judulnya. auth.js mengidentifikasi
+           mode registrasi melalui data-mode dan memakai name/data-error-for pada kolom. -->
       <section class="auth-form-card" aria-labelledby="register-title">
         <h2 id="register-title">Buat akun gratis</h2>
         <p class="form-subtitle">Hanya butuh satu menit untuk mulai belajar.</p>
 
+        <!-- Validasi diserahkan ke auth.js agar kesalahan nama, username, email, dan kata sandi
+             dapat ditunjukkan pada kolom terkait alih-alih pesan browser yang terpisah. -->
         <form class="auth-form" data-mode="register" novalidate>
           <div class="form-group">
             <label class="form-label" for="full-name">Nama lengkap</label>
@@ -164,6 +172,7 @@
             </div>
             <span class="field-error" data-error-for="confirmPassword"> </span>
           </div>
+          <!-- Kotak persetujuan wajib dicentang sebelum akun dapat dibuat. -->
           <div class="form-options">
             <label class="check-label">
               <input type="checkbox" name="terms" required /> Saya menyetujui syarat penggunaan

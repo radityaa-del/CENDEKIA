@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman detail kelas menampilkan informasi kelas, tujuan pembelajaran, kurikulum, durasi, tingkat kesulitan, dan tombol memulai pembelajaran. -->
+<!-- Deskripsi halaman: Halaman ini memuat ringkasan kelas terpilih, hasil belajar,
+     kurikulum, persyaratan, dan tombol yang mengantar pengguna ke materi pertama. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan metadata dan tampilan, lalu memuat data kelas sebelum skrip detail
+       agar course.js dapat mengisi elemen bertanda data-course-*. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -61,6 +63,8 @@
       </nav>
     </header>
 
+    <!-- Bagian pembuka menampilkan identitas kelas. Atribut data-course-* menjadi target
+         yang diisi course.js sesuai kelas yang dipilih melalui URL. -->
     <section class="detail-hero">
       <div class="container detail-hero-inner">
         <div>
@@ -86,6 +90,8 @@
       </div>
     </section>
 
+    <!-- Konten utama membagi informasi menjadi tujuan dan kurikulum di kiri, serta
+         ringkasan syarat dan aksi mulai belajar di panel samping. -->
     <main class="container detail-main">
       <div>
         <!-- Bagian section mengelompokkan satu topik atau tahapan antarmuka agar hierarki dan alur baca halaman mudah dipahami. -->
@@ -94,15 +100,20 @@
 
           <h2>Yang akan kamu <span>pelajari.</span></h2>
 
+          <!-- Daftar tujuan diisi dari data kelas supaya hasil belajar mengikuti kelas
+               yang sedang ditampilkan, bukan ditulis statis pada template. -->
           <ul class="objective-list" id="objectives"></ul>
         </section>
         <section>
           <p class="section-kicker">Kurikulum</p>
           <h2>Langkah demi <span>langkah.</span></h2>
+          <!-- course.js merender bab dan materi ke area kurikulum ini berdasarkan data kelas. -->
           <div class="curriculum" id="curriculum"></div>
         </section>
       </div>
 
+      <!-- Ringkasan di aside membantu pengguna memeriksa tingkat, durasi, jumlah materi,
+           dan prasyarat sebelum menekan tombol mulai. -->
       <aside class="detail-aside">
         <h2>Siap mulai?</h2>
         <ul class="aside-list">

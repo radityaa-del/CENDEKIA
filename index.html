@@ -1,13 +1,19 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman beranda CENDEKIA berisi pengenalan platform, kategori bidang, kelas unggulan, keunggulan, alur memulai belajar, ajakan pendaftaran, dan tautan navigasi. -->
+<!-- Deskripsi halaman: Halaman beranda memperkenalkan CENDEKIA dan mengarahkan pengunjung
+     dari pengenalan platform menuju pilihan kelas atau pembuatan akun. Isi halaman disusun
+     berurutan: hero, kategori, kelas unggulan, keunggulan, langkah belajar, lalu ajakan. -->
 
 <html lang="id">
   <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
   <head>
+    <!-- UTF-8 mendukung karakter Bahasa Indonesia dan simbol dekoratif yang digunakan halaman. -->
     <meta charset="UTF-8" />
 
+    <!-- Mengatur lebar layout dan skala awal agar halaman responsif pada ponsel dan tablet. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!-- Ringkasan ini menjelaskan isi beranda ketika halaman ditampilkan pada hasil pencarian
+         atau saat informasi halaman dibagikan. -->
     <meta
       name="description"
       content="CENDEKIA adalah platform belajar informatika gratis untuk membangun masa depan digitalmu."
@@ -15,17 +21,24 @@
 
     <title>CENDEKIA | Belajar. Berpikir. Menciptakan.</title>
 
+    <!-- Membuka koneksi lebih awal ke server font agar jenis huruf lebih cepat dimuat. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Memuat DM Sans, Inter, dan Space Grotesk dalam bobot yang dipakai desain situs. -->
     <link
       href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- global.css berisi aturan dasar; components.css dan landing.css mengatur komponen
+         serta bagian khusus beranda; responsive.css menyesuaikannya dengan ukuran layar. -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/landing.css" />
     <link rel="stylesheet" href="css/responsive.css" />
 
+    <!-- navigation.js mengelola menu dan tautan bagian; app.js menangani animasi masuk
+         serta notifikasi beranda; theme.js menerapkan preferensi tampilan yang tersimpan.
+         defer menjaga urutan eksekusi setelah struktur HTML selesai diparsing. -->
     <script src="js/navigation.js" defer></script>
     <script src="js/app.js" defer></script>
     <script src="js/theme.js" defer></script>
@@ -33,12 +46,20 @@
 
   <!-- Body menjadi wadah seluruh tampilan dan interaksi pengguna yang terlihat pada halaman. -->
   <body>
+    <!-- ID top menjadi tujuan tautan kembali ke awal halaman. Header berisi logo,
+         tautan navigasi, serta akses masuk dan pendaftaran. -->
     <header class="site-header" id="top">
+      <!-- aria-label memberi nama pada navigasi untuk pembaca layar. Class container
+           membatasi lebar isi agar sejajar dengan bagian lain pada desktop. -->
       <nav class="navbar container" aria-label="Navigasi utama">
+        <!-- Tautan logo mengembalikan pengunjung ke bagian atas. aria-hidden pada ikon
+             mencegah huruf C dibacakan terpisah dari nama merek CENDEKIA. -->
         <a class="brand" href="#top" aria-label="CENDEKIA, kembali ke beranda">
           <span class="brand-mark" aria-hidden="true">C</span> <span>CENDEKIA</span>
         </a>
 
+        <!-- Tombol ini menjadi kontrol menu pada layar kecil. navigation.js mengubah
+             aria-expanded dan membuka atau menutup elemen dengan ID main-menu. -->
         <button
           class="menu-toggle"
           type="button"
@@ -49,6 +70,8 @@
           <span> </span> <span> </span> <span> </span>
         </button>
 
+        <!-- Panel memisahkan tautan perpindahan halaman dari aksi akun. Pada perangkat
+             sempit panel dapat diubah menjadi menu tarik-turun oleh CSS dan JavaScript. -->
         <div class="nav-panel" id="main-menu">
           <div class="nav-links">
             <a class="nav-link is-active" href="#top">Beranda</a>
@@ -65,14 +88,21 @@
       </nav>
     </header>
 
-    <!-- Bagian main memuat konten utama halaman, sedangkan header, footer, dan elemen pendukung berada di luar fokus utama. -->
+    <!-- main membungkus isi unik beranda supaya struktur semantik jelas bagi pembaca layar,
+         mesin pencari, dan pengembang yang menelusuri struktur halaman. -->
     <main>
+      <!-- Hero adalah bagian pertama yang dilihat pengunjung. aria-labelledby menghubungkan
+           section dengan judul hero-title; class reveal dipakai app.js untuk animasi saat masuk layar. -->
       <section class="hero section container" aria-labelledby="hero-title">
+        <!-- Kolom kiri memuat janji utama platform dan tombol tindakan untuk mulai belajar
+             atau membaca alur belajar. -->
         <div class="hero-copy reveal">
           <div class="eyebrow">
             <span class="eyebrow-dot"> </span> Belajar tanpa batas, mulai dari sini
           </div>
 
+          <!-- Satu h1 memberi halaman judul utama yang paling penting. em hanya menandai
+               frasa yang diberi penekanan visual oleh stylesheet. -->
           <h1 id="hero-title">Bangun masa depan <em>digitalmu.</em></h1>
 
           <p class="hero-description">
@@ -80,6 +110,8 @@
             CENDEKIA.
           </p>
           <div class="hero-actions">
+            <!-- Tindakan utama membawa pengunjung ke daftar kelas; tindakan kedua menggulir
+                 ke bagian cara kerja sehingga keduanya menawarkan langkah lanjutan yang jelas. -->
             <a class="button button-primary" href="catalog.html"
               >Mulai belajar <span aria-hidden="true">↗</span>
             </a>
@@ -89,12 +121,16 @@
           </div>
 
           <div class="hero-proof">
+            <!-- Tumpukan inisial bersifat ilustratif, jadi disembunyikan dari pembaca layar.
+                 Angka di sebelahnya memberi bukti sosial sebagai teks yang dapat dibaca. -->
             <div class="avatar-stack" aria-hidden="true">
               <span>AN</span> <span>RA</span> <span>DS</span> <span>+</span>
             </div>
             <p>Dipercaya <strong>2.000+</strong> pelajar</p>
           </div>
         </div>
+        <!-- Kolom kanan adalah ilustrasi antarmuka belajar dan kode, bukan data aplikasi nyata.
+             reveal-delay menunda animasinya agar muncul setelah teks hero. -->
         <div class="hero-visual reveal reveal-delay" aria-label="Ilustrasi ruang belajar digital">
           <div class="hero-grid-lines"></div>
           <div class="orbit orbit-one"></div>
@@ -111,6 +147,8 @@
               <span class="live-dot"> </span> <span>Ruang belajar CENDEKIA</span>
               <span class="hero-card-menu">•••</span>
             </div>
+            <!-- Jendela kode hanya ilustrasi statis untuk memberi gambaran suasana praktik;
+                 teks di dalamnya bukan editor yang dapat dijalankan pada beranda. -->
             <div class="code-window">
               <div class="window-dots"><i> </i> <i> </i> <i> </i></div>
               <p>
@@ -135,6 +173,8 @@
         </div>
       </section>
 
+      <!-- Bagian ini memperlihatkan bidang yang dapat dijelajahi. Setiap kartu menuju
+           kumpulan kelas pada bagian #kelas, bukan ke halaman filter terpisah. -->
       <section
         class="category-section section container"
         id="tentang"
@@ -150,6 +190,8 @@
             Materi yang dirancang untuk membuatmu terus ingin tahu dan berani mencoba.
           </p>
         </div>
+        <!-- Grid mengelompokkan lima kategori utama. Nomor membantu urutan visual,
+             sedangkan judul kategori tetap menjadi informasi yang dibaca pengguna. -->
         <div class="category-grid">
           <a class="category-card category-blue reveal" href="#kelas">
             <span class="category-number">01</span> <span class="category-symbol">&lt;/&gt;</span>
@@ -180,6 +222,8 @@
         </div>
       </section>
 
+      <!-- Kelas unggulan memberi contoh nyata dari isi katalog. ID kelas menjadi target
+           tautan kategori, menu, dan tautan "Semua kelas". -->
       <section class="courses-section section container" id="kelas" aria-labelledby="courses-title">
         <div class="section-heading reveal">
           <div>
@@ -188,6 +232,8 @@
           </div>
           <a class="text-link" href="catalog.html">Lihat semua kelas <span>↗</span> </a>
         </div>
+        <!-- Setiap article adalah kartu mandiri: ilustrasi dan label kelas, tingkat,
+             ringkasan materi, jumlah pelajaran, rating, dan tautan ke katalog. -->
         <div class="course-grid">
           <article class="course-card reveal">
             <div class="course-image image-html">
@@ -249,6 +295,8 @@
         </div>
       </section>
 
+      <!-- Bagian keunggulan menjawab alasan belajar di CENDEKIA. Layout membagi penjelasan
+           pengantar dan empat manfaat agar cepat dipindai tanpa paragraf panjang. -->
       <section class="features-section section" aria-labelledby="features-title">
         <div class="container feature-layout">
           <div class="feature-intro reveal">
@@ -260,6 +308,8 @@
             </p>
             <a class="button button-dark" href="#cara-kerja">Kenali CENDEKIA <span>↗</span> </a>
           </div>
+          <!-- Tiap item menggabungkan ikon, nama manfaat, uraian singkat, dan nomor urut.
+               Daftar ini menjelaskan manfaat, bukan kontrol interaktif. -->
           <div class="feature-list">
             <article class="feature-item reveal">
               <span class="feature-icon icon-blue">◈</span>
@@ -297,6 +347,8 @@
         </div>
       </section>
 
+      <!-- Bagian cara kerja menguraikan perjalanan pengguna dari membuat akun sampai
+           praktik dan evaluasi. ID cara-kerja dipakai oleh beberapa tombol sebagai tujuan scroll. -->
       <section
         class="steps-section section container"
         id="cara-kerja"
@@ -314,6 +366,8 @@
             Tidak perlu menunggu siap. Mulai saja, kami akan menemani prosesnya.
           </p>
         </div>
+        <!-- Empat article berikut menunjukkan urutan langkah belajar; nomor hanya penanda
+             urutan, bukan status progres akun tertentu. -->
         <div class="steps-grid">
           <article class="step-item reveal">
             <span class="step-number">01</span> <span class="step-icon">♧</span>
@@ -338,6 +392,8 @@
         </div>
       </section>
 
+      <!-- CTA (ajakan bertindak) menjadi penutup konten utama dan mengarahkan pengunjung
+           yang siap bergabung ke formulir pendaftaran. ID daftar juga dipakai tautan ajakan. -->
       <section class="cta-section section container" id="daftar" aria-labelledby="cta-title">
         <div class="cta-inner reveal">
           <div class="cta-decoration decoration-left">✦</div>
@@ -356,6 +412,8 @@
       </section>
     </main>
 
+    <!-- Footer menyediakan jalur alternatif menuju kelas, informasi tentang, cara belajar,
+         dan kontak. Tautan media sosial saat ini mengarah kembali ke bagian atas sebagai placeholder. -->
     <footer class="site-footer">
       <div class="container footer-main">
         <div class="footer-brand">
@@ -384,6 +442,8 @@
       </div>
     </footer>
 
+    <!-- Wadah toast awalnya kosong. app.js mengisinya saat pengunjung memilih tautan
+         yang fiturnya belum tersedia; role dan aria-live mengumumkan pesan ke pembaca layar. -->
     <div class="toast" role="status" aria-live="polite"></div>
   </body>
 </html>

@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman masuk menyediakan formulir identitas dan kata sandi, validasi data, pemulihan kata sandi, serta autentikasi melalui Supabase. -->
+<!-- Deskripsi halaman: Halaman masuk memvalidasi email dan kata sandi, mengirimkan
+     autentikasi ke Supabase, serta menyediakan tautan pemulihan dan pembuatan akun. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan tampilan halaman serta pustaka dan konfigurasi autentikasi.
+       Skrip auth.js menggunakan Supabase Client untuk memproses formulir masuk. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,6 +65,8 @@
       </nav>
     </header>
 
+    <!-- Area autentikasi membagi penjelasan manfaat di sisi kiri dan formulir masuk
+         di sisi kanan agar tujuan halaman dan tindakan utama terlihat bersamaan. -->
     <main class="container auth-page">
       <section class="auth-intro">
         <p class="section-kicker">Selamat datang kembali</p>
@@ -78,10 +82,14 @@
           <div class="auth-point"><span>✓</span> Tumbuh bersama komunitas</div>
         </div>
       </section>
+      <!-- Formulir menggunakan ID yang dikenali auth.js untuk mengambil email dan kata sandi,
+           menampilkan kesalahan per kolom, dan memproses tombol lupa kata sandi. -->
       <section class="auth-form-card" aria-labelledby="login-title">
         <h2 id="login-title">Masuk ke CENDEKIA</h2>
         <p class="form-subtitle">Gunakan email dan password akunmu untuk melanjutkan.</p>
 
+        <!-- novalidate menyerahkan validasi dan pesan kesalahan kepada auth.js agar umpan
+             balik dapat ditampilkan dekat kolom yang perlu diperbaiki. -->
         <form class="auth-form" novalidate>
           <div class="form-group">
             <label class="form-label" for="identity">Email</label>

@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman progres menampilkan statistik belajar, grafik aktivitas, nilai kuis, perjalanan kelas, kalender, riwayat, streak, dan pencapaian. -->
+<!-- Deskripsi halaman: Halaman ini menyatukan ringkasan progres akun, aktivitas dan nilai,
+     kemajuan per kelas, kalender belajar, riwayat, streak, serta badge pencapaian. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan gaya khusus grafik dan memuat dependensi secara berurutan:
+       koneksi akun, data kelas, penyimpanan progres, lalu pembentuk visualisasi progres. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +34,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Data yang ditampilkan bersifat personal, sehingga atribut ini menandai kebutuhan
+       autentikasi sebelum progres dapat dibaca. -->
   <body class="progress-page" data-auth-required="true">
     <header class="site-header">
       <nav class="navbar container" aria-label="Navigasi utama">
@@ -46,6 +50,8 @@
       </nav>
     </header>
 
+    <!-- Konten utama bergerak dari ringkasan umum menuju grafik, rincian kelas,
+         kalender, riwayat, dan pencapaian untuk membantu pengguna memahami tren. -->
     <main class="container progress-shell">
       <header class="progress-heading">
         <div>
@@ -64,6 +70,8 @@
         </div>
       </header>
 
+      <!-- Kartu statistik adalah ringkasan angka yang akan diisi progress.js dari
+           aktivitas belajar tersimpan; nilai nol merupakan keadaan awal antarmuka. -->
       <section class="progress-stats" aria-label="Ringkasan progres">
         <!-- Elemen article merupakan satu unit konten mandiri, seperti kartu kelas, item materi, soal, atau pencapaian. -->
         <article>
@@ -91,6 +99,8 @@
           ><small>Progres keseluruhan</small>
         </article>
       </section>
+      <!-- Dua grafik memisahkan frekuensi aktivitas dari performa kuis agar kedua
+           ukuran kemajuan tidak tercampur dalam satu visualisasi. -->
       <div class="progress-grid">
         <section class="progress-panel activity-chart-panel">
           <div class="panel-title">
@@ -102,6 +112,8 @@
             <span id="activity-total">0 aktivitas</span>
           </div>
 
+          <!-- Elemen SVG kosong disiapkan sebagai kanvas yang progress.js isi dengan
+               bentuk grafik dan label yang sesuai data pengguna. -->
           <svg
             id="activity-chart"
             class="chart"
@@ -127,6 +139,8 @@
           ></svg>
         </section>
       </div>
+      <!-- Baris ini membandingkan penyelesaian tiap kelas dengan konsistensi aktivitas
+           sepanjang bulan yang sedang ditampilkan. -->
       <div class="progress-grid second-row">
         <section class="progress-panel">
           <div class="panel-title">
@@ -153,6 +167,8 @@
           <p class="calendar-note"><i></i> Hari dengan aktivitas tercatat</p>
         </section>
       </div>
+      <!-- Bagian terakhir menampilkan aktivitas yang dapat difilter dan badge yang
+           telah terbuka, sebagai rincian lanjutan dari statistik ringkasan. -->
       <div class="progress-grid third-row">
         <section class="progress-panel activity-history-panel">
           <div class="panel-title">

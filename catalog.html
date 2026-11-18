@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman katalog menampilkan seluruh kelas tersedia beserta pencarian, filter kategori, jumlah hasil, dan tindakan melihat detail kelas. -->
+<!-- Deskripsi halaman: Katalog menyediakan pencarian dan filter untuk menemukan kelas.
+     Daftar dan jumlah hasil diperbarui oleh catalog.js berdasarkan data kelas yang tersedia. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head memuat metadata dan aturan tampilan, lalu menyiapkan navigasi, data kelas,
+       logika pencarian katalog, dan preferensi tema. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,6 +23,8 @@
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/responsive.css" />
 
+    <!-- learning-data.js harus dimuat sebelum catalog.js karena katalog memakai data
+         kelas yang didefinisikan di sana; defer mempertahankan urutan tanpa menghambat HTML. -->
     <script src="js/navigation.js" defer></script>
     <script src="js/learning-data.js" defer></script>
     <script src="js/catalog.js" defer></script>
@@ -75,6 +79,8 @@
         <a class="button button-secondary" href="index.html">Kembali ke beranda <span>↗</span> </a>
       </header>
 
+      <!-- Toolbar menyatukan kata kunci dan kategori agar hasil dapat disaring melalui
+           input yang terhubung dengan label aksesibel meskipun labelnya disembunyikan visual. -->
       <section class="catalog-toolbar" aria-label="Pencarian dan filter kelas">
         <div class="search-wrap">
           <label class="visually-hidden" for="course-search">Cari kelas</label>
@@ -98,7 +104,11 @@
         </select>
         <span class="result-count" id="result-count">0 kelas ditemukan</span>
       </section>
+      <!-- catalog.js mengisi grid ini saat halaman dimuat dan saat filter berubah. Live
+           region memberi tahu pembaca layar ketika daftar hasil diperbarui. -->
       <section id="catalog-grid" class="catalog-grid" aria-live="polite"></section>
+      <!-- Pesan kosong ditampilkan ketika kombinasi pencarian dan kategori tidak menemukan
+           kelas; class hidden menjaga pesan ini tidak muncul pada keadaan awal. -->
       <section class="empty-state hidden" id="empty-state">
         <h2>Kelas belum ditemukan</h2>
         <p>Coba gunakan kata kunci lain atau pilih semua kategori.</p>

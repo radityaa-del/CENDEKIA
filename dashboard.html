@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Dasbor pengguna menampilkan identitas siswa, perkembangan kelas, materi yang dapat dilanjutkan, statistik singkat, dan aktivitas belajar terbaru. -->
+<!-- Deskripsi halaman: Dasbor merangkum aktivitas belajar akun yang sedang masuk,
+     menyediakan pintasan melanjutkan materi, melihat kelas, dan membuka fitur pelajar. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head memuat aset visual dan pustaka Supabase, lalu menyiapkan konfigurasi,
+       sesi akun, data kelas, penyimpanan progres, serta pengisi konten dashboard. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,8 +33,12 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- data-auth-required menandai halaman khusus pengguna terautentikasi; auth-session.js
+       memeriksa sesi sebelum data dasbor ditampilkan. -->
   <body class="student-app" data-auth-required="true">
     <div class="student-layout">
+      <!-- Sidebar menjadi navigasi tetap untuk berpindah antara ringkasan, kelas,
+           latihan, progres, profil, dan pengaturan akun. -->
       <aside class="student-sidebar" id="student-sidebar">
         <a class="brand" href="dashboard.html">
           <span class="brand-mark">C</span> <span>CENDEKIA</span>
@@ -58,6 +64,8 @@
         </button>
       </aside>
 
+      <!-- Area utama menggabungkan sapaan personal, ringkasan angka, daftar kelas aktif,
+           aktivitas, rekomendasi, serta akses cepat ke alat belajar. -->
       <main class="student-main">
         <header class="student-header">
           <button class="student-menu" id="student-menu" type="button" aria-label="Buka navigasi">
@@ -74,6 +82,8 @@
           </div>
         </header>
 
+        <!-- Tombol lanjut memiliki tujuan awal sebagai fallback; dashboard.js dapat
+             memperbarui tautannya sesuai materi terakhir yang tersimpan. -->
         <section class="dashboard-welcome">
           <div>
             <p class="section-kicker">Terus melangkah</p>
@@ -93,6 +103,8 @@
           </div>
           <div class="welcome-art" aria-hidden="true"><span>&lt;/&gt;</span> <b>+</b> <i>✦</i></div>
         </section>
+        <!-- Nilai awal nol adalah placeholder yang diganti dashboard.js setelah progres
+             akun berhasil dibaca dari penyimpanan. -->
         <section class="stat-grid" aria-label="Ringkasan progres">
           <article class="stat-card">
             <span class="stat-icon blue">▣</span>
@@ -111,6 +123,8 @@
             <div><strong id="overall-progress">0%</strong> <span>Progres belajar</span></div>
           </article>
         </section>
+        <!-- Kolom pertama berisi kelas dan riwayat; kolom kedua menampilkan rekomendasi
+             dan tautan ke ruang praktik. Elemen dengan ID diisi oleh dashboard.js. -->
         <div class="dashboard-columns">
           <section class="dashboard-section" id="my-courses">
             <div class="section-title-row">

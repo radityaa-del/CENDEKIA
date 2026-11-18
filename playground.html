@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Coding Playground menyediakan editor kode, tantangan, pemilihan bahasa, console, pratinjau program, penyimpanan proyek, dan pengunduhan kode. -->
+<!-- Deskripsi halaman: Playground menggabungkan tantangan latihan, editor tiga bahasa,
+     pratinjau dan console, serta fitur menjalankan, menyimpan lokal, dan mengunduh kode. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head menyiapkan tampilan editor, pustaka Supabase, sesi, progres, dan skrip
+       playground yang menghubungkan kontrol antarmuka dengan area kode. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +34,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Workspace dibatasi untuk pengguna masuk; skrip autentikasi juga dapat memakai
+       atribut ini untuk mengarahkan pengunjung tanpa sesi ke proses masuk. -->
   <body class="playground-page" data-auth-required="true">
     <header class="playground-header">
       <div class="playground-brand-wrap">
@@ -61,6 +65,8 @@
     </header>
 
     <main class="playground-layout" id="playground-workspace">
+      <!-- Sidebar menyimpan tantangan aktif dan daftar proyek yang telah disimpan agar
+           pengguna dapat berpindah latihan tanpa meninggalkan editor. -->
       <aside class="playground-sidebar">
         <div class="sidebar-intro">
           <p class="section-kicker">Ruang praktik</p>
@@ -86,6 +92,8 @@
         </div>
       </aside>
 
+      <!-- Bagian utama dibagi menjadi instruksi tantangan, toolbar, editor, dan hasil
+           sehingga alur menulis lalu menjalankan kode mudah diikuti. -->
       <section class="playground-main" aria-label="Workspace coding playground">
         <section class="challenge-brief" id="challenge-brief">
           <div class="brief-icon">✦</div>
@@ -122,6 +130,8 @@
             </button>
           </div>
         </section>
+        <!-- Grid editor dan output menampilkan sumber kode bersebelahan dengan hasilnya;
+             perubahan bahasa atau aksi toolbar dikelola oleh playground.js. -->
         <section class="coding-grid" id="coding-grid">
           <div class="editor-panel panel-surface">
             <div class="panel-header">
@@ -134,6 +144,8 @@
             <div class="editor-body">
               <div class="line-numbers" id="line-numbers" aria-hidden="true">1</div>
 
+              <!-- Textarea menjadi editor kode dasar; spellcheck dan autocorrect dimatikan
+                   supaya browser tidak mengubah sintaks yang sedang ditulis. -->
               <textarea
                 id="code-editor"
                 spellcheck="false"
@@ -154,6 +166,8 @@
               </button>
             </div>
             <div class="preview-wrap">
+              <!-- Hasil HTML ditampilkan dalam iframe terpisah. sandbox memberi konteks
+                   terbatas untuk pratinjau dan hanya mengizinkan skrip yang dibutuhkan. -->
               <iframe id="live-preview" title="Live preview kode" sandbox="allow-scripts"></iframe>
             </div>
             <div class="console-panel">
@@ -173,6 +187,8 @@
       </section>
     </main>
 
+    <!-- Dialog meminta nama sebelum proyek disimpan. method=dialog membuat tombol batal
+         dapat menutup dialog melalui mekanisme formulir dialog bawaan browser. -->
     <dialog class="save-dialog" id="save-dialog">
       <form method="dialog" id="save-form">
         <button class="dialog-close" value="cancel" type="submit" aria-label="Tutup dialog">

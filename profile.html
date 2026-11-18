@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman profil menampilkan identitas pelajar, deskripsi, tanggal bergabung, statistik ringkas, pencapaian, dan formulir pengubahan profil. -->
+<!-- Deskripsi halaman: Profil menyajikan identitas dan ringkasan belajar, lalu
+     menyediakan dialog untuk mengubah nama, username, deskripsi, dan avatar sementara. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head memuat gaya akun dan dependensi yang diperlukan untuk sesi pengguna, data kelas,
+       serta pengelolaan profil dan statistiknya. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -23,6 +25,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Profil hanya relevan untuk akun yang sedang masuk; data-auth-required menandai
+       syarat tersebut untuk pemeriksaan sesi. -->
   <body class="account-page" data-auth-required="true">
     <header class="site-header">
       <nav class="navbar container">
@@ -37,6 +41,8 @@
       </nav>
     </header>
 
+    <!-- Ringkasan profil menempatkan identitas di bagian atas dan statistik serta badge
+         di bawahnya, dengan tautan ke halaman progres yang lebih terperinci. -->
     <main class="container account-shell">
       <div class="account-heading">
         <div>
@@ -48,6 +54,8 @@
         <button class="button button-primary" id="edit-profile" type="button">Edit profil</button>
       </div>
 
+      <!-- Elemen ber-ID di bagian profil menjadi target pengisian data akun oleh account.js.
+           Catatan avatar menjelaskan bahwa foto tidak diunggah atau disimpan permanen. -->
       <section class="profile-hero">
         <div class="avatar-large" id="profile-avatar">P</div>
         <div>
@@ -90,6 +98,8 @@
       </div>
     </main>
 
+    <!-- Dialog ini memuat formulir penyuntingan. Elemen small dengan data-error menjadi
+         lokasi pesan validasi, sementara method=dialog mengatur aksi batal/simpan. -->
     <dialog id="profile-dialog" class="account-dialog">
       <form id="profile-form" method="dialog">
         <button class="dialog-close" value="cancel" type="submit">×</button>

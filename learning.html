@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Ruang belajar menampilkan kurikulum, materi aktif, contoh kode, rangkuman, status penyelesaian, progres, serta tombol navigasi antar materi. -->
+<!-- Deskripsi halaman: Ruang belajar menyajikan materi yang dipilih, navigasi kurikulum,
+     contoh dan rangkuman, serta kendali untuk menandai selesai atau berpindah materi. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head memuat gaya halaman dan tema. Skrip pembelajaran dimuat setelah markup agar
+       elemen materi tersedia saat data kelas dan progres dihubungkan. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -24,6 +26,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Halaman ruang belajar memerlukan sesi pengguna karena status materi disimpan sebagai
+       progres personal dan data-auth-required mengaktifkan pemeriksaan autentikasi. -->
   <body class="learning-room" data-auth-required="true">
     <header class="learning-header">
       <a class="brand" href="dashboard.html">
@@ -36,6 +40,8 @@
 
         <strong id="learning-course-title">Python Dasar</strong>
       </div>
+      <!-- Judul kelas dan persentase merupakan ringkasan tetap di header agar pengguna
+           mengetahui konteks kelas serta kemajuan tanpa meninggalkan materi. -->
       <div class="learning-progress">
         <span id="learning-progress-label">0% selesai</span>
         <div class="progress-track">
@@ -55,6 +61,8 @@
     </header>
 
     <main class="learning-layout">
+      <!-- Sidebar menampilkan daftar bab dan materi; learning.js mengisi daftar ini dan
+           menyorot materi yang sedang dipelajari. -->
       <aside class="curriculum-sidebar" id="curriculum-sidebar">
         <div class="curriculum-heading">
           <p class="section-kicker">Kurikulum kelas</p>
@@ -64,6 +72,8 @@
         <div id="curriculum-list"></div>
       </aside>
 
+      <!-- Area pelajaran memuat breadcrumb posisi, status, penjelasan, kode, dan rangkuman.
+           Konten dinamis ditempatkan pada elemen ber-ID agar dapat diperbarui tanpa pindah halaman. -->
       <section class="lesson-area">
         <div class="lesson-breadcrumb">
           <span id="lesson-chapter">Bab 1</span>
@@ -95,6 +105,8 @@
           </div>
         </article>
 
+        <!-- Tombol sebelumnya/berikutnya berpindah materi; tombol tengah menyimpan status
+             selesai untuk materi aktif dan memperbarui progres belajar. -->
         <nav class="lesson-navigation" aria-label="Navigasi materi">
           <button class="button button-secondary" id="previous-lesson" type="button">
             ← Sebelumnya
@@ -110,6 +122,8 @@
     </main>
     <div class="toast" role="status" aria-live="polite"></div>
 
+    <!-- Urutan skrip penting: pustaka dan konfigurasi menyiapkan klien, autentikasi
+         memvalidasi sesi, kemudian data dan penyimpanan progres dipakai learning.js. -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="js/supabase-config.js"></script>
     <script src="js/supabase-client.js"></script>

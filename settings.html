@@ -1,8 +1,10 @@
 <!doctype html>
-<!-- Deskripsi halaman: Halaman pengaturan mengelola tema tampilan, ukuran teks, pengingat, email, kata sandi, serta preferensi akun. -->
+<!-- Deskripsi halaman: Pengaturan dibagi menjadi informasi akun, keamanan, tampilan,
+     preferensi pengingat, dan privasi agar pengguna mudah menemukan kontrol yang dicari. -->
 
 <html lang="id">
-  <!-- Head menyimpan konfigurasi dokumen, judul tab, stylesheet, font, dan skrip yang dibutuhkan sebelum atau saat halaman ditampilkan. -->
+  <!-- Head memuat gaya halaman akun, pustaka Supabase, sesi autentikasi, pengelola akun,
+       serta tema tampilan dan preferensinya. -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,6 +24,8 @@
     <script src="js/theme.js" defer></script>
   </head>
 
+  <!-- Pengaturan berisi informasi dan aksi khusus pemilik akun, sehingga aksesnya
+       memerlukan sesi yang valid. -->
   <body class="account-page" data-auth-required="true">
     <header class="site-header">
       <nav class="navbar container">
@@ -44,6 +48,8 @@
           <h1>Atur ruang belajar<br /><span>sesuai kebutuhanmu.</span></h1>
         </div>
       </div>
+      <!-- Navigasi internal di kiri berpindah ke bagian dengan ID yang sesuai; konten
+           di kanan dikelompokkan menurut jenis pengaturan untuk memudahkan penelusuran. -->
       <div class="settings-layout">
         <nav class="settings-tabs" aria-label="Bagian pengaturan">
           <a href="#account-info">Informasi akun</a><a href="#security">Keamanan</a
@@ -51,6 +57,8 @@
           ><a href="#privacy">Privasi</a>
         </nav>
         <div class="settings-content">
+          <!-- Informasi akun bersifat baca-saja di halaman ini; keterangan menjelaskan
+               bahwa perubahan email membutuhkan alur verifikasi tersendiri. -->
           <section class="settings-card" id="account-info">
             <p class="section-kicker">Informasi akun</p>
 
@@ -64,6 +72,8 @@
               Email tidak dapat diubah langsung. Perubahan email memerlukan verifikasi email.
             </p>
           </section>
+          <!-- Formulir keamanan mengganti kata sandi melalui Supabase; kolom konfirmasi
+               membantu memastikan kedua input baru cocok. -->
           <section class="settings-card" id="security">
             <p class="section-kicker">Keamanan</p>
             <h2>Ubah password</h2>
@@ -86,6 +96,8 @@
               Password diperbarui melalui Supabase dan tidak disimpan di perangkat ini.
             </p>
           </section>
+          <!-- Kontrol tampilan mengatur tema dan skala teks untuk antarmuka, bukan isi
+               materi belajar. Nilainya dikelola oleh skrip tema. -->
           <section class="settings-card" id="appearance">
             <p class="section-kicker">Preferensi tampilan</p>
             <h2>Nyaman di matamu</h2>
@@ -107,6 +119,8 @@
               </select>
             </div>
           </section>
+          <!-- Preferensi pengingat disimpan sebagai pilihan lokal; catatan menegaskan
+               bahwa pengiriman notifikasi belum tersedia pada prototipe. -->
           <section class="settings-card" id="notifications">
             <p class="section-kicker">Preferensi</p>
             <h2>Pengingat belajar</h2>
@@ -128,6 +142,8 @@
             /></label>
             <p class="settings-note">Pengiriman notifikasi belum tersedia di prototipe ini.</p>
           </section>
+          <!-- Bagian privasi menjelaskan lokasi penyimpanan data dan membedakan tindakan
+               penghapusan data prototipe lokal dari penghapusan akun Supabase. -->
           <section class="settings-card" id="privacy">
             <p class="section-kicker">Privasi</p>
             <h2>Data dan visibilitas</h2>
