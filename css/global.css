@@ -1,6 +1,13 @@
-/* Deskripsi berkas: berkas ini mengatur tampilan khusus untuk global. Aturan-aturannya mengontrol ukuran, warna, jarak, tata letak, status, dan responsivitas pada komponen yang memakai class terkait. */
+/* Deskripsi berkas: stylesheet dasar yang dipakai bersama oleh halaman CENDEKIA.
+   Isinya menetapkan warna dan ukuran global, tata letak umum, tipografi, komponen
+   tombol, utilitas aksesibilitas, serta beberapa penyesuaian tema gelap. */
 
+/* Memuat Inter sebagai pilihan font isi; font heading tambahan dapat didefinisikan
+   oleh halaman atau stylesheet lain yang menggunakan Space Grotesk. */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Variabel di :root bisa digunakan di seluruh dokumen. Dengan satu sumber nilai,
+   warna, radius, dan bayangan komponen tetap konsisten dan mudah disesuaikan. */
 :root {
   --navy: #142d4e;
   --blue: #2563eb;
@@ -14,12 +21,20 @@
   --shadow: 0 18px 50px rgba(20, 45, 78, 0.1);
   --radius: 18px;
 }
+
+/* Terapkan perhitungan ukuran yang konsisten: padding dan border ikut dihitung
+   di dalam lebar/tinggi elemen, sehingga layout lebih mudah diprediksi. */
 * {
   box-sizing: border-box;
 }
+
+/* Gulir menuju tautan jangkar dilakukan halus, misalnya saat navigasi menuju section. */
 html {
   scroll-behavior: smooth;
 }
+
+/* Gaya dasar halaman: hilangkan margin bawaan browser, tetapkan warna dan font,
+   atur jarak baris, serta cegah konten melebar secara horizontal. */
 body {
   margin: 0;
   color: var(--ink);
@@ -29,27 +44,46 @@ body {
   line-height: 1.55;
   overflow-x: hidden;
 }
+
+/* Saat menu ponsel terbuka, cegah halaman di belakang panel ikut tergulir. */
 body.menu-open {
   overflow: hidden;
 }
+
+/* Tautan mewarisi warna teks di sekitarnya dan tidak menampilkan garis bawah bawaan;
+   variasi seperti .text-link memberi warna khusus untuk tautan penting. */
 a {
   color: inherit;
   text-decoration: none;
 }
+
+/* Tombol mewarisi font situs agar teks kontrol konsisten dengan isi halaman. */
 button {
   font: inherit;
 }
+
+/* Gambar tidak melampaui lebar wadah dan ditampilkan sebagai blok agar tidak
+   menyisakan celah baseline yang biasanya muncul pada elemen inline. */
 img {
   display: block;
   max-width: 100%;
 }
+
+/* Wadah konten utama dibatasi maksimum 1160 piksel dan tetap menyisakan margin
+   kiri-kanan pada layar sempit. margin-inline memusatkan wadah secara horizontal. */
 .container {
   width: min(1160px, calc(100% - 64px));
   margin-inline: auto;
 }
+
+/* Jarak vertikal baku untuk section halaman; stylesheet halaman dapat mengubahnya
+   jika suatu bagian membutuhkan kepadatan atau susunan khusus. */
 .section {
   padding-block: 110px;
 }
+
+/* Label kecil di atas judul section digunakan untuk menandai topik atau kategori.
+   Huruf kapital dan jarak antarhuruf membedakannya dari paragraf biasa. */
 .section-kicker {
   color: var(--blue);
   font-size: 0.75rem;
@@ -58,12 +92,18 @@ img {
   margin: 0 0 15px;
   text-transform: uppercase;
 }
+
+/* Reset margin atas pada teks umum menghindari jarak tambahan yang tidak konsisten
+   saat elemen heading atau paragraf muncul setelah elemen lain. */
 h1,
 h2,
 h3,
 p {
   margin-top: 0;
 }
+
+/* Judul menggunakan Space Grotesk dan baris rapat agar hierarki visual lebih tegas
+   serta tampil selaras di semua halaman. */
 h1,
 h2,
 h3 {
@@ -71,10 +111,16 @@ h3 {
   line-height: 1.08;
   letter-spacing: -0.03em;
 }
+
+/* Ukuran h2 menyesuaikan lebar viewport, dengan batas minimum dan maksimum agar
+   judul tetap nyaman dibaca di ponsel maupun layar besar. */
 h2 {
   font-size: clamp(2rem, 4vw, 3.2rem);
   margin-bottom: 0;
 }
+
+/* Logo merek menyusun simbol dan nama secara sejajar, dengan jarak dan tipografi
+   khusus agar tetap mudah dikenali di header yang berbeda. */
 .brand {
   align-items: center;
   display: inline-flex;
@@ -84,6 +130,9 @@ h2 {
   font-weight: 700;
   letter-spacing: 0.06em;
 }
+
+/* Kotak huruf C menjadi simbol merek. Flexbox memusatkan huruf di dalam bidang
+   biru yang ukurannya tetap dan sudutnya membulat. */
 .brand-mark {
   align-items: center;
   background: var(--blue);
@@ -95,6 +144,9 @@ h2 {
   justify-content: center;
   width: 32px;
 }
+
+/* Gaya dasar tombol menyatukan posisi ikon dan teks, bentuk, ukuran huruf, serta
+   animasi hover. Class variasi di bawahnya menentukan warna dan jenis tombol. */
 .button {
   align-items: center;
   border: 1px solid transparent;
@@ -111,9 +163,14 @@ h2 {
     box-shadow 0.2s,
     background 0.2s;
 }
+
+/* Gerakan kecil saat pointer berada di atas tombol memberi umpan balik visual. */
 .button:hover {
   transform: translateY(-2px);
 }
+
+/* Tombol utama menonjol sebagai tindakan yang direkomendasikan melalui warna biru
+   dan bayangan; hover memperkuat bayangan sebagai respons interaksi. */
 .button-primary {
   background: var(--blue);
   box-shadow: 0 10px 24px rgba(37, 99, 235, 0.22);
@@ -122,6 +179,9 @@ h2 {
 .button-primary:hover {
   box-shadow: 0 14px 28px rgba(37, 99, 235, 0.32);
 }
+
+/* Variasi tombol sekunder memakai latar putih dan garis tipis untuk tindakan
+   pendamping, sedangkan .button-dark dan .button-white menyediakan kontras lain. */
 .button-secondary {
   background: var(--white);
   border-color: var(--line);
@@ -135,12 +195,18 @@ h2 {
   background: var(--white);
   color: var(--navy);
 }
+
+/* Ukuran khusus untuk tombol ghost dan tombol kecil mengurangi padding tanpa
+   mengubah struktur atau perilaku dasar komponen tombol. */
 .button-ghost {
   padding: 10px 14px;
 }
 .button-small {
   padding: 11px 17px;
 }
+
+/* Tautan penting ditata sejajar dengan ikon, diberi warna aksen, dan dijaga tetap
+   satu baris agar tetap terbaca sebagai satu kontrol. */
 .text-link {
   align-items: center;
   color: var(--blue);
@@ -150,10 +216,15 @@ h2 {
   gap: 8px;
   white-space: nowrap;
 }
+
+/* Ikon panah dalam tautan dibuat sedikit lebih besar daripada teks tautannya. */
 .text-link span,
 .course-detail span {
   font-size: 1.1rem;
 }
+
+/* Menyembunyikan label dari tampilan tanpa menghapusnya dari aksesibilitas.
+   Teknik ini dipakai, misalnya, agar pembaca layar tetap mendapat nama input. */
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
@@ -166,6 +237,9 @@ h2 {
   white-space: nowrap;
   width: 1px;
 }
+
+/* Penyesuaian tema gelap menargetkan elemen bersama pada halaman. Nilai tema
+   --white dan --ink diubah oleh mekanisme tema untuk menjaga kontras antarelemen. */
 body.theme-dark .site-header {
   background: rgba(13, 28, 45, 0.92);
 }
